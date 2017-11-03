@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../main/js/jquery.min.js"></script>
+</head>
+<body>
+<div id="w"></div>
+    <script>
+    $.getScript('http://php.weather.sina.com.cn/iframe/index/w_cl.php?code=js&day=0&city=&dfc=1&charset=utf-8',function(a){
+    var s="",r="",q="";for(s in window.SWther.w){
+        q=SWther.w[s][0];
+        r={city:s,date:SWther.add.now.split(" ")[0]||"",day_weather:q.s1,night_weather:q.s2,day_temp:q.t1,night_temp:q.t2,day_wind:q.p1,night_wind:q.p2},
+        $("#w").html(q.s1+" "+r.city);
+        console.log(window.SWther.w); 
+        //alert(q[0])
+        }
+});</script>
+<script type="text/javascript">
+	var dataD=[
+		    {"name": "Expression_2","text": "[撇嘴]"},
+		    {"name": "Expression_3","text": "[色]"},
+		    {"name": "Expression_4","text": "[发呆]"},
+		    {"name": "Expression_5","text": "[得意]"},
+		    {"name": "Expression_6","text": "[流泪]"},
+		    {"name": "Expression_7","text": "[害羞]"},
+		    {"name": "Expression_8","text": "[闭嘴]"},
+		    {"name": "Expression_9","text": "[睡]"},
+		    {"name": "Expression_10","text": "[大哭]"},
+		    {"name": "Expression_11","text": "[尴尬]"},
+		    {"name": "Expression_12","text": "[发怒]"},
+		    {"name": "Expression_13","text": "[调皮]"},
+		    {"name": "Expression_14","text": "[呲牙]"}];
+		    console.log(dataD)
+		var emoData=JSON.parse(dataD);
+
+var transMsger=dome("我来时撒大大啊爱的[开心]")
+ function dome(emoMsg){
+              var emoPath, transMsg;
+                var reg = /\[(.*?)\]/gm;
+                transMsg = emoMsg.replace(reg, function(match) {
+                        for (var i = 0, len = emoData.length; i < len; i++) {
+                                if (emoData[i].text === match) {
+                                        emoPath = '../image/emotion/' + emoData[i].name + '.png';
+                                        return '<img width="20" height="20" src="' + emoPath + '" />'
+                                }
+                        }
+                        return match;
+                });
+                return transMsg;
+
+    }
+console.log(transMsger)
+</script>
+</body>
+</html>

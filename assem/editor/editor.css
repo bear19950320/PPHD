@@ -1,0 +1,100 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 459122 */
+  src: url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.eot');
+  src: url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.svg#iconfont') format('svg');
+}
+
+.layui-nav-side{
+	right:0;
+	left:auto;
+}
+.layui-nav-side>li>a>i{
+	font-size: 20px;
+}
+/* 按钮的样式  */
+.back-close,.back-open{
+	color:#FF5722;
+	z-index: 999;
+}
+.back-open{
+	position: fixed;
+	right: -200px;
+	top:0;
+	z-index: 9999;
+}
+.back-close>i,.back-open>i{
+	font-size: 24px;
+}
+/* 编辑器的身体  */
+#editor-body{
+	height: 100%;
+	background: #D0CFD8;
+	
+}
+
+#editor-ul{
+	width: 90%;
+	height: 100%;
+	border:1px dashed rgba(0,0,0,.6);
+	border-top:0;
+	border-bottom: 0;
+	margin: auto;
+	overflow: hidden;
+}
+#editor-ul>li{
+	min-height: 40px !important;
+	position: relative;
+	padding: 10px;
+}
+#editor-ul>li:after{
+	display: block;
+	clear: both;
+	content: "";
+}
+#demo{
+	width: 80%;
+	min-height: 100px !important;
+	background: red;
+}
+.click-box{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left:0;
+}
+#editor-ul>li .click-box>.content{
+	position: absolute;
+	top:0;
+	left: 0;
+	padding: 5px 10px;
+	font-size: 24px;
+	width: 100%;
+	height: 100%;
+	min-height: 40px !important;
+	line-height: inherit;
+}
+/* 定义打动的span标签 */
+.resize-box{
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	min-height: 40px;
+	height: 100% !important;
+	border:1px solid rgba(9,155,148,.5);
+	}
+.writing{
+	z-index: 999;
+}
+
+
+/*------------------------------------------------------*/
+@keyframes myfirst
+{
+from {right: 0;}
+to {right: -200px;}
+}

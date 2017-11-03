@@ -1,0 +1,9 @@
+li{
+	width: 100%;
+	min-height: 40px;
+	position: relative;
+}
+li>div{
+	width: 100%;
+	position: absolute;
+}

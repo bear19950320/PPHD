@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				width: 20px;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="test" style="height: 200px;background: yellow;" contentEditable="true" >双击文字可编辑</div>
+		<button>点击保存样式</button>
+		<div style="height: 698px;width: 429px;background: url('${sgds.imagePath}\u10.png')" class="move_element editor_div"  id="floor_container">
+
+		</div>
+		
+		
+		
+		 
+		<script type="text/javascript">
+			var val = {
+		        zIndex: maxTemplateZIndex,
+		        jump:false,
+		        objId: SGDS_EDITOR.tool.getNextNumber(),
+		        coverImage:$("#floor_container").html(),
+		        controlType: 'floor_guide',
+		        scrolling: false
+		    };
+		    
+			$('div').mouseup(function(){
+			var s=window.getSelection();
+			s=s.toString();
+			        s=s.replace(/([\'\"\<\>\[\]\/\?\.\*\+\^\$\!])/g,'\\$1');
+			        var reg=new RegExp(s);console.log(reg);
+			        var h=$(this).html();
+			        console.log(h)
+			         if(reg.test(h)){
+			             var reg1=new RegExp('^(.*?)('+s+')(.*?)$');
+			             console.log(reg1)
+			           //  $(this).html(h.replace(reg1,'$1<span>$2</span>$3'));console.log(reg1);
+			         }
+			});
+//			function printStyles(elem) {
+//			
+//			    var isIe  = navigator.userAgent.indexOf('MSIE') >= 0 ? true : false;
+//			    var allStyle;
+//			    if(isIe) {
+//			        allStyle = elem.currentStyle;
+//			    }else {
+//			       allStyle = document.defaultView.getComputedStyle(elem,null);
+//			    }
+//			    var tmp = '';
+//			    for(var i in allStyle) {
+//			        if(typeof allStyle[i] != 'string') continue;
+//			        tmp += i+":"+allStyle[i] + "\n" ;
+//			    }
+//			    console.log(tmp);
+//			}
+			
+			
+			$("button").click(function(){
+				console.log(val)
+				//printStyles(document.getElementById('test'));
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+#materialer{
+
+}
+.menu-left>.menu-leftBody{
+	padding: 5px;
+	padding-top: 0;
+	background: #569BDB;
+}
+.menu-right>.menu-rightBody{
+	padding: 5px;
+	padding-top: 0;
+	background: #569BDB;
+}
+.centenr-left-menu{
+	background: #77B2EE;
+}
+
+.centenr-left-menu a{
+	line-height: 36px;
+	font-size: 20px;
+	width: 100%;
+	text-align: center;
+}
+

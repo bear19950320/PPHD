@@ -1,0 +1,176 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+a,span,p{
+	display: inline-block;
+}
+a{
+	text-decoration: none !important;
+	outline-style: none;
+}
+ul,ol{
+	list-style: none;
+}
+body{
+	background-color: #001C37 !important;
+}
+.navPack{
+	background: #136DBA;
+}
+.logoImg{
+	height:80px;
+}
+.row{
+	margin: 0 !important;
+}
+/*  div自增长  */
+.content:after,.contenter:after{
+	display: block;
+	clear: both;
+	content: "";
+}
+/* 内容居中 */
+.center{
+	display: flex;
+	justify-content: space-around;
+}
+/* 字体居中 */
+.centerText{
+	text-align: center;
+}
+/* 去掉UL的自动margin */
+.navPackUl{
+	margin-bottom: 0;
+}
+/* 导航头部的li的设置 */
+.navPackUl>li{
+	width: 13.2%;
+	height: 80px;
+	padding: 10px 0;
+	text-align: center;
+	border-right:1px solid #082844;
+}
+/* 导航条的图标字体大小 */
+.i{
+	font-size: 32px;
+	font-style: normal;
+	color:#AAADAF;
+}
+/* 导航菜单的字体颜色   */
+.navText{
+	margin: 10px 0;
+	color:#AAADAF;
+}
+/* 被选中的样式 */
+.activer{
+	background: #0E3255;
+}
+.activer .i{
+	color:#FFC05D;
+}
+/* 共用身体 */
+#section{
+	background: rgba(0,0,0,0.2);
+}
+/* font-white */
+.white{
+	color:white
+}
+/* 右侧导航的背景颜色  */
+.menu-right>.nav,.menu-left>.nav{
+	background: #6CADD8;
+}
+.menu-right>.nav>.active>a{
+	background: #125697;
+}
+.menu-right>.nav>li>a{
+	color:white;
+}
+.menu-right>.nav>li>a:hover{
+	background: #125697;
+}
+/* 左导航的菜单  */
+.centenr-left-menu{
+	background: #186AB0;
+}
+.centenr-left-menu>li>a{
+	color:#fff;
+}
+.menu-left .active>a{
+	background: #125697;
+}
+
+/* 右侧的下面内容 */
+.centenr-right{
+	background:#D5E8FB;
+}
+
+/* 文字超出显示... */
+.outtext{
+	display:block;
+	white-space:nowrap;
+	 overflow:hidden;
+	  text-overflow:ellipsis;
+}
+/* 行高 line*/
+.line{
+	line-height: 18px;
+	padding: 2px 0;
+}
+
+
+/*－－－－－－－－－－－－－－－－－－－－－－－很多地方用到的列表菜单等一系列的css－－－－－－－－－－－－－－－－－－－－－－－－－－－*/
+
+.centenr-right{
+	padding: 5px;
+	margin-top: 5px;
+}
+/* menu-options （操作菜单） */
+.menu-options>li{
+	max-width: 24%;
+	margin: 0 0.5%;
+	float: left;
+}
+
+/* 右边展示列表的 list-ul */
+
+.list-ul>li{
+	float: left;
+	min-width: 33%;
+	min-height:60px;
+	margin: 10px 0;
+	padding: 5px;
+	padding-bottom: 0;
+}
+.list-ul>li>div{
+	padding: 5px;
+	background: #F3FAFF;
+	border-radius: 5px;
+	border:1px solid #E1A623;
+}
+.list-ul>li p{
+	margin:5px 0;
+}
+/* 装内容的盒子 弹性盒子 conter-box*/
+.conter-box{
+	display: -webkit-flex;
+	display: flex;
+}
+.conter-box>img{
+	height: 100px;
+}
+.conter-box>.pull-right{
+	padding-left: 10px;
+	min-height: 100px;
+}
+/*------------通用身体的CSS END 处-----------------------------*/
+
+/* 共用的圆形按钮css  
+ * radio
+ * */
+.radio{
+	font-size: 16px;
+	color:#FFFFFF;
+}
+

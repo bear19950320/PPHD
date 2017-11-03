@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- page的css  -->
+		<link rel="stylesheet" type="text/css" href="css/program.css"/>
+	</head>
+	<body>
+		<div id="programer layui-row">
+			<div class="layui-col-md12 menu-right">
+		    	<div class="menu-rightBody">
+		    		<!-- menu-right -->
+			       	<ul class="nav nav-pills layui-nav center" style="justify-content: center;">
+					  <li role="presentation" class="active layui-nav-item"><a href="#">节目列表</a></li>
+					  <li role="presentation" class="layui-nav-item"><a href="#">新增</a></li>
+					</ul>
+			       	<!-- centenr-right --> 
+			       	<div class="centenr-right">
+			       		<!-- menu-options(右边的操作菜单栏)  -->
+			       		<ul class="menu-options contenter"> 
+							<li>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    选择搜索条件 <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+								    <li><a href="#">图片</a></li>
+								    <li><a href="#">文字</a></li>
+								    <li><a href="#">音频</a></li>
+								    <li><a href="#">word</a></li>
+								  </ul>
+								</div>
+							</li>
+							<li>
+								<input type="text" class="form-control" placeholder="">
+							</li>
+							<li>
+								<button type="button" class="btn btn-default"> <i class="layui-icon">&#xe615;</i>  搜索</button>
+							</li>
+							<li class="pull-right" style="max-width:40%;">
+								<div class="btn-group" role="group" aria-label="...">
+								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe618;</i> 全选</button>
+								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe61f;</i> 修改</button>
+								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe61f;</i> 复制</button>
+								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe640;</i> 删除</button>
+								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe61f;</i> 导出节目</button>
+								</div>
+							</li>
+			       		</ul>
+			            <!-- list（列表展示） -->
+			            <div class="centenr-list layui-container" style="width:100%;">
+			            	 <ul class="list-ul layui-row layui-col-space15">
+			            	 	<li class="layui-col-md4 layui-col-sm6 layui-col-xs6">
+			            	 		<div>
+			            	 			<div class="conter-box layui-row">
+			            	 				<img src="img/text.jpg" class="layui-col-md4" alt="" />
+			            	 				<div class="layui-col-md8 pull-right">
+			            	 					<h4 class="outtext">135226565656565DASDADASDASD 6</h4>
+			            	 					<div class="line"> <span>文件大小</span> : <span>2M</span></div>
+			            	 					<div class="line"> <span>上传者</span> : <span>admin</span></div>
+			            	 				</div>
+				            	 		</div>
+				            	 		<p>&nbsp;<i class="layui-icon">&#xe60e;</i>   时间 :2017-05-28 15:30</p>
+			            	 		</div>
+			            	 	</li>
+			            	 	
+			            	 </ul>
+			            </div>
+			       	</div>
+		    	</div>
+		    </div>
+		</div>
+		<!-- page的js -->
+		<script src="js/program.js" type="text/javascript"></script>
+	</body>
+</html>

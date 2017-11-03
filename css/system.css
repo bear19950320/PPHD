@@ -1,0 +1,12 @@
+#systemer{
+	height: 300px;
+	background: #985F0D;
+}
+/* 系统管理页面的身体部分  */
+#systemer-contenr{
+	margin-top: 10px;
+}
+.system-border{
+	border-bottom: 1px solid #136DBA;
+	min-height: auto !important; 
+}
