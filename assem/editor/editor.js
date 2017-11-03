@@ -32,19 +32,18 @@ $("#editor-ul>li>.click-box").click(function(e){
 /* 按钮 */
 var editorBody=$("#editor-ul>li");
 var content=[]  
+    
 $("#keep").click(function(){
 	for(var i=0;i<editorBody.length;i++){
-	function GetJsonData() {
-		var json = {
-				Css:editorBody.eq(i).find(".click-box").attr("style"),
-				content:editorBody.eq(i).find(".content").html()
-				};
-				console.log(json)
-				return json;
-			}
-	// shopcart.push(GetJsonData())
-	
-
+		function GetJsonData() {
+				var json = {
+					Css:editorBody.eq(i).find(".click-box").attr("style"),
+					content:editorBody.eq(i).find(".content").html(),
+					Class:editorBody.eq(i).find(".click-box").attr('name')
+				};	
+			console.log(json)
+			return json;
+		}
 		content.push(GetJsonData())
 	}
 	content=JSON.stringify(content)
