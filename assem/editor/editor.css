@@ -94,9 +94,10 @@
 }
 
 
+/* 所有图片设置最小高度 */
+
 /*------------------------------------------------------*/
-@keyframes myfirst
-{
-from {right: 0;}
-to {right: -200px;}
+@keyframes myfirst{
+	from {right: 0;}
+	to {right: -200px;}
 }
