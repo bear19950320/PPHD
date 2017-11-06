@@ -1,74 +1,158 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- page的css  -->
-		<link rel="stylesheet" type="text/css" href="css/statistics.css"/>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+		<title>日志管理</title>
+		<link href="../../main/img/logo.webp" rel="icon" type="image/icon">
+		<link rel="stylesheet" type="text/css" href="../../main/css/main.css"/>
+				
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css"/>
+		
+		<!-- statistics的css  -->
+		<link rel="stylesheet" type="text/css" href="../../css/statistics.css"/>
+		
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="../../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 	</head>
 	<body>
-		<div id="statisticser">
-			<div id="statistics-contenr">
-				<div class="layui-col-md12 menu-right">
-			    	<div class="menu-rightBody">
-			    		<!-- menu-right -->
-				       	<ul class="nav nav-pills layui-nav center" style="justify-content: center;">  
-						  <li role="presentation" class="layui-nav-item"><a href="#">&nbsp;</a></li>
-						</ul>
-				       	<!-- centenr-right --> 
-				       	<div class="centenr-right">
-				       		<!-- menu-options(右边的操作菜单栏)  -->
-				       		<ul class="menu-options contenter"> 
-							<li>
-								<div class="btn-group">
-								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    选择搜索条件 <span class="caret"></span>
-								  </button>
-								  <ul class="dropdown-menu">
-								    <li><a href="#">图片</a></li>
-								    <li><a href="#">文字</a></li>
-								    <li><a href="#">音频</a></li>
-								    <li><a href="#">word</a></li>
-								  </ul>
-								</div>
-							</li>
-							<li>
-								<input type="text" class="form-control" placeholder="">
-							</li>
-							<li>
-								<button type="button" class="btn btn-default"> <i class="layui-icon">&#xe615;</i>  搜索</button>
-							</li>
-							<li class="pull-right" style="max-width:40%;">
-								<div class="btn-group" role="group" aria-label="...">
-								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe640;</i> 删除</button>
-								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe61f;</i> 导出日志</button>
-								  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe640;</i> 删除全部</button>
-								</div>
-							</li>
-			       		</ul>
-				            <!-- list（列表展示） -->
-				            <div class="centenr-list layui-container" style="width:100%;">
-				            	<table class="layui-table" lay-data="{height:315, url:'list/json/terminal.json', page:true, id:'test'}" lay-filter="test">
-								  <thead>
-								    <tr>
-								      <th lay-data="{field:'id', width:100}">操作</th>
-								      <th lay-data="{field:'username', width:100}">终端名</th>
-								      <th lay-data="{field:'sex', width:200}">标识码</th>
-								      <th lay-data="{field:'city', width:200}">ip地址</th>
-								      <th lay-data="{field:'sign', width:200}">连接时间</th>
-								      <th lay-data="{field:'experience', width:100}">在线状态</th>
-								      <th lay-data="{field:'score', width:100}">操作</th>
-								      <th lay-data="{field:'classify', width:100}">职业</th>
-								      <th lay-data="{field:'wealth', width:200}">财富</th>
-								    </tr>
-								  </thead>
-								</table>
-				            </div>
-				       	</div>
-			    	</div>
-			    </div> 	
+		<nav class="row navPack">
+			<div class="col-lg-3">
+				<img src="../../main/img/logo1.webp" class="logoImg" alt="" />
 			</div>
-		</div>
-		<!-- page的js -->
-		<script src="js/statistics.js" type="text/javascript"></script>
+			<ul class="col-lg-9 navPackUl center">
+				<li class="content page" onclick="btnClick(this)" id="page" name="page">
+					<span class="center">
+						<i class="glyphicon glyphicon-home i"></i>
+					</span>
+					<a href="javascript:;" class="navText">
+						系统首页
+					</a>
+				</li>
+				<li class="content material" onclick="btnClick(this)" id="material" name="material">
+					<span class="center">
+						<i class="glyphicon glyphicon-home i"></i>
+					</span>
+					<a href="javascript:;" class="navText">
+						素材管理
+					</a>
+				</li>
+				<li class="content program" onclick="btnClick(this)" id="program" name="program">
+					<span class="center">
+						<i class="glyphicon glyphicon-home i"></i>
+					</span>
+					<a href="javascript:;" class="navText">
+						节目管理
+					</a>
+				</li>
+				<li class="content terminal" onclick="btnClick(this)" id="terminal" name="terminal">
+					<span class="center">
+						<i class="glyphicon glyphicon-home i"></i>
+					</span>
+					<a href="javascript:;" class="navText">
+						终端发布
+					</a>
+				</li>
+				<li class="content system" onclick="btnClick(this)" id="system" name="system">
+					<span class="center">
+						<i class="glyphicon glyphicon-home i"></i>
+					</span>
+					<a href="javascript:;" class="navText">
+						系统管理
+					</a>
+				</li>
+				<li class="content activer statistics" onclick="btnClick(this)" id="statistics" name="statistics">
+					<span class="center">
+						<i class="glyphicon glyphicon-home i"></i>
+					</span>
+					<a href="javascript:;" class="navText">
+						日志统计
+					</a>
+				</li>
+				<li class="content business" onclick="btnClick(this)" id="business" name="business">
+					<span class="center">
+						<i class="glyphicon glyphicon-home i"></i>
+					</span>
+					<a href="javascript:;" class="navText">
+						业务模块
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<section>
+			<div id="statisticser">
+				<div id="statistics-contenr">
+					<div class="layui-col-md12 menu-right">
+				    	<div class="menu-rightBody">
+				    		<!-- menu-right -->
+					       	<ul class="nav nav-pills layui-nav center" style="justify-content: center;">  
+							  <li role="presentation" class="layui-nav-item"><a href="#">&nbsp;</a></li>
+							</ul>
+					       	<!-- centenr-right --> 
+					       	<div class="centenr-right">
+					       		<!-- menu-options(右边的操作菜单栏)  -->
+					       		<ul class="menu-options contenter"> 
+								<li>
+									<div class="btn-group">
+									  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    选择搜索条件 <span class="caret"></span>
+									  </button>
+									  <ul class="dropdown-menu">
+									    <li><a href="#">图片</a></li>
+									    <li><a href="#">文字</a></li>
+									    <li><a href="#">音频</a></li>
+									    <li><a href="#">word</a></li>
+									  </ul>
+									</div>
+								</li>
+								<li>
+									<input type="text" class="form-control" placeholder="">
+								</li>
+								<li>
+									<button type="button" class="btn btn-default"> <i class="layui-icon">&#xe615;</i>  搜索</button>
+								</li>
+								<li class="pull-right" style="max-width:40%;">
+									<div class="btn-group" role="group" aria-label="...">
+									  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe640;</i> 删除</button>
+									  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe61f;</i> 导出日志</button>
+									  <button type="button" class="btn btn-default"> <i class="layui-icon">&#xe640;</i> 删除全部</button>
+									</div>
+								</li>
+				       		</ul>
+					            <!-- list（列表展示） -->
+					            <div class="centenr-list layui-container" style="width:100%;">
+					            	<table class="layui-table" lay-data="{height:315, url:'../../list/json/terminal.json', page:true, id:'test'}" lay-filter="test">
+									  <thead>
+									    <tr>
+									      <th lay-data="{field:'id', width:100}">操作</th>
+									      <th lay-data="{field:'username', width:100}">终端名</th>
+									      <th lay-data="{field:'sex', width:200}">标识码</th>
+									      <th lay-data="{field:'city', width:200}">ip地址</th>
+									      <th lay-data="{field:'sign', width:200}">连接时间</th>
+									      <th lay-data="{field:'experience', width:100}">在线状态</th>
+									      <th lay-data="{field:'score', width:100}">操作</th>
+									      <th lay-data="{field:'classify', width:100}">职业</th>
+									      <th lay-data="{field:'wealth', width:200}">财富</th>
+									    </tr>
+									  </thead>
+									</table>
+					            </div>
+					       	</div>
+				    	</div>
+				    </div> 	
+				</div>
+			</div>
+		</section>
+		<!----------------------------------- 其他Js -------------------------------------->
+		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<!-- statistics的js -->
+		<script src="../../js/statistics.js" type="text/javascript"></script>
 	</body>
 </html>
-<!--http://www.psahz.com/psxiazai/9810.html-->

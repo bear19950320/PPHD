@@ -1,6 +1,6 @@
 	function btnClick(obj){
         var id=$(obj).attr("name");
-        $('#section').load('build/'+id+'/'+id+'.html');
+        location.href='../'+id+'/'+id+'.html';
 		$("#"+id).addClass("activer").siblings().removeClass('activer');
 	}
 	/* 首页点击 */

@@ -1,0 +1,29 @@
+.login{
+	background: #136DBA;
+	margin-top: 10%;
+	/*display: flex;
+	display: -webkit-flex;
+	justify-content: center;*/
+}
+
+.login>header,.login>section,.passwordAndUser,.loginBtnBody{
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+}
+.layui-form-label{
+	color:#6DB5E6;
+}
+.layui-form-item .layui-input-inline{
+	width:240px;
+}
+
+/* 忘记密码   用户注册 */
+.passwordAndUser>span,.passwordAndUser>a{
+	font-size: 14px;
+	font-weight: 600;
+	color:#6DB5E6;
+}
+.passwordAndUser>a:hover{
+	color:white;
+}

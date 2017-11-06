@@ -18,6 +18,8 @@
 				
 		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
 		
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		
 		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
@@ -27,81 +29,58 @@
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	   
 	</head>
-	<body>
-		<nav class="row navPack">
-			<div class="col-lg-3">
-				<img src="main/img/logo1.webp" class="logoImg" alt="" />
-			</div>
-			<ul class="col-lg-9 navPackUl center">
-				<li class="content activer page" onclick="btnClick(this)" id="page" name="page">
-					<span class="center">
-						<i class="glyphicon glyphicon-home i"></i>
-					</span>
-					<a href="javascript:;" class="navText">
-						系统首页
-					</a>
-				</li>
-				<li class="content material" onclick="btnClick(this)" id="material" name="material">
-					<span class="center">
-						<i class="glyphicon glyphicon-home i"></i>
-					</span>
-					<a href="javascript:;" class="navText">
-						素材管理
-					</a>
-				</li>
-				<li class="content program" onclick="btnClick(this)" id="program" name="program">
-					<span class="center">
-						<i class="glyphicon glyphicon-home i"></i>
-					</span>
-					<a href="javascript:;" class="navText">
-						节目管理
-					</a>
-				</li>
-				<li class="content terminal" onclick="btnClick(this)" id="terminal" name="terminal">
-					<span class="center">
-						<i class="glyphicon glyphicon-home i"></i>
-					</span>
-					<a href="javascript:;" class="navText">
-						终端发布
-					</a>
-				</li>
-				<li class="content system" onclick="btnClick(this)" id="system" name="system">
-					<span class="center">
-						<i class="glyphicon glyphicon-home i"></i>
-					</span>
-					<a href="javascript:;" class="navText">
-						系统管理
-					</a>
-				</li>
-				<li class="content statistics" onclick="btnClick(this)" id="statistics" name="statistics">
-					<span class="center">
-						<i class="glyphicon glyphicon-home i"></i>
-					</span>
-					<a href="javascript:;" class="navText">
-						日志统计
-					</a>
-				</li>
-				<li class="content business" onclick="btnClick(this)" id="business" name="business">
-					<span class="center">
-						<i class="glyphicon glyphicon-home i"></i>
-					</span>
-					<a href="javascript:;" class="navText">
-						业务模块
-					</a>
-				</li>
-			</ul>
-		</nav>
-	    <section class="content" id="section">
-	    	
-	    	
-	    </section>
+	<body class="layui-row">
+		<div class="layui-col-md4 layui-col-md-offset4 layui-col-sm8 layui-col-sm-offset2 login">
+			<header>
+				<img src="main/img/logo1.webp"/>
+			</header>
+			
+		    <section class="content" id="section">
+		    	<form class="layui-form" action="">
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">账号名 : </label>
+				    <div class="layui-input-inline">
+				      <input type="text" id="user" name="user" required  lay-verify="required" placeholder="用户ID/手机号登陆" autocomplete="off" class="layui-input">
+				    </div>
+				  </div>
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">密码 : </label>
+				    <div class="layui-input-inline">
+				      <input type="password" id="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				    </div>
+				    <div class="layui-form-mid layui-word-aux">辅助文字</div>
+				  </div>
+				  <div class="layui-form-item">
+				    <div class="loginBtnBody">
+				      <button class="layui-btn" lay-submit lay-filter="formDemo">立即登陆</button>
+				    </div>
+				  </div>
+				  <div class="layui-form-item passwordAndUser">
+				  	 	<a href="javascript:;">忘记密码</a>&nbsp;<span>|</span>&nbsp;<a	href="javascript:;">注册账号</a>
+				  </div>
+				</form>
+		    </section>
+		</div>
 		<script src="main/js/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			window.onload=function(){
-				page();
-			}
-			// layer.msg('hello'); 
+			layui.use('form', function(){
+			  var form = layui.form;
+			  
+			  //监听提交
+			  form.on('submit(formDemo)', function(data){
+			  	if( $("#user").val() != "admin" ){
+			  		layer.msg("账号不存在");
+			  	}else if( $("#password").val() != "123"){
+			  		layer.msg("密码错误");
+			  	}else{
+			  		setTimeout(function(){ location.href="build/page/page.html" },3000)
+			  	}
+			  	
+			  //  layer.msg(JSON.stringify(data.field));
+			    return false;
+			  });
+			});
 		</script>
 	</body>
 </html>
