@@ -2,7 +2,7 @@
 layui.use('element', function(){
   var element = layui.element;
 });
-$(".back-close").click(function(event){
+$(".back-close").mousemove(function(event){
 	event.stopPropagation();
 	$("#action-bar").animate({"right":"-200px"});
 	$(".back-open").animate({"right":"0"})
@@ -11,7 +11,7 @@ $(".back-close").click(function(event){
 //	var backOpen=document.getElementsByClassName('back-open');
 //	backOpen.style.right='0'
 //}
-$(".back-open").click(function(event){
+$(".back-open").mouseover(function(event){
 	event.stopPropagation();
 	$("#action-bar").animate({"right":0});
 	$(".back-open").animate({"right":"-200px"})
@@ -34,7 +34,6 @@ var editorBody=$("#editor-ul>li");
 var content=[]  
     
 $("#keep").click(function(){
-	
 	for(var i=0;i<editorBody.length;i++){
 		function GetJsonData() {
 				var json = {
