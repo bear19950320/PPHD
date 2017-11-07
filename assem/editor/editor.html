@@ -4,8 +4,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 		<title>编辑器</title>
 		<link href="main/img/logo.webp" rel="icon" type="image/icon">
-		<link rel="stylesheet" type="text/css" href="../../main/css/main.css"/>
-				
+		<link rel="stylesheet" type="text/css" href="../../main/css/main.css"/>	
 		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css"/>
 		
 		<link rel="stylesheet" type="text/css" href="editor.css"/>
@@ -23,12 +22,7 @@
 			<div class="layui-row">
 				<!-- 编辑体的展现 -->
 				<div id="editor-body" class="layui-col-xs12">
-					<ul id="editor-ul">
-						<li>
-							<div class="click-box writing" name="text" touch="flase">
-								<div class="content" contentEditable>双击可编辑</div>
-							</div>
-						</li>
+					<ul id="editor-ul" name="page1">
 						<li>
 							<div class="click-box writing" name="text" touch="flase">
 								<div class="content " contentEditable>双击可编辑</div>
@@ -50,7 +44,7 @@
 				<!--<ul class="layui-nav layui-nav-tree" lay-filter="test">-->
 				
 				<!--  action-bar 操作栏 的身体 -->
-			 	<ul class="layui-col-xs2 layui-nav layui-nav-tree layui-nav-side layui-anim back-close" id="action-bar"> 
+			 	<ul class="layui-col-xs2 layui-nav layui-nav-tree layui-nav-side layui-anim" id="action-bar"> 
 			 	  <!-- 操作栏的隐藏按钮  -->
 				  <a href="javascript:;" class="back-close"> <i class="layui-icon">&#xe65b;</i> </a>
 				  <li class="layui-nav btn-assemble" style="min-height: 40px;">
@@ -59,7 +53,7 @@
 				  <li class="layui-nav-item layui-nav-itemed">
 				    <a href="javascript:;"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
 				    <dl class="layui-nav-child">
-				      <dd><a href="javasciript:;"><i class="layui-icon">&#xe62b;</i> <span>加粗</span></a></dd>
+				      <dd><a href="javasciript:;" id="textAdd"><i class="layui-icon">&#xe62b;</i> <span>加粗</span></a></dd>
 				      <dd><a href="javasciript:;"><i class="layui-icon">&#xe646;</i> <span>下划线</span></a></dd>
 				      <dd><a href="javasciript:;"><i class="layui-icon">&#xe644;</i> <span>斜体</span></a></dd>
 				    </dl>
@@ -70,13 +64,19 @@
 				  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i>	&nbsp;&nbsp;&nbsp;<span>音乐</span> </a></li>
 				  
 				  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i> &nbsp;&nbsp;&nbsp;<span>视频</span></a></li>
+				  
+				  <li class="layui-nav-item"><a href="javasciript:;" id="add"><i class="layui-icon">&#xe654;</i><span>模板</span></a></li>
 				</ul> 
 			</div>
 			
 		</section>
+		
+		<!--  引用的JS -- Start -->
 		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="zRsize.js" type="text/javascript" charset="utf-8"></script>
         <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <!-- 引用的JS ---  END  -->
+    
 	</body>
 </html>

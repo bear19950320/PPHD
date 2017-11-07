@@ -21,9 +21,9 @@
 }
 .back-open{
 	position: fixed;
-	right: -200px;
+	/*right: -200px;*/
 	top:0;
-	z-index: 9999;
+	z-index: 999;
 }
 .back-close>i,.back-open>i{
 	font-size: 24px;
@@ -80,6 +80,7 @@
 	line-height: inherit;
 }
 /* 定义打动的span标签 */
+
 .resize-box{
 	position: absolute;
 	top:0;
@@ -94,6 +95,21 @@
 }
 
 
+/*   添加btn   */
+#add{
+	background: white;
+	width: 100%;
+	/*height: 100%;*/
+  text-align: center;
+}
+#add i{
+	color:#007DDB;
+	font-size: 20px;
+}
+#add>span{
+	color:#007DDB;
+	font-size: 20px;
+}
 /* 所有图片设置最小高度 */
 
 /*------------------------------------------------------*/

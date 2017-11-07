@@ -13,11 +13,12 @@
   * 定义类 
   */
  var ZResize = function(options) { 
+ 	
   this.options = $.extend({}, defaultOpts, options); 
   this.init(); 
  } 
   
- ZResize.prototype = { 
+ ZResize.prototype = {
   init: function() { 
    this.initResizeBox(); 
   }, 
@@ -25,8 +26,11 @@
    * 初始化拖拽item 
    */
   initResizeBox: function() { 
+ console.log("this"+this)
    var self = this; 
-   $(self.options.item).each(function () { 
+      console.log($(self.options.item))
+   $(self.options.item).append(function () { 
+   	console.log(" 动态添加 ")
     //创建面板 
     var width = $(this).width(); 
     var height = $(this).height(); 
@@ -110,7 +114,8 @@
   
     //绑定触发事件 
     self.bindTrigger($(this)); 
-   }); 
+   });
+   
    self.bindHidePanel(); 
   }, 
   //控制点公共样式 

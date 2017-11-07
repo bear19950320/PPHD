@@ -7,7 +7,7 @@
 		<script src="../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			div{
-				width: 20px;
+				width: 200px;
 				margin: auto;
 			}
 		</style>
@@ -16,36 +16,59 @@
 		
 		<div id="test" style="height: 200px;background: yellow;" contentEditable="true" >双击文字可编辑</div>
 		<button>点击保存样式</button>
-		<div style="height: 698px;width: 429px;background: url('${sgds.imagePath}\u10.png')" class="move_element editor_div"  id="floor_container">
+		<!--<div style="height: 698px;width: 429px;background: url('${sgds.imagePath}\u10.png')" class="move_element editor_div"  id="floor_container">
 
+		</div>-->
+		
+		<div style="width: 500px;height: 500px;background: yellow;">
+			
 		</div>
-		
-		
 		
 		 
 		<script type="text/javascript">
-			var val = {
-		        zIndex: maxTemplateZIndex,
-		        jump:false,
-		        objId: SGDS_EDITOR.tool.getNextNumber(),
-		        coverImage:$("#floor_container").html(),
-		        controlType: 'floor_guide',
-		        scrolling: false
-		    };
-		    
-			$('div').mouseup(function(){
+
+		$('#test').mouseup(function(){
 			var s=window.getSelection();
 			s=s.toString();
-			        s=s.replace(/([\'\"\<\>\[\]\/\?\.\*\+\^\$\!])/g,'\\$1');
-			        var reg=new RegExp(s);console.log(reg);
-			        var h=$(this).html();
-			        console.log(h)
-			         if(reg.test(h)){
-			             var reg1=new RegExp('^(.*?)('+s+')(.*?)$');
-			             console.log(reg1)
-			           //  $(this).html(h.replace(reg1,'$1<span>$2</span>$3'));console.log(reg1);
-			         }
-			});
+			s=s.replace(/([\'\"\<\>\[\]\/\?\.\*\+\^\$\!])/g,'\\$1');
+			var reg=new RegExp(s);
+			console.log("reg-----------"+reg);
+			var h=$(this).html();
+			console.log("h变量--------"+h)
+			 if(reg.test(h)){
+			 	console.log(s)
+			     var reg1=new RegExp('^(.*?)('+s+')(.*?)$');
+			    console.log("reg1的变量"+reg1)
+			    console.log("reg1的变量是不是空"+reg1==" ")
+			     
+			    //$(this).html(h.replace(reg1,'$1<span>$2</span>$3'));console.log(reg1);
+			 }
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//			var val = {
+//		        zIndex: maxTemplateZIndex,
+//		        jump:false,
+//		        objId: SGDS_EDITOR.tool.getNextNumber(),
+//		        coverImage:$("#floor_container").html(),
+//		        controlType: 'floor_guide',
+//		        scrolling: false
+//		    };
+		    
+			
 //			function printStyles(elem) {
 //			
 //			    var isIe  = navigator.userAgent.indexOf('MSIE') >= 0 ? true : false;
@@ -64,10 +87,10 @@
 //			}
 			
 			
-			$("button").click(function(){
-				console.log(val)
-				//printStyles(document.getElementById('test'));
-			})
+//			$("button").click(function(){
+//				console.log(val)
+//				//printStyles(document.getElementById('test'));
+//			})
 		</script>
 	</body>
 </html>
