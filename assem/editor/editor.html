@@ -15,68 +15,102 @@
 		<script src="../../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	   
+	    <link rel="stylesheet" type="text/css" href="../../main/swiper/swiper.min.css"/>
+	    <style type="text/css">
+	    	.swiper-container {
+			    width: 100%;
+			    height: 100%;
+			    background:white;
+			}  
+	    </style>
 	</head>
 	<body>
 		<section>
-			<div class="layui-row">
+			<div class="layui-row swiper-container">
 				<!-- 编辑体的展现 -->
-				<div id="editor-body" class="layui-col-xs12">
-					<ul id="editor-ul" name="page1">
+				<div id="editor-body" class="layui-col-xs12 swiper-wrapper swiper-no-swiping">
+					<!-- -->
+					<ul id="editor-ul" class="editor-ul swiper-slide " name="page1">
 						<li>
 							<div class="click-box writing" name="text" touch="flase">
 								<div class="content " contentEditable>双击可编辑</div>
 							</div>
 						</li>
-						<li>
+						<img id="dome" src=""/>
+						<!--<li>
 							<div class="click-box" touch="flase">
 								<div class="content" contentEditable>
 									<img style="width: 100%;height: 100%;" src="../../img/text.jpg"/>
 								</div>
 							</div>
-						</li>
+						</li>-->
+					</ul>
+					<ul class="editor-ul swiper-slide " name="page1">
+					
 					</ul>
 				</div>
 				
-				<!-- 操作栏的展现按钮  -->
-			  	
-			   	<a href="javascript:;" class="layui-btn back-open"><i class="layui-icon">&#xe642;</i></a>
-				<!--<ul class="layui-nav layui-nav-tree" lay-filter="test">-->
-				
-				<!--  action-bar 操作栏 的身体 -->
-			 	<ul class="layui-col-xs2 layui-nav layui-nav-tree layui-nav-side layui-anim" id="action-bar"> 
-			 	  <!-- 操作栏的隐藏按钮  -->
-				  <a href="javascript:;" class="back-close"> <i class="layui-icon">&#xe65b;</i> </a>
-				  <li class="layui-nav btn-assemble" style="min-height: 40px;">
-				  	<button class="layui-btn pull-left" id="keep" >保存</button><button class="layui-btn pull-right">退出</button>
-				  </li>
-				  <li class="layui-nav-item layui-nav-itemed">
-				    <a href="javascript:;"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
-				    <dl class="layui-nav-child">
-				      <dd><a href="javasciript:;" id="textAdd"><i class="layui-icon">&#xe62b;</i> <span>加粗</span></a></dd>
-				      <dd><a href="javasciript:;"><i class="layui-icon">&#xe646;</i> <span>下划线</span></a></dd>
-				      <dd><a href="javasciript:;"><i class="layui-icon">&#xe644;</i> <span>斜体</span></a></dd>
-				    </dl>
-				  </li>
-				  <li class="layui-nav-item">
-				    <a href="javascript:;"><i class="layui-icon">&#xe60d;</i>&nbsp;&nbsp;&nbsp;<span>图片</span></a>
-				  </li>
-				  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i>	&nbsp;&nbsp;&nbsp;<span>音乐</span> </a></li>
-				  
-				  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i> &nbsp;&nbsp;&nbsp;<span>视频</span></a></li>
-				  
-				  <li class="layui-nav-item"><a href="javasciript:;" id="add"><i class="layui-icon">&#xe654;</i><span>模板</span></a></li>
-				</ul> 
-			</div>
+				<!-- 如果需要分页器 -->
+		    <div class="swiper-pagination"></div>
 			
+			<!-- 如果需要导航按钮 -->
+		    <div class="swiper-button-prev"></div>
+		    <div class="swiper-button-next"></div>
+
+			</div>
 		</section>
 		
+		<!-- 操作栏的展现按钮  -->
+			<a href="javascript:;" class="layui-btn back-open"><i class="layui-icon">&#xe642;</i></a>
+		<!--  action-bar 操作栏 的身体 -->
+		 	<ul class="layui-col-xs2 layui-nav layui-nav-tree layui-nav-side layui-anim" id="action-bar"> 
+		 	  <!-- 操作栏的隐藏按钮  -->
+			  <a href="javascript:;" class="back-close"> <i class="layui-icon">&#xe65b;</i> </a>
+			  <li class="layui-nav btn-assemble" style="min-height: 40px;">
+			  	<button class="layui-btn pull-left" id="keep" >保存</button><button class="layui-btn pull-right">退出</button>
+			  </li>
+			  <li class="layui-nav-item layui-nav-itemed">
+			    <a href="javascript:;"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
+			    <dl class="layui-nav-child">
+			      <dd><a href="javasciript:;" id="textAdd"><i class="layui-icon">&#xe62b;</i> <span>加粗</span></a></dd>
+			      <dd><a href="javasciript:;"><i class="layui-icon">&#xe646;</i> <span>下划线</span></a></dd>
+			      <dd><a href="javasciript:;"><i class="layui-icon">&#xe644;</i> <span>斜体</span></a></dd>
+			    </dl>
+			  </li>
+			  <li class="layui-nav-item">
+			  	<input type="file" id="imgInput" value="" onchange="BackImage(this)" />
+			    <a href="javascript:;" id="imgAdd"><i class="layui-icon">&#xe60d;</i>&nbsp;&nbsp;&nbsp;<span id="test1">图片</span></a>
+			  </li>
+			  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i>	&nbsp;&nbsp;&nbsp;<span>音乐</span> </a></li>
+			  
+			  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i> &nbsp;&nbsp;&nbsp;<span>视频</span></a></li>
+			  
+			  <li class="layui-nav-item"><a href="javasciript:;" id="add"><i class="layui-icon">&#xe654;</i><span>模板</span></a></li>
+			</ul> 
 		<!--  引用的JS -- Start -->
 		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../main/swiper/swiper.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="zRsize.js" type="text/javascript" charset="utf-8"></script>
         <script src="editor.js" type="text/javascript" charset="utf-8"></script>
         <!-- 引用的JS ---  END  -->
-    
+    <script>        
+		  var mySwiper = new Swiper ('.swiper-container', {
+		    direction: 'vertical',
+		    loop: true,
+		    // 如果需要分页器
+		    pagination: {
+		      el: '.swiper-pagination',
+		    },
+		    mousewheelControl : false,
+		    // 如果需要前进后退按钮
+		    navigation: {
+		      nextEl: '.swiper-button-next',
+		      prevEl: '.swiper-button-prev',
+		    },
+		    // 如果需要滚动条
+		  })        
+		  </script>
+		</body>
 	</body>
 </html>

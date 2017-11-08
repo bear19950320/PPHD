@@ -21,13 +21,18 @@
 }
 .back-open{
 	position: fixed;
-	/*right: -200px;*/
+	right: -200px;
 	top:0;
-	z-index: 999;
+	z-index: 998;
 }
 .back-close>i,.back-open>i{
 	font-size: 24px;
 }
+#imgInput,#dome{
+	display: none;
+}
+
+
 /* 编辑器的身体  */
 #editor-body{
 	height: 100%;
@@ -35,7 +40,7 @@
 	
 }
 
-#editor-ul{
+.editor-ul{
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -45,13 +50,13 @@
 	margin: auto;
 	overflow: hidden;
 }
-#editor-ul>li{
+.editor-ul>li{
 	min-height: 40px !important;
 	position: absolute;
 	width: 100%;
 	padding: 10px;
 }
-#editor-ul>li:after{
+.editor-ul>li:after{
 	display: block;
 	clear: both;
 	content: "";
@@ -68,7 +73,8 @@
 	top:0;
 	left:0;
 }
-#editor-ul>li .click-box>.content{
+.editor-ul>li .click-box>.content{
+	overflow: hidden;
 	position: absolute;
 	top:0;
 	left: 0;

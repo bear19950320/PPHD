@@ -46,7 +46,20 @@
 		});
 
 
-
+		$.ajax({
+			type: "post",
+			url: "http://192.168.7.104:8081/pphd/getMyProducelistmyproduceapi",
+			dataType: "json",
+			data:{
+				gglx:'0'
+			},
+			success: function(data) {
+				console.log(data)
+			},
+			error:function(){
+				console.log(1)
+			}
+		})
 
 
 
