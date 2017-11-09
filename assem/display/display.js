@@ -12,7 +12,7 @@ var data= JSON.parse(content)
  	}else{
  		/* 图片层级 */
  		
- 		$("ul").append('<li style="z-index:1;'+data[i].Css+'"><div style="width:'+data[i].Width+'px;height:'+data[i].Height+'px;">'+data[i].content+'</div></li>');
+ 		$("ul").append('<li style="'+data[i].Css+'"><div style="width:'+data[i].Width+'px;height:'+data[i].Height+'px;">'+data[i].content+'</div></li>');
  		
  	}
  	

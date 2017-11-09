@@ -16,27 +16,19 @@
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	    <link rel="stylesheet" type="text/css" href="../../main/swiper/swiper.min.css"/>
-	    <style type="text/css">
-	    	.swiper-container {
-			    width: 100%;
-			    height: 100%;
-			    background:white;
-			}  
-	    </style>
 	</head>
 	<body>
 		<section>
-			<div class="layui-row swiper-container">
+			<div class="layui-row">
 				<!-- 编辑体的展现 -->
-				<div id="editor-body" class="layui-col-xs12 swiper-wrapper swiper-no-swiping">
+				<div id="editor-body" class="layui-col-xs12">
 					<!-- -->
-					<ul id="editor-ul" class="editor-ul swiper-slide " name="page1">
+					<ul id="editor-ul" class="editor-ul" name="page1">
 						<li>
 							<div class="click-box writing" name="text" touch="flase">
 								<div class="content " contentEditable>双击可编辑</div>
 							</div>
 						</li>
-						<img id="dome" src=""/>
 						<!--<li>
 							<div class="click-box" touch="flase">
 								<div class="content" contentEditable>
@@ -45,20 +37,13 @@
 							</div>
 						</li>-->
 					</ul>
-					<ul class="editor-ul swiper-slide " name="page1">
 					
-					</ul>
 				</div>
-				
-				<!-- 如果需要分页器 -->
-		    <div class="swiper-pagination"></div>
-			
-			<!-- 如果需要导航按钮 -->
-		    <div class="swiper-button-prev"></div>
-		    <div class="swiper-button-next"></div>
-
 			</div>
 		</section>
+
+		<audio id="music-body" style="display: none;" autoplay="autoplay" src="" controls="nodownload" controlsList="nodownload">
+		</audio>
 		
 		<!-- 操作栏的展现按钮  -->
 			<a href="javascript:;" class="layui-btn back-open"><i class="layui-icon">&#xe642;</i></a>
@@ -78,10 +63,14 @@
 			    </dl>
 			  </li>
 			  <li class="layui-nav-item">
+			  	<img id="dome" src=""/>
 			  	<input type="file" id="imgInput" value="" onchange="BackImage(this)" />
 			    <a href="javascript:;" id="imgAdd"><i class="layui-icon">&#xe60d;</i>&nbsp;&nbsp;&nbsp;<span id="test1">图片</span></a>
 			  </li>
-			  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i>	&nbsp;&nbsp;&nbsp;<span>音乐</span> </a></li>
+			  <li class="layui-nav-item">
+			  	<input type="file" id="musicInput" value="" onchange="backMusic(this)" />
+			  	<a href="javasciript:;" id="musicAdd"><i class="layui-icon"></i>&nbsp;&nbsp;&nbsp;<span>音乐</span> </a>
+			  </li>
 			  
 			  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i> &nbsp;&nbsp;&nbsp;<span>视频</span></a></li>
 			  
@@ -94,7 +83,7 @@
 		<script src="zRsize.js" type="text/javascript" charset="utf-8"></script>
         <script src="editor.js" type="text/javascript" charset="utf-8"></script>
         <!-- 引用的JS ---  END  -->
-    <script>        
+    	<script>        
 		  var mySwiper = new Swiper ('.swiper-container', {
 		    direction: 'vertical',
 		    loop: true,
@@ -110,7 +99,7 @@
 		    },
 		    // 如果需要滚动条
 		  })        
-		  </script>
+		</script>
 		</body>
 	</body>
 </html>

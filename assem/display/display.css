@@ -6,6 +6,11 @@ ul{
 	width: 100%;
 	position: relative;
 }
+ul:after{
+	display: block;
+	clear: both;
+	content: " ";
+}
 li{
 	width: 100%;
 	min-height: 40px;

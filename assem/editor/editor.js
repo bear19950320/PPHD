@@ -31,7 +31,7 @@ $("#textAdd").click(function(){
 });
 /*----------------------  点击选择文字添加End ---------------------- */
 
-/* ------- 转Base64的方法  -------- */
+/* ------- 转Base64的方法Start  -------- */
 function getBase64Image(img) {  
      var canvas = document.createElement("canvas");  
      canvas.width = img.width;  
@@ -42,6 +42,7 @@ function getBase64Image(img) {
      var dataURL = canvas.toDataURL("image/"+ext);  
      return dataURL;  
 }
+/* ------- 转Base64的方法End  -------- */
 
 /* ---- 图片显示到div里面的方法Start --------  */
 var imgUrl="";
@@ -54,7 +55,11 @@ function readFile(obj) {
     }
 
 }
+/* ------------ 添加图片的方法！ zindex是图片的层级叠加 Stasrt ------------ */
+var zIndex=0;
 function BackImage(imgFile) {
+		zIndex++;
+    
     var t_files = imgFile.files;
     var str = '';
     imgss = [];
@@ -69,6 +74,7 @@ function BackImage(imgFile) {
         } else {
             var path;
             if(document.all) {
+            	
                 imgFile.select();
                 path = document.selection.createRange().text;
                 document.getElementById("img").innerHTML = "";
@@ -81,10 +87,11 @@ function BackImage(imgFile) {
                 var img = $("#dome").attr("src");//imgurl 就是你的图片路径  
 								var image = new Image();  
 								image.src = img;  
-								image.onload = function(){  
+								image.onload = function(){ 
+									/* -----转换为Base64 -------*/
 								  var base64 = getBase64Image(image); 
 								  imgUrl=base64;
-								  $("#editor-ul").append('<li style="width:220px;height:220px;"><div class="click-box" touch="flase"><div class="content" contentEditable><img style="width:100%;height:100%;" src='+imgUrl+' /></div></div></li>')
+								  $("#editor-ul").append('<li style="z-index:'+zIndex+';width:220px;height:220px;"><div class="click-box img-box" touch="flase"><div class="content" contentEditable><img style="width:100%;height:100%;" src='+imgUrl+' /></div></div></li>')
 									$("#editor-ul").find(".resize-panel").remove();
 								  new ZResize({
 									   stage: "#editor-ul", //舞台 
@@ -99,11 +106,24 @@ function BackImage(imgFile) {
 }
 /* ---------------- 图片显示到div里面的方法End ---------------------  */
 
+/* --- 图片点击让其层级变高 --- 暂未实现 --- */
+$("#editor-ul>li").on("click","img",function(event){
+	event.stopPropagation();
+	 console.log(1)
+})
+
+/* ------------------------ 点击添加音乐按钮Start ------------------ */
+$("#musicAdd").click(function(event){
+	event.stopPropagation();
+	$("#musicInput").trigger("click");
+})
+/* ------------------------ 点击添加音乐按钮End ------------------ */
 
 /* ------------------ 点击添加图片按钮Start ------------------------- */
 $("#imgAdd").click(function(event){
-	$("#imgInput").trigger("click")
 	event.stopPropagation();
+	$("#imgInput").trigger("click");
+	
 })
 /* ------------------ 点击添加图片按钮end ------------------------- */
 
@@ -156,11 +176,11 @@ function htmlSql(){
   	for(var i=0;i<editorBody.length;i++){
 			function GetJsonData() {
 				var json = {
-					Css:editorBody.eq(i).find(".click-box").attr("style"),
+					Css:editorBody.eq(i).attr("style"),
 					content:editorBody.eq(i).find(".content").html(),
 					Class:editorBody.eq(i).find(".click-box").attr('name'),
-					Width:$(".content>img").width(),
-					Height:$(".content>img").height()
+					Width:editorBody.eq(i).find(".content>img").width(),
+					Height:editorBody.eq(i).find(".content>img").height()
 //					 jim:{
 //								
 //						}

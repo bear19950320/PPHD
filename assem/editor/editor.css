@@ -28,7 +28,9 @@
 .back-close>i,.back-open>i{
 	font-size: 24px;
 }
-#imgInput,#dome{
+
+/* 所有隐藏的写在这里  */
+#imgInput,#dome,#musicInput{
 	display: none;
 }
 
@@ -78,7 +80,7 @@
 	position: absolute;
 	top:0;
 	left: 0;
-	padding: 5px 10px;
+	padding:0;
 	font-size: 24px;
 	width: 100%;
 	height: 100%;
