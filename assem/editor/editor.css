@@ -33,6 +33,27 @@
 #imgInput,#dome,#musicInput{
 	display: none;
 }
+/* 导航的样式  */
+/*#page-body{
+	position: fixed;
+	top:10px;
+	left: 1px;
+	width: 40px;
+	height: 200px;
+	background: red;
+}*/
+#pageBtn{
+	height:auto;
+	white-space:inherit;
+}
+#pageBtn>li{
+	height: 40px;
+	width: 100%;
+	background: #007AFF;
+	margin: 5px 0;
+	text-align: center;
+	line-height: 40px;
+}
 
 
 /* 编辑器的身体  */
@@ -58,7 +79,7 @@
 	width: 100%;
 	padding: 10px;
 }
-.editor-ul>li:after{
+.editor-ul>li:after,#pageBtn:after{
 	display: block;
 	clear: both;
 	content: "";

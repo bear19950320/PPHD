@@ -4,6 +4,7 @@ var content=[],imgSrc="";
 layui.use('element', function(){
   var element = layui.element;
 });
+
 /*------------------- 关闭编辑工具框  ----------------------*/
 $(".back-close").click(function(event){
 	event.stopPropagation();
@@ -106,6 +107,20 @@ function BackImage(imgFile) {
 }
 /* ---------------- 图片显示到div里面的方法End ---------------------  */
 
+/* -----------音乐的input change事件 ---------------- */
+function backMusic(musicfile){
+	// console.log(musicfile)
+	console.log(musicfile.value)
+	var audio = document.createElement('audio');
+audio.src =musicfile.value; //这里放音乐的地址
+audio.autoplay = 'autoplay';
+document.body.appendChild(audio);
+//var music=window.URL.createObjectURL(musicfile.files);
+//console.log(music)
+	//$("#editor-ul").append('<audio id="music-body" style="display: none;" autoplay="autoplay" src="'+musicfile.value+'" controls="nodownload" controlsList="nodownload"></audio>')
+}
+
+
 /* --- 图片点击让其层级变高 --- 暂未实现 --- */
 $("#editor-ul>li").on("click","img",function(event){
 	event.stopPropagation();
@@ -194,7 +209,32 @@ function htmlSql(){
 /*---------  调用储存html的JSON循环方法END  ------------------*/
 
 
-/* 按钮 */
+/* --------------------翻页选项卡事件 暂时不要 ------------------ */
+//$("#pageBtn li").mouseup(function() {
+//	if($(this).next()){
+//		 $(this).next().after($(this));
+//	}
+// 
+//}); 
+ 
+ // oninput 事件，输入框在用户 停止输入   一秒后再执行，不重复执行，只在每次改变值之后的1秒执行一次
+// (function textCoun(textarea,num){
+//  var sendTextarea     =     document.getElementById(textarea),
+//      text            =    sendTextarea.value,
+//      counter            =    text.length,
+//      sendCount         =     document.getElementById("send-count");
+//  
+//  sendCount.innerHTML = num-counter;    //显示初始状态还属于多少字
+//  
+//  //输入以后重新计算
+//  sendTextarea.oninput = function(){
+//      text    =    sendTextarea.value,
+//      counter    =    text.length;
+//      sendCount.innerHTML = num-counter;
+//  }
+//
+//})("send-textarea",110)
+ 
  
  
  
@@ -204,13 +244,19 @@ function htmlSql(){
 //		console.log(1-1)
 //		return "快住手！！别点下去！！";
 //	};
+ 
+var pageNum=1; 
 
 /*-------------添加模板------------------------------------*/
 $("#add").click(function(event){
 	event.stopPropagation();
-	$("#editor-body").find("#editor-ul").
+	pageNum++;
 	$("#editor-body").find("ul").attr("id"," ")
-	
+	$("#editor-body").find("ul").removeClass("layui-show")
+	$("#editor-body").find("ul").hide()
+	$("#pageBtn").find("li").removeClass("layui-this");
+	$("#pageBtn").append('<li class="layui-this">第'+ pageNum +'页</li>')
+	$("#editor-body").append('<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" name="page'+pageNum+'"></ul>')
 })
 
 
