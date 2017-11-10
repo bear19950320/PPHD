@@ -1,5 +1,5 @@
 // 全局变量
-var content=[],imgSrc="";
+var content=[],imgSrc="",conatent=[];
 
 layui.use('element', function(){
   var element = layui.element;
@@ -185,29 +185,35 @@ $("#editor-ul>li>.click-box").dblclick(function(){
 /*  -------------------- 对字进行编辑 END --------------------------- */
 })
 
-/*---------  调用储存html的JSON循环方法Start  ------------------*/ 
+/*---------  生成ul下面的li的json方法Start  ------------------*/ 
 function htmlSql(){
-	var editorBody=$("#editor-ul>li");
-  	for(var i=0;i<editorBody.length;i++){
-			function GetJsonData() {
-				var json = {
-					Css:editorBody.eq(i).attr("style"),
-					content:editorBody.eq(i).find(".content").html(),
-					Class:editorBody.eq(i).find(".click-box").attr('name'),
-					Width:editorBody.eq(i).find(".content>img").width(),
-					Height:editorBody.eq(i).find(".content>img").height()
-//					 jim:{
-//								
-//						}
-				};	
-				console.log("JSON内容--"+json);
-				return json;
-			}
-			content.push(GetJsonData())
+		for(var k=0;k<$("#editor-body>ul").length;k++){
+			var editorBody=$("#editor-body>ul").eq(k).find("li");
+				for(var i=0;i<$("#editor-body>ul").eq(k).find("li").length;i++){
+					function GetJsonData() {
+						var json = {
+							Css:editorBody.eq(i).attr("style"),
+							content:editorBody.eq(i).find(".content").html(),
+							Class:editorBody.eq(i).find(".click-box").attr('name'),
+							Width:editorBody.eq(i).find(".content>img").width(),
+							Height:editorBody.eq(i).find(".content>img").height()
+						};	
+						return json;
+					}
+					content.push(GetJsonData())
+				}
+			
 		}
-  }
-/*---------  调用储存html的JSON循环方法END  ------------------*/
-
+}
+/*---------  生成ul下面的li的json方法End  ------------------*/ 
+function conatents(){
+	console.log("conatent-JSon"+htmlSql())
+	var json = {
+		 pagaNum:$("#editor-body>ul").length,
+		 content:content
+	}
+	return json
+}
 
 /* --------------------翻页选项卡事件 暂时不要 ------------------ */
 //$("#pageBtn li").mouseup(function() {
@@ -336,19 +342,20 @@ $("#add").click(function(event){
 
 
 
-
+var center=[]
 /*----------------点击保存的按钮时间 Start  ----------------------------------------*/
 $("#keep").click(function(event){
 	event.stopPropagation();
-	htmlSql();
+	conatent.push(conatents())	
 	// 转为json
-	content=JSON.stringify(content)
- 
+
+ 	center=JSON.stringify(conatent)
+ //console.log(content)
 	// 点击保存的时候的操作
 	
 	// 储存json样式
-	sessionStorage.setItem("content",content)
-	
-   	location.href="../display/index.html"
+//	sessionStorage.setItem("content",content)
+//	
+// 	location.href="../display/index.html"
 })
 /*----------------点击保存的按钮时间 END  ----------------------------------------*/

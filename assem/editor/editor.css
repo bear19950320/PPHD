@@ -6,6 +6,11 @@
   url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.svg#iconfont') format('svg');
 }
+/* layui的选项卡样式 */
+.layui-tab{
+	margin: 0;
+}
+
 
 .layui-nav-side{
 	right:0;
@@ -60,7 +65,7 @@
 #editor-body{
 	height: 100%;
 	background: #D0CFD8;
-	
+	padding: 0;
 }
 
 .editor-ul{
@@ -120,9 +125,8 @@
 	border:1px solid rgba(9,155,148,.5);
 	}
 .writing{
-	z-index: 999;
+	z-index: 990;
 }
-
 
 /*   添加btn   */
 #add{
