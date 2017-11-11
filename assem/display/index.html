@@ -18,19 +18,35 @@
 		<script src="../../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../../main/swiper/swiper.min.css"/>
 	</head>
 	<body>
-		<section class="layui-row">
-			<ul class="layui-col-xs12">
+		<section class="layui-row swiper-container">
+			<div class="swiper-wrapper">
 				
-			</ul>
-			
+			</div>
+			<!-- 如果需要导航按钮 -->
+		    <div class="swiper-button-prev"></div>
+		    <div class="swiper-button-next"></div>
 		</section>
 		
 		<!--  引用的JS -- Start -->
 		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../main/swiper/swiper.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="display.js" type="text/javascript" charset="utf-8"></script>
         <!-- 引用的JS ---  END  -->
+<script>        
+	  var mySwiper = new Swiper ('.swiper-container', {
+	    direction: 'vertical',
+	    loop: true,
+	 	autoplay : 3000,
+		speed:300,
+	    
+	
+	  })
+
+</script>
 	</body>
 </html>

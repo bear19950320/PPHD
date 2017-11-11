@@ -19,7 +19,7 @@ $(".back-open").click(function(event){
 	$(".back-open").animate({"right":"-200px"})
 });
 
-var textDom='<li><div class="click-box writing" name="text" touch="flase"><div class="content" contentEditable>双击可编辑</div></div></li>'
+var textDom='<li style="width:20%;left:25%;"><div class="click-box writing" name="text" touch="flase"><div class="content" contentEditable>双击可编辑</div></div></li>'
 /*---------------------- 点击选择文字添加Start ---------------------- */
 $("#textAdd").click(function(){
 		$(this).parents("li").siblings("li").find('.resize-panel').hide();
@@ -184,37 +184,58 @@ $("#editor-ul>li>.click-box").dblclick(function(){
 //		});
 /*  -------------------- 对字进行编辑 END --------------------------- */
 })
-
+var 	page=[],Css,content,Class,Width,Height
 /*---------  生成ul下面的li的json方法Start  ------------------*/ 
 function htmlSql(){
 		for(var k=0;k<$("#editor-body>ul").length;k++){
+	
 			var editorBody=$("#editor-body>ul").eq(k).find("li");
 				for(var i=0;i<$("#editor-body>ul").eq(k).find("li").length;i++){
-					function GetJsonData() {
-						var json = {
-							Css:editorBody.eq(i).attr("style"),
-							content:editorBody.eq(i).find(".content").html(),
-							Class:editorBody.eq(i).find(".click-box").attr('name'),
-							Width:editorBody.eq(i).find(".content>img").width(),
-							Height:editorBody.eq(i).find(".content>img").height()
-						};	
-						return json;
-					}
-					content.push(GetJsonData())
+							page=editorBody.eq(i).attr("num");
+							Css=editorBody.eq(i).attr("style");
+							content=editorBody.eq(i).find(".content").html();
+							Class=editorBody.eq(i).find(".click-box").attr('name');
+							Width=editorBody.eq(i).find(".content>img").width();
+							Height=editorBody.eq(i).find(".content>img").height();
 				}
-			
+				console.log(page)
 		}
 }
-/*---------  生成ul下面的li的json方法End  ------------------*/ 
-function conatents(){
-	console.log("conatent-JSon"+htmlSql())
-	var json = {
-		 pagaNum:$("#editor-body>ul").length,
-		 content:content
+var test=0
+function GetJsonData() {
+	test++;
+	var t = [];
+	
+	for(var k=0;k<$("#editor-body>ul").length;k++){
+		var editorBody=$("#editor-body>ul").eq(k).find("li");
+		var n = "[";
+			for(i = 0; i < $("#editor-body>ul").eq(k).find("li").length; i++) {
+				n += "{'page':'" + editorBody.eq(i).attr("num") + "',"
+				n += "'Css':'" + editorBody.eq(i).attr("style") + "',"
+				n += "'content':'" + editorBody.eq(i).find(".content").html() + "',"
+				n += "'Class':'" + editorBody.eq(i).find(".click-box").attr('name') + "',"
+				n += "'Width':'" + editorBody.eq(i).width() + "',"
+				n += "'Height':'" +  editorBody.eq(i).height() + "'},"
+				console.log(editorBody.eq(i).height())
+			}
+		  n = n.substr(0, n.length - 1);
+		  n +="]" 
+			n = eval('(' + n + ')');
+		t.push(n);
 	}
-	return json
+	//console.log(t)
+	var json = {
+	  id:"test"+test,
+		pagaNum:$("#editor-body>ul").length,
+		content:t
+	};
+	//console.log(json)
+	return json;
 }
 
+
+
+/*---------  生成ul下面的li的json方法End  ------------------*/ 
 /* --------------------翻页选项卡事件 暂时不要 ------------------ */
 //$("#pageBtn li").mouseup(function() {
 //	if($(this).next()){
@@ -262,7 +283,7 @@ $("#add").click(function(event){
 	$("#editor-body").find("ul").hide()
 	$("#pageBtn").find("li").removeClass("layui-this");
 	$("#pageBtn").append('<li class="layui-this">第'+ pageNum +'页</li>')
-	$("#editor-body").append('<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" name="page'+pageNum+'"></ul>')
+	$("#editor-body").append('<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="'+pageNum+'"></ul>')
 })
 
 
@@ -346,16 +367,16 @@ var center=[]
 /*----------------点击保存的按钮时间 Start  ----------------------------------------*/
 $("#keep").click(function(event){
 	event.stopPropagation();
-	conatent.push(conatents())	
+//	conatent.push(conatents())	
+	conatent.push(GetJsonData())
 	// 转为json
 
  	center=JSON.stringify(conatent)
- //console.log(content)
 	// 点击保存的时候的操作
-	
+	console.log(JSON.parse(center))
 	// 储存json样式
-//	sessionStorage.setItem("content",content)
+	sessionStorage.setItem("content",center)
 //	
-// 	location.href="../display/index.html"
+//	location.href="../display/index.html"
 })
 /*----------------点击保存的按钮时间 END  ----------------------------------------*/
