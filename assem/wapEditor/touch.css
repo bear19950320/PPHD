@@ -63,20 +63,20 @@
 
 /* 编辑器的身体  */
 #editor-body{
-	height: 100%;
-	background: #D0CFD8;
+	height: 85%;
+	background: rgba(57,61,73,0.5);
 	padding: 0;
 }
 
 .editor-ul{
 	position: relative;
-	width: 100%;
-	height: 100%;
-	border:1px dashed rgba(0,0,0,.6);
+	width: 80%;
+	height: 90%;
 	border-top:0;
 	border-bottom: 0;
-	margin: auto;
+	margin:7% 10% 3% 10%;
 	overflow: hidden;
+	background: #D0CFD8;
 }
 .editor-ul>li{
 	min-height: 40px !important;
@@ -151,27 +151,63 @@
 	min-width: 100px !important;
 }
 
-
-
-.layui-nav-side{
-	overflow-x:inherit;
+/* ----------------------------导航条down---------------------------  */
+#down-nav{
+	height: 9%;
 }
-/* 撤回按钮  */
-/*.undo-body{
-	min-width: 30px;
-	min-height: 100px;
-	background: rgba(0,0,0,.4);
-	position: fixed;
-	left:0px;
-	top:20%;
-	z-index: 10;
+#down-ul{
+	height:100%;
+	width:100%;
 }
-.undo-body>li>div{
-	cursor: pointer;
-	min-height: 30px;
-	padding: 5px;
-	
+#down-ul>li{
+	float: left;
+	width:20%;
+	height: 100%;
+	background: #393D49;
 }
-.undo-body>li>div>i{
-	font-size: 20px;
-}*/
+.down-btn{
+	width:100%;
+	height:100%;
+}
+.down-btn>div{
+	display: flex;
+	justify-content: center;
+}
+.down-btn>div>.icon{
+	font-size: 22px;
+}
+.down-btn {
+	color:#E2E2E2;
+}
+/* 头部按钮Css */
+#head-nav{
+	height:6%;
+	width:100%;
+}
+.head-ul:after{
+	display: block;
+	content: " ";
+	clear: both;
+}
+.head-ul>li{
+	position: relative;
+	float: left;
+	width: 20%;
+	height: 100%;
+	background: #393D49;
+}
+.head-ul>li>div{ 
+	font-size: 14px;
+	position: absolute;
+	top:50%;
+	margin-top: -10px;
+	color:#F2F2F2;
+	text-align: center;
+}
+.head-ul>li>.icon-body{
+	position: inherit;
+	margin-top: -14px;
+}
+.head-ul>li>.icon-body>.icon{
+		font-size: 20px;
+}

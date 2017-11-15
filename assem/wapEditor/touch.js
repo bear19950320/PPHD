@@ -1,5 +1,5 @@
 // 全局变量
-var content=[],imgSrc="",conatent=[],log=[];
+var content=[],imgSrc="",conatent=[],log = [];;
 
 layui.use('element', function(){
   var element = layui.element;
@@ -19,12 +19,13 @@ $(".back-open").click(function(event){
 	$(".back-open").animate({"right":"-200px"})
 });
 
-var textDom='<li style="width:20%;left:25%;"><div class="click-box writing" name="text" touch="flase"><div class="content" contentEditable>双击可编辑</div></div></li>'
+var textDom='<li style="width:100px;left:25%;"><div class="click-box writing" name="text" touch="flase"><div class="content" contentEditable>双击可编辑</div></div></li>'
 /*---------------------- 点击选择文字添加Start ---------------------- */
 $("#textAdd").click(function(){
 		$(this).parents("li").siblings("li").find('.resize-panel').hide();
 	  $("#editor-ul").append(textDom);
 	  $("#editor-ul").find(".resize-panel").remove();
+		$(this).parents("li").siblings("li").find('.content').attr("id"," ");
 	  new ZResize({
 		   stage: "#editor-ul", //舞台 
 		   item: $('#editor-ul>li .click-box'), //可缩放的类名 
@@ -124,7 +125,7 @@ document.body.appendChild(audio);
 /* --- 图片点击让其层级变高 --- 暂未实现 --- */
 $("#editor-ul>li").on("click","img",function(event){
 	event.stopPropagation();
-	 console.log(1)
+	 
 })
 
 /* ------------------------ 点击添加音乐按钮Start ------------------ */
@@ -144,38 +145,37 @@ $("#imgAdd").click(function(event){
 
 /*------------------- 点击输入框呼唤拉动Start  ----------------------*/
 $("#editor-ul>li").on("click",".click-box",function(event){
-	
 	$(this).parents("li").siblings("li").find('.resize-panel').hide();
+	$(this).find('.content').attr("id","t");
+	$(this).parents("li").siblings("li").find('.content').attr("id"," ");
 	event.stopPropagation();
 	if($(this).attr("touch")=="flase"){
 		$(this).attr("touch",true);
-		 new ZResize({
-		   stage: "#editor-ul", //舞台 
-		   item: $('#editor-ul>li .click-box'), //可缩放的类名 
+		new ZResize({
+		  stage: "#editor-ul", //舞台 
+		  item: $('#editor-ul>li .click-box'), //可缩放的类名 
 		 }); 					
 	}
 });
 
-/*------------------- 点击输入框呼唤拉动End  ----------------------*/
 
+/*------------------- 点击输入框呼唤拉动End  ----------------------*/
 
 /*--------------撤回按钮事件的Start------------------------ */		
 // 每1.5S判断控制面板的事件 统计撤回的数据 添加
-//window.setInterval(function() {
-//	if(log[log.length - 1] != $("#t").html()) {
-//		log[log.length] = $("#t").html();
-//	}
-//}, 1500)
-//// 撤回按钮的 事件ID
-//$("#undo").click(function(event){
-////	event.stopPropagation();
-//	console.log(1)
-//	log.pop();
-//	$("#t").html(log[log.length - 1]).blur();
-//});
-/*--------------撤回按钮事件的End------------------------ */			
+window.setInterval(function() {
+	if(log[log.length - 1] != $("#t").html()) {
+		log[log.length] = $("#t").html();
+	}
+}, 1500)
+// 撤回按钮的 事件ID
+$("#undo").click(function(event){
+	event.stopPropagation();
+	log.pop();
+	$("#t").html(log[log.length - 1]).blur();
+});
 
-
+/*--------------撤回按钮时间的End------------------------ */			
 
 
 /*------------------- 双击呼唤div的编辑  ----------------------*/
@@ -206,22 +206,22 @@ $("#editor-ul>li>.click-box").dblclick(function(){
 })
 var 	page=[],Css,content,Class,Width,Height
 /*---------  生成ul下面的li的json方法Start  ------------------*/ 
-var test=0
+var test=0,widthBU=0;
 function GetJsonData() {
+	console.log($('.editor-ul').width())
 	test++;
 	var t = [];
-	
 	for(var k=0;k<$("#editor-body>ul").length;k++){
 		var editorBody=$("#editor-body>ul").eq(k).find("li");
 		var n = "[";
 			for(i = 0; i < $("#editor-body>ul").eq(k).find("li").length; i++) {
-				n += "{'page':'" + editorBody.eq(i).attr("num") + "',"
+			n += "{'page':'" + editorBody.eq(i).attr("num") + "',"
 				n += "'Css':'" + editorBody.eq(i).attr("style") + "',"
 				n += "'content':'" + editorBody.eq(i).find(".content").html() + "',"
 				n += "'Class':'" + editorBody.eq(i).find(".click-box").attr('name') + "',"
-				n += "'Width':'" + Number(editorBody.eq(i).width()/$('.editor-ul').width()).toFixed(2)*100+"%" + "',"
-				n += "'Height':'" +  Number(editorBody.eq(i).height()/$('.editor-ul').height()).toFixed(2)*100+"%" + "'},"
-				console.log(editorBody.eq(i).height())
+				n += "'Width':'" + Number(editorBody.eq(i).width()/$('.editor-ul').width()).toFixed(2)*100+"%"+ "',"
+				n += "'Height':'" + Number(editorBody.eq(i).height()/$('.editor-ul').height()).toFixed(2)*100+"%" + "'},"
+				//console.log(editorBody.eq(i).height())
 			}
 		  n = n.substr(0, n.length - 1);
 		  n +="]" 
@@ -237,10 +237,9 @@ function GetJsonData() {
 	//console.log(json)
 	return json;
 }
-
-
-
 /*---------  生成ul下面的li的json方法End  ------------------*/ 
+
+
 /* --------------------翻页选项卡事件 暂时不要 ------------------ */
 //$("#pageBtn li").mouseup(function() {
 //	if($(this).next()){
@@ -352,36 +351,23 @@ $("#add").click(function(event){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var center=[]
 /*----------------点击保存的按钮时间 Start  ----------------------------------------*/
 $("#keep").click(function(event){
-	event.stopPropagation();
-//	conatent.push(conatents())	
-	conatent.push(GetJsonData())
-	// 转为json
+event.stopPropagation();
 
- 	center=JSON.stringify(conatent)
-	// 点击保存的时候的操作
-	console.log(JSON.parse(center))
-	// 储存json样式
-	sessionStorage.setItem("content",center)
-//	
+//	conatent.push(conatents())
+conatent.push(GetJsonData())
+
+// 转为json
+center=JSON.stringify(conatent)
+// 点击保存的时候的操作
+var centern=JSON.parse(center)
+
+// 储存json样式
+sessionStorage.setItem("content",center)
+
+//	跳转页面
 	location.href="../display/index.html"
 })
 /*----------------点击保存的按钮时间 END  ----------------------------------------*/

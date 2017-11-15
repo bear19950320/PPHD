@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.video_show {
+				display: flex;
+				transition-duration: 0ms;
+				transform: translateX(0px)
+			}
+			
+			.video_item {
+				flex-shrink: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="videoShow" class="video_show">
+			<div class="video_item">
+				<a href="javascript:void(0)" class="align_center"><img alt="图片" src="../img/text.jpg"></a>
+				<span>One Piece Gold</span>
+			</div>
+		</div>
+		<script src="../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//获取设备宽度
+			var deviceWidth = document.body.scrollWidth;
+			//body的实际宽度(最外层div的宽度)
+			var videoShowWidth = deviceWidth;
+			//html并没有占满整个屏幕,最大宽度为750px
+			if(deviceWidth > 750) {
+				videoShowWidth = 750;
+			}
+			// 判断是电脑还是手机
+			function IsPC() {
+				var userAgentInfo = navigator.userAgent;
+				var Agents = ["Android", "iPhone",
+					"SymbianOS", "Windows Phone",
+					"iPad", "iPod"
+				];
+				var flag = true;
+				for(var v = 0; v < Agents.length; v++) {
+					if(userAgentInfo.indexOf(Agents[v]) > 0) {
+						flag = false;
+						break;
+					}
+				}
+				return flag;
+			}
+			var positionX = 0;
+			var positionY = 0;
+			//当前transform属性的值
+			var transgormX = 0;
+			var videoShow = document.getElementById("videoShow"); //videoShow是拖动div
+			var videoShowPositionX1 = $(videoShow).offset().left; //该div的左上角横坐标
+			//确定右上角坐标
+			if(deviceWidth > 750) {
+				videoShowPositionX2 = (deviceWidth + 750) / 2;
+			} else {
+				videoShowPositionX2 = videoShowPositionX1 + $(videoShow).width();
+			}
+			$(videoShow).attr("style", "transition-duration: 0ms;transform: translateX(0px);"); //添加移动div需要的css
+			// 电脑与pc事件不同
+			//对div进行处理width:num,根据实际宽度确定div的宽度
+			$(videoShow).css("width", videoShowWidth);
+			$(".video_item").css("width", videoShowWidth / 3);
+			if(IsPC()) {
+				//电脑移动事件
+				//鼠标按下事件
+				$(videoShow).bind('mousedown', function(e) {
+					// 鼠标按下捕获此时位置
+					positionX = e.pageX;
+					posiitonY = e.pageY;
+					var transformStr = $(this).attr("style");
+					transformStr = transformStr.substring(transformStr.lastIndexOf("translateX(") + 11);
+					transformX = parseInt(transformStr.substring(0, transformStr.lastIndexOf("p")));
+					//确定本次拖动的div宽度值
+					var widthStr = videoShow.style.width;
+					thisWidth = parseInt(widthStr.substring(0, widthStr.lastIndexOf("p")));
+					//鼠标按下,绑定鼠标移动事件
+					$(this).bind('mousemove', function(e) {
+						e.preventDefault();
+						// transformX+e.pageX-positionX表示当前移动的距离
+						$(this).css("transition-duration", "0ms");
+						$(this).css("transform", "translateX(" + (transformX + e.pageX - positionX) + "px)");
+						$(videoShow).css("width", thisWidth + positionX - e.pageX);
+					});
+				});
+				//mouseup,鼠标松开事件(移动出元素位置,此事件捕获不到),mouseleave,移动出钙元素时的事件
+				//(注:若鼠标在元素之外仍需要拖动效果,那么可以为document对象添加mouse事件)
+				$(videoShow).bind('mouseup mouseleave', function(e) {
+					$(this).unbind('mousemove');
+					//该div的子标签
+					var videoItems = $(".video_item");
+					//第一个标签若大于父div左上角横坐标时
+					var videoItem1 = videoItems[0];
+					if($(videoItem1).offset().left > videoShowPositionX1) {
+						videoShow.style.transform = 'translateX(0px)';
+						$(videoShow).css("width", videoShowWidth);
+					}
+					// 最后一个标签的位置,父元素右上角坐标值
+					var videoItem2 = videoItems[videoItems.length - 1];
+					var videoItemPositionX = $(videoItem2).offset().left + $(videoItem2).width();
+					if(videoItemPositionX < videoShowPositionX2) {
+						//此时展示最后三个元素,宽度为最大宽度
+						videoShow.style.transform = 'translateX(' + (0 - (videoShowWidth / 3) * (videoItems.length - 3)) + 'px)';
+						$(videoShow).css("width", videoShowWidth / 3 * videoItems.length);
+					}
+				});
+			} else {
+				//客户端拖动事件
+				//获取
+				videoShow.addEventListener('touchstart', function(event) {
+					event.preventDefault();
+					if(event.targetTouches.length == 1) {
+						var touch = event.targetTouches[0];
+						positionX = touch.pageX;
+						//确定本次拖动transform的初始值
+						var transformStr = videoShow.style.transform;
+						transformStr = transformStr.substring(11);
+						var index = transformStr.lastIndexOf("p");
+						transformStr = transformStr.substring(0, index);
+						transformX = parseInt(transformStr);
+						//确定本次拖动的div宽度值
+						var widthStr = videoShow.style.width;
+						thisWidth = parseInt(widthStr.substring(0, widthStr.lastIndexOf("p")));
+					}
+				}, false);
+				videoShow.addEventListener('touchmove', function(event) {
+					//阻止其他事件
+					event.preventDefault();
+					//获取当前坐标
+					if(event.targetTouches.length == 1) {
+						var touch = event.targetTouches[0];
+						videoShow.style.transform = 'translateX(' + (transformX + touch.pageX - positionX) + 'px)';
+						$(videoShow).css("width", thisWidth + positionX - touch.pageX);
+					}
+				}, false);
+				videoShow.addEventListener('touchend', function(event) {
+					//判断div是否越界
+					// 第一个标签位置不能大于指定值(父元素的左上角横坐标值),
+					var videoItems = $(".video_item");
+					var videoItem1 = videoItems[0];
+					if($(videoItem1).offset().left > videoShowPositionX1) {
+						videoShow.style.transform = 'translateX(' + (videoShowPositionX1) + 'px)';
+						//此时恢复初始状态
+						$(videoShow).css("width", videoShowWidth);
+					}
+					// 最后一个标签的位置,父元素右上角坐标值
+					var videoItem2 = videoItems[videoItems.length - 1];
+					var videoItemPositionX = $(videoItem2).offset().left + $(videoItem2).width();
+					if(videoItemPositionX < videoShowPositionX2) {
+						//此时展示最后三个元素,宽度为最大宽度
+						videoShow.style.transform = 'translateX(' + (0 - (videoShowWidth / 3) * (videoItems.length - 3)) + 'px)';
+						$(videoShow).css("width", videoShowWidth / 3 * videoItems.length);
+					}
+				}, false);
+			}
+		</script>
+	</body>
+
+</html>

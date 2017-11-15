@@ -16,34 +16,45 @@
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	    <link rel="stylesheet" type="text/css" href="../../main/swiper/swiper.min.css"/>
+	 	<link rel="stylesheet" type="text/css" href="../../main/icon/iconfont.css"/>
 	</head>
 	<body>
+<!--<ul class="undo-body">
+	<li>
+		<div class="icon-body" id="undo">
+			<i class="icon iconfont icon-chexiao"></i>
+		</div>
+	</li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>	-->
 		<section>
-			<div class="layui-row layui-tab">
+			<div class="layui-row layui-tab" id="t">
+				
 				<!-- 编辑体的展现 -->
 				<div id="editor-body" class="layui-col-xs12 layui-tab-content">
-					<!-- -->
 					<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="1">
 					
 					</ul>
-
 				</div>
+				
 				<!--  action-bar 操作栏 的身体 -->
-				 	<ul class="layui-col-xs2 layui-nav layui-nav-tree layui-nav-side layui-anim" id="action-bar"> 
+				<ul class="layui-col-xs2 layui-nav layui-nav-tree layui-nav-side layui-anim" id="action-bar"> 
 				 	  <!-- 控制页数的选项卡 -->
-				 	 		 	  	
+				 	    	  	
 				 	  <!-- 操作栏的隐藏按钮  -->
 					  <a href="javascript:;" class="back-close"> <i class="layui-icon">&#xe65b;</i> </a>
 					  <li class="layui-nav btn-assemble" style="min-height: 40px;">
 					  	<button class="layui-btn pull-left" id="keep" >保存</button><button class="layui-btn pull-right" id="out">退出</button>
 					  </li>
 					  <li class="layui-nav-item layui-nav-itemed">
-					    <a href="javascript:;"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
-					    <dl class="layui-nav-child">
+					    <a href="javascript:;" id="textAdd"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
+					    <!--<dl class="layui-nav-child">
 					      <dd><a href="javasciript:;" id="textAdd"><i class="layui-icon">&#xe62b;</i> <span>加粗</span></a></dd>
 					      <dd><a href="javasciript:;"><i class="layui-icon">&#xe646;</i> <span>下划线</span></a></dd>
 					      <dd><a href="javasciript:;"><i class="layui-icon">&#xe644;</i> <span>斜体</span></a></dd>
-					    </dl>
+					    </dl>-->
 					  </li>
 					  <li class="layui-nav-item">
 					  	<img id="dome" src=""/>
@@ -82,23 +93,6 @@
 		<script src="zRsize.js" type="text/javascript" charset="utf-8"></script>
         <script src="editor.js" type="text/javascript" charset="utf-8"></script>
         <!-- 引用的JS ---  END  -->
-    	<script>        
-		  var mySwiper = new Swiper ('.swiper-container', {
-			    direction: 'vertical',
-			    loop: true,
-			    // 如果需要分页器
-			    pagination: {
-			      el: '.swiper-pagination',
-			    },
-			    mousewheelControl : false,
-			    // 如果需要前进后退按钮
-			    navigation: {
-			      nextEl: '.swiper-button-next',
-			      prevEl: '.swiper-button-prev',
-			    },
-			    // 如果需要滚动条
-			  })        
-		</script>
 		</body>
 	</body>
 </html>

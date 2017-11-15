@@ -1,0 +1,125 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    	<meta name="apple-mobile-web-app-capable" content="yes" />
+		<title>编辑器</title>
+		<link href="../../main/img/logo.webp" rel="icon" type="image/icon">
+		<link rel="stylesheet" type="text/css" href="../../main/css/main.css"/>	
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="touch.css"/>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="../../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	    <link rel="stylesheet" type="text/css" href="../../main/swiper/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../main/icon/iconfont.css"/>
+		<style>
+			#editor-ul{
+				padding: 10px;
+				overflow: inherit;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="head-nav">
+			<ul class="head-ul">
+				<li>
+					<div id="back">
+						<i class="layui-icon">&#xe603;</i>
+						<span>返回</span>
+					</div>
+				</li>
+				<li>
+					<div class="icon-body" id="undo">
+						<i class="icon iconfont icon-chexiao"></i>
+					</div>
+				</li>
+				<li>
+					<div class="icon-body">
+						<i class="icon iconfont icon-suoding"></i>
+					</div>
+				</li>
+				<li>
+					<div class="icon-body">
+						<i class="icon layui-icon">&#xe60b;</i>
+					</div>
+				</li>
+				<li>
+					<div style="right:0;" id="keep">
+						<span>保存</span>
+						<i class="layui-icon">&#xe602;</i>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<section>
+			<div class="layui-row layui-tab" id="t">
+				<!-- 编辑体的展现 -->
+				<div id="editor-body" class="layui-col-xs12 layui-tab-content">
+					<!-- -->
+					<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="1">
+					
+					</ul>
+
+				</div>
+				
+			</div>
+		</section>
+
+		<!-- 下面的功能按钮  -->
+		<nav id="down-nav">
+			<ul id="down-ul">
+				<li>
+					<div class="down-btn">
+					    	<div><i class="icon iconfont icon-msnui-template-file"></i></div>
+					    	<div> + 模板</div>
+					</div>
+				</li>
+				<li>
+					<div class="down-btn" id="textAdd">
+				    	<div><i class="icon iconfont icon-ziti"></i></div>
+				    	<div> + 文字</div>
+					</div>
+				</li>
+				<li>
+					<img id="dome" src=""/>
+					<input type="file" id="imgInput" value="" accept="image/jpeg,image/jpeg,image/gif,image/png" onchange="BackImage(this)" />
+					<div class="down-btn" id="imgAdd">
+				    	<div><i class="icon layui-icon">&#xe64a;</i></div>
+				    	<div> + 图片</div>
+					</div>
+				</li>
+				<li>
+					<div class="down-btn">
+					    	<div><i class="icon iconfont icon-texiao"></i></div>
+					    	<div> + 特效</div>
+					</div>
+				</li>
+				<li>
+					<div class="down-btn">
+					    	<div><i class="icon iconfont icon-beijing"></i></div>
+					    	<div>背景</div>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<!-- 操作栏的展现按钮  -->
+		<a href="javascript:;" class="layui-btn back-open"><i class="layui-icon">&#xe642;</i></a>
+			 
+		<!--  引用的JS -- Start -->
+		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../main/swiper/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="touchRsize.js" type="text/javascript" charset="utf-8"></script>
+        <script src="touch.js" type="text/javascript" charset="utf-8"></script>
+        <!-- 引用的JS ---  END  -->
+    	
+		</body>
+	</body>
+</html>

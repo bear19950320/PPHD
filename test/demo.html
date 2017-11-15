@@ -1,53 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <style type="text/css">
-  	.cls:content{
-  		width: 100px;
-  		height: 100px;
-  		content: '<div class="user_icon" style="background:url(../img/text.jpg) no-repeat;background-size:100% 100%;-moz-background-size:100% 100%; width: 50px;height: 50px;border-radius: 50% ;border: 2px solid #3BBBA3;"></div>'
-  	}
-  </style>
-</head>
-<body>
-	<!--<div class="user_icon" style="background:url(../img/text.jpg) no-repeat;background-size:100% 100%;-moz-background-size:100% 100%; width: 50px;height: 50px;border-radius: 50% ;border: 2px solid #3BBBA3;"></div>-->
-<script src="../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-  <!--<script type="text/javascript">
-    function getBase64Image(img) {
-      var canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-      var ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, img.width, img.height);
+	<head>
+		<meta charset="UTF-8">
+		<title>基于jQuery的让textarea支持Ctrl+Z步步撤销功能</title>
+		<script src="../main/js/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var log = [];
+			$(function() {
+				var txt = window.setInterval(function() {
+					if(log[log.length - 1] != $("#t").val()) {
+						log[log.length] = $("#t").val();
+						console.log(log)
+					}
+				}, 1500);
+				var isCtrl = false;
+				$(document).keydown(function(e) {
+					console.log(e.which)
+					if(e.which === 17)
 
-      var dataURL = canvas.toDataURL("image/png");
-      return dataURL
+						isCtrl = true;
+					if(e.which === 90 && isCtrl === true) {
+						log.pop();
+						$("#t").val(log[log.length - 1]).blur();
+						$("#s").val(log[log.length - 1]).blur();
+					}
+				}).keyup(function(e) {
+					if(e.which === 17)
+						isCtrl = false;
+				});
+			});
 
-      // return dataURL.replace("data:image/png;base64,", "");
-    }
+			function show() {
+				$("#s").val("");
+				for(var i = 0; i < log.length; i++) {
+					$("#s").val(log[i] + "\r\n[" + i + "]\r\n-----------------------\r\n" + $("#s").val());
+				}
+			}
+		</script>
+	</head>
 
+	<body>
+		<textarea id="t" style="width:400px; height:300px;">
+</textarea>
+		<button onclick="show()">显示历史记录</button>
+		<textarea id="s" style="width:400px; height:300px;">
+</textarea>
+		<div id="canvas">
+			<img src="../img/text.jpg" />
+		</div>
+		<hr /> 按Ctrl+Z一步一步撤销
+		<script src="canvas.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				setTimeout(function() {
+					html2canvas($("#canvas"), {
+						onrendered: function(canvas) {
+							console.log("Html2canvas onrendered.");
+							var myImage = canvas.toDataURL("image/png");
+							$('body').append('<div class="image-container"><img src=' + myImage + ' alt="" ></div>');
+						}
+					});
+					// 这里等待1秒是为了等待canvas的图表的动态效果执行完毕再截图，如果页面没有动画效果，可以设置为0
+				}, 1000);
+			});
+		</script>
+	</body>
 
-    function main() {
-      var img = document.createElement('img');
-      
-      img.src = '../img/text.jpg';
-      img.onload =function() {
-        var data = getBase64Image(img);
-        console.log(data);
-        $("#name>img").attr('src',data)
-      }
-   
-      document.body.appendChild(img);
-    }
-
-    main()
-
-  </script>-->
- <div id="name" style="float: right;" class="cls">
- 	<img src="" />
- </div>
-</body>
 </html>

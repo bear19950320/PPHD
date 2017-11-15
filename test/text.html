@@ -46,21 +46,26 @@
 		});
 
 
-		$.ajax({
-			type: "post",
-			url: "http://192.168.7.104:8081/pphd/getMyProducelistmyproduceapi",
-			dataType: "json",
-			data:{
-				gglx:'0'
-			},
-			success: function(data) {
-				console.log(data)
-			},
-			error:function(){
-				console.log(1)
-			}
-		})
 
+
+ /*--------------ajax--- 可以在 外面调用 ajax里面的回调函数方法 ----------*/
+//	function test(callback){
+//	    $.ajax({    
+//	        url:'/mall/credit',
+//	        type: 'get',
+//	        dataType:'json',
+//	        success: function(response){
+//	            credit = response.data.credit;
+//	            callback(credit);
+//	        },
+//	        error: function(){
+//	            alert("error");
+//	        }
+//	    });
+//	}
+//	test(function(data){
+//	    console.log(data);
+//	})
 
 
 
