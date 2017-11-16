@@ -54,8 +54,9 @@
 #pageBtn>li{
 	height: 40px;
 	width: 100%;
-	background: #007AFF;
 	margin: 5px 0;
+	background: rgba(0,0,0,.5);
+	color:white;
 	text-align: center;
 	line-height: 40px;
 }
@@ -157,7 +158,7 @@
 	overflow-x:inherit;
 }
 /* 撤回按钮  */
-/*.undo-body{
+.undo-body{
 	min-width: 30px;
 	min-height: 100px;
 	background: rgba(0,0,0,.4);
@@ -174,4 +175,7 @@
 }
 .undo-body>li>div>i{
 	font-size: 20px;
-}*/
+}
+#pageBtn>#layui-btn,#pageBtn>.layui-this{
+	background: #007AFF;
+}

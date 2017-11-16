@@ -56,9 +56,10 @@
 				setTimeout(function() {
 					html2canvas($("#canvas"), {
 						onrendered: function(canvas) {
-							console.log("Html2canvas onrendered.");
+							//console.log("Html2canvas onrendered.");
 							var myImage = canvas.toDataURL("image/png");
-							$('body').append('<div class="image-container"><img src=' + myImage + ' alt="" ></div>');
+							console.log("缩略图的base64地址-----"+myImage)
+							//$('body').append('<div class="image-container"><img src=' + myImage + ' alt="" ></div>');
 						}
 					});
 					// 这里等待1秒是为了等待canvas的图表的动态效果执行完毕再截图，如果页面没有动画效果，可以设置为0

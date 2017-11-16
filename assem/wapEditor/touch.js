@@ -5,20 +5,6 @@ layui.use('element', function(){
   var element = layui.element;
 });
 
-/*------------------- 关闭编辑工具框  ----------------------*/
-$(".back-close").click(function(event){
-	event.stopPropagation();
-	$("#action-bar").animate({"right":"-200px"});
-	$(".back-open").animate({"right":"0"})
-});
-
-/*------------------- 呼唤编辑工具框  ----------------------*/
-$(".back-open").click(function(event){
-	event.stopPropagation();
-	$("#action-bar").animate({"right":0});
-	$(".back-open").animate({"right":"-200px"})
-});
-
 var textDom='<li style="width:100px;left:25%;"><div class="click-box writing" name="text" touch="flase"><div class="content" contentEditable>双击可编辑</div></div></li>'
 /*---------------------- 点击选择文字添加Start ---------------------- */
 $("#textAdd").click(function(){
@@ -57,11 +43,12 @@ function readFile(obj) {
     }
 
 }
+/* ---- 图片显示到div里面的方法End --------  */
+
 /* ------------ 添加图片的方法！ zindex是图片的层级叠加 Stasrt ------------ */
 var zIndex=0;
 function BackImage(imgFile) {
 		zIndex++;
-    
     var t_files = imgFile.files;
     var str = '';
     imgss = [];
@@ -108,7 +95,7 @@ function BackImage(imgFile) {
 }
 /* ---------------- 图片显示到div里面的方法End ---------------------  */
 
-/* -----------音乐的input change事件 ---------------- */
+/* -----------音乐的input change事件 Start---------------- */
 function backMusic(musicfile){
 	// console.log(musicfile)
 	console.log(musicfile.value)
@@ -120,12 +107,11 @@ document.body.appendChild(audio);
 //console.log(music)
 	//$("#editor-ul").append('<audio id="music-body" style="display: none;" autoplay="autoplay" src="'+musicfile.value+'" controls="nodownload" controlsList="nodownload"></audio>')
 }
-
+/* -----------音乐的input change事件 End---------------- */
 
 /* --- 图片点击让其层级变高 --- 暂未实现 --- */
 $("#editor-ul>li").on("click","img",function(event){
-	event.stopPropagation();
-	 
+	event.stopPropagation(); 
 })
 
 /* ------------------------ 点击添加音乐按钮Start ------------------ */
@@ -177,32 +163,30 @@ $("#undo").click(function(event){
 
 /*--------------撤回按钮时间的End------------------------ */			
 
+/* -------------------锁定事件的Start--------------------- */
+var flag=0;
+$("#lock").click(function(event){
+	event.stopPropagation();
+		flag++;
+		if(flag%2!=0){
+			/* 开锁状态  */
+			$(this).find("i").removeClass('icon-suoding')
+			$(this).find("i").addClass('icon-qmiconsuodingkai')
+		}else{
+			/* 锁定状态  */
+			$(this).find("i").removeClass('icon-qmiconsuodingkai')
+			$(this).find("i").addClass('icon-suoding')
+		}
+	
+})
+/* -------------------锁定事件的End--------------------- */
+
+
 
 /*------------------- 双击呼唤div的编辑  ----------------------*/
-$("#editor-ul>li>.click-box").dblclick(function(){
-	$(this).children('.content').prop('contenteditable',true);
+$("#editor-ul>li>.click-box>.content").dblclick(function(){
+	$(this).prop('contenteditable',true);
 	$(this).parents("li").siblings("li").find('.content').prop('contenteditable',false);	
-
-
-/*-------------------- 对字进行编辑 Start --------------------------- */
-//			$('.writing>.content').mouseup(function(){
-//			var s=window.getSelection();
-//			s=s.toString();
-//			s=s.replace(/([\'\"\<\>\[\]\/\?\.\*\+\^\$\!])/g,'\\$1');
-//			var reg=new RegExp(s);
-//			console.log("reg-----------"+reg);
-//			var h=$(this).html();
-//			console.log("h变量--------"+h)
-//			 if(reg.test(h)){
-//			 	console.log(s)
-//			 	console.log(s==NaN)
-////				 	if(s!=" "){
-////				 		var reg1=new RegExp('^(.*?)('+s+')(.*?)$');
-////				 		$(this).html(h.replace(reg1,'$1<span>$2</span>$3'));console.log(reg1);
-////				 	}
-//			 }
-//		});
-/*  -------------------- 对字进行编辑 END --------------------------- */
 })
 var 	page=[],Css,content,Class,Width,Height
 /*---------  生成ul下面的li的json方法Start  ------------------*/ 
@@ -239,35 +223,6 @@ function GetJsonData() {
 }
 /*---------  生成ul下面的li的json方法End  ------------------*/ 
 
-
-/* --------------------翻页选项卡事件 暂时不要 ------------------ */
-//$("#pageBtn li").mouseup(function() {
-//	if($(this).next()){
-//		 $(this).next().after($(this));
-//	}
-// 
-//}); 
- 
- // oninput 事件，输入框在用户 停止输入   一秒后再执行，不重复执行，只在每次改变值之后的1秒执行一次
-// (function textCoun(textarea,num){
-//  var sendTextarea     =     document.getElementById(textarea),
-//      text            =    sendTextarea.value,
-//      counter            =    text.length,
-//      sendCount         =     document.getElementById("send-count");
-//  
-//  sendCount.innerHTML = num-counter;    //显示初始状态还属于多少字
-//  
-//  //输入以后重新计算
-//  sendTextarea.oninput = function(){
-//      text    =    sendTextarea.value,
-//      counter    =    text.length;
-//      sendCount.innerHTML = num-counter;
-//  }
-//
-//})("send-textarea",110)
- 
- 
- 
  
 /*---------  浏览器离开事件  ------------------*/  
 //	window.onbeforeunload=function(){
@@ -275,7 +230,14 @@ function GetJsonData() {
 //		console.log(1-1)
 //		return "快住手！！别点下去！！";
 //	};
- 
+var left=$(window).width()*0.1;
+var half=$(window).width()*0.5;
+ $(".editor-ul").css({
+  	width:$(window).width()*0.8+"px",
+  	'margin-top':left+"px",
+  	'margin-left':left+"px",
+  	'margin-right':left+"px"
+  })
 var pageNum=1; 
 
 /*-------------添加模板------------------------------------*/
@@ -283,21 +245,110 @@ $("#add").click(function(event){
 	event.stopPropagation();
 	pageNum++;
 	$("#editor-body").find("ul").attr("id"," ")
-	$("#editor-body").find("ul").removeClass("layui-show")
-	$("#editor-body").find("ul").hide()
-	$("#pageBtn").find("li").removeClass("layui-this");
-	$("#pageBtn").append('<li class="layui-this">第'+ pageNum +'页</li>')
-	$("#editor-body").append('<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="'+pageNum+'"></ul>')
+	//$("#editor-body").find("ul").removeClass("swiper-slide-active").siblings(this).addClass("swiper-slide-prev")
+	//$("#pageBtn").append('<li class="layui-this">第'+ pageNum +'页</li>')
+	$("#editor-body").append('<ul id="editor-ul" class="editor-ul" num="'+pageNum+'"><span class="layui-badge">第'+pageNum+'页</span></ul>')
+  $(".editor-ul").css({
+  	width:$(window).width()*0.8+"px",
+  	'margin-top':left+"px",
+  	'margin-left':left+"px",
+  	'margin-right':left+"px"
+  });
+  var Ullength=$("#editor-body>ul").length;
+  console.log(Ullength+"---宽"+$(window).width())
+  $("#editor-body").width($(window).width()*Ullength)
 })
 
 
+$("#t").on("touchstart", function(e) {
+ 
+    startX = e.originalEvent.changedTouches[0].pageX,
+    startY = e.originalEvent.changedTouches[0].pageY;
+});
+	
+	var iNow=0;
+$("#t").on("touchmove", function(e) {
 
+	  e.stopPropagation();
+    moveEndX = e.originalEvent.changedTouches[0].pageX,
+    moveEndY = e.originalEvent.changedTouches[0].pageY,
+    X = moveEndX - startX,
+    Y = moveEndY - startY;
+  var left=0;
+    if ( X > 0 ) {
+//     left+=X;
+//     $("#editor-body").animate({
+//		  	 "left":-left
+//		  })
+    }
+    else if ( X <= half ) {
+//  	iNow++;
+//  			left+=X
+//  			console.log(left)
+//  	
+//  	$("#editor-body").animate({
+//		  	 "left":left
+//		  })
+    	
+    }
+    else if ( Y > 0) {
+        alert("top 2 bottom");
+    }
+    else if ( Y < 0 ) {
+        alert("bottom 2 top");
+    }
+});
 
+function back(imgFile) {
+		zIndex++;
+    var t_files = imgFile.files;
+    var str = '';
+    imgss = [];
+    for(var i = 0, len = t_files.length; i < len; i++) {
+        var filextension = t_files[i].name.substring(t_files[i].name.lastIndexOf("."), t_files[i].name.length);
+        filextension = filextension.toLowerCase();
+        readFile(t_files[i]);
 
+        if((filextension != '.jpg') && (filextension != '.gif') && (filextension != '.jpeg') && (filextension != '.png') && (filextension != '.bmp')) {
+            skin("对不起，系统仅支持标准格式的照片，请您调整格式后重新上传，谢谢 !");
+            imgFile.focus();
+        } else {
+            var path;
+            if(document.all) {
+            	
+                imgFile.select();
+                path = document.selection.createRange().text;
+                document.getElementById("img").innerHTML = "";
+                document.getElementById("img").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")"; //使用滤镜效果
+            } else {
+                path = window.URL.createObjectURL(imgFile.files[i]);
+                
+                $("#dome").attr("src",path);
+                
+                var img = $("#dome").attr("src");//imgurl 就是你的图片路径  
+								var image = new Image();  
+								image.src = img;  
+								image.onload = function(){ 
+									/* -----转换为Base64 -------*/
+								  var base64 = getBase64Image(image); 
+								  $("#editor-ul").attr("back",base64)
+								  $("#editor-ul").css({
+								  	background:"url("+base64+")",
+								  	"background-size":"100% 100%"
+								  })
+									
+									
+								}                
+            }
+        }
+        $("#img li").eq(0).before(str);
+    }
+}
 
-
-
-
+$("#backAdd").click(function(event){
+	event.stopPropagation();
+	$("#backInput").trigger("click");	
+})
 
 
 

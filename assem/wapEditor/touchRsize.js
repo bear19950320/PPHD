@@ -173,6 +173,7 @@
 			//东 
 			var emove = false;
 			el.on('touchstart', '.e', function(e) {
+				e.stopPropagation();
 				ox = e.pageX; //原始x位置 
 				ow = el.width();
 				emove = true;
@@ -181,6 +182,7 @@
 			//南 
 			var smove = false;
 			el.on('touchstart', '.s', function(e) {
+				e.stopPropagation();
 				oy = e.pageY; //原始x位置 
 				oh = el.height();
 				smove = true;
@@ -189,6 +191,7 @@
 			//西 
 			var wmove = false;
 			el.on('touchstart', '.w', function(e) {
+				e.stopPropagation();
 				ox = e.pageX; //原始x位置 
 				ow = el.width();
 				wmove = true;
@@ -198,6 +201,7 @@
 			//北 
 			var nmove = false;
 			el.on('touchstart', '.n', function(e) {
+				e.stopPropagation();
 				oy = e.pageY; //原始x位置 
 				oh = el.height();
 				nmove = true;
@@ -207,6 +211,7 @@
 			//东北 
 			var nemove = false;
 			el.on('touchstart', '.ne', function(e) {
+				e.stopPropagation();
 				ox = e.pageX; //原始x位置 
 				oy = e.pageY;
 				ow = el.width();
@@ -218,6 +223,7 @@
 			//西北 
 			var nwmove = false;
 			el.on('touchstart', '.nw', function(e) {
+				e.stopPropagation();
 				ox = e.pageX; //原始x位置 
 				oy = e.pageY;
 				ow = el.width();
@@ -230,6 +236,7 @@
 			//东南 
 			var semove = false;
 			el.on('touchstart', '.se', function(e) {
+				e.stopPropagation();
 				ox = e.pageX; //原始x位置 
 				oy = e.pageY;
 				ow = el.width();
@@ -240,6 +247,7 @@
 			//西南 
 			var swmove = false;
 			el.on('touchstart', '.sw', function(e) {
+				e.stopPropagation();
 				ox = e.pageX; //原始x位置 
 				oy = e.pageY;
 				ow = el.width();
@@ -251,6 +259,7 @@
 			//拖拽 
 			var drag = false;
 			el.on('touchstart', function(e) {
+				e.stopPropagation();
 				ox = e.pageX; //原始x位置 
 				oy = e.pageY;
 				otop = parseInt(org.css('top').replace('px', ''));
@@ -259,6 +268,7 @@
 			});
 
 			$(self.options.stage).on('touchmove', function(e) {
+				e.stopPropagation();
 				if(emove) {
 					var x = (e.pageX - ox);
 					el.css({

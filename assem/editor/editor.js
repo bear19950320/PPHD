@@ -3,6 +3,14 @@ var content=[],imgSrc="",conatent=[],log=[];
 
 layui.use('element', function(){
   var element = layui.element;
+  
+  element.on('tab(editor)', function(data){
+    console.log(data);
+    $(".layui-show").attr("id","editor-ul");
+    $(".layui-show").siblings(".layui-tab-item").attr("id"," ")
+    $(".layui-this").attr("id","layui-btn")
+    $(".layui-this").siblings("li").attr("id"," ")
+  });
 });
 
 /*------------------- 关闭编辑工具框  ----------------------*/
