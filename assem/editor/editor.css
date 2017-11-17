@@ -1,44 +1,60 @@
 @font-face {
-  font-family: 'iconfont';  /* project id 459122 */
-  src: url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.eot');
-  src: url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.svg#iconfont') format('svg');
+	font-family: 'iconfont';
+	/* project id 459122 */
+	src: url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.eot');
+	src: url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.woff') format('woff'), url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.ttf') format('truetype'), url('//at.alicdn.com/t/font_459122_rtw9fxp0opcwstt9.svg#iconfont') format('svg');
 }
+
+
 /* layui的选项卡样式 */
-.layui-tab{
+
+.layui-tab {
 	margin: 0;
 }
 
-
-.layui-nav-side{
-	right:0;
-	left:auto;
+.layui-nav-side {
+	right: 0;
+	left: auto;
 }
-.layui-nav-side>li>a>i{
+
+.layui-nav-side>li>a>i {
 	font-size: 20px;
 }
+
+
 /* 按钮的样式  */
-.back-close,.back-open{
-	color:#FF5722;
+
+.back-close,
+.back-open {
+	color: #FF5722;
 	z-index: 999;
 }
-.back-open{
+
+.back-open {
 	position: fixed;
 	right: -200px;
-	top:0;
+	top: 0;
 	z-index: 998;
 }
-.back-close>i,.back-open>i{
+
+.back-close>i,
+.back-open>i {
 	font-size: 24px;
 }
 
+
 /* 所有隐藏的写在这里  */
-#imgInput,#dome,#musicInput{
+
+#imgInput,
+#dome,
+#musicInput {
 	display: none;
 }
+
+
 /* 导航的样式  */
+
+
 /*#page-body{
 	position: fixed;
 	top:10px;
@@ -47,67 +63,76 @@
 	height: 200px;
 	background: red;
 }*/
-#pageBtn{
-	height:auto;
-	white-space:inherit;
+
+#pageBtn {
+	height: auto;
+	white-space: inherit;
 }
-#pageBtn>li{
+
+#pageBtn>li {
 	height: 40px;
 	width: 100%;
 	margin: 5px 0;
-	background: rgba(0,0,0,.5);
-	color:white;
+	background: rgba(0, 0, 0, .5);
+	color: white;
 	text-align: center;
 	line-height: 40px;
 }
 
 
 /* 编辑器的身体  */
-#editor-body{
+
+#editor-body {
 	height: 100%;
 	background: #D0CFD8;
 	padding: 0;
 }
 
-.editor-ul{
+.editor-ul {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	border:1px dashed rgba(0,0,0,.6);
-	border-top:0;
+	border: 1px dashed rgba(0, 0, 0, .6);
+	border-top: 0;
 	border-bottom: 0;
 	margin: auto;
 	overflow: hidden;
 }
-.editor-ul>li{
+
+.editor-ul>li {
 	min-height: 40px !important;
 	position: absolute;
 	width: 100%;
 	padding: 10px;
 }
-.editor-ul>li:after,#pageBtn:after{
+
+.editor-ul>li:after,
+#pageBtn:after {
 	display: block;
 	clear: both;
 	content: "";
 }
-#demo{
+
+#demo {
 	width: 80%;
 	min-height: 100px !important;
 	background: red;
 }
-.click-box{
+
+.click-box {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	top:0;
-	left:0;
+	top: 0;
+	left: 0;
 }
-.editor-ul>li .click-box>.content{
+
+.editor-ul>li .click-box>.content {
 	overflow: hidden;
 	position: absolute;
-	top:0;
+	top: 0;
 	left: 0;
-	padding:0;
+	padding: 0;
 	font-size: 24px;
 	width: 100%;
 	height: 100%;
@@ -115,67 +140,164 @@
 	min-width: 100px !important;
 	line-height: inherit;
 }
+
+
 /* 定义打动的span标签 */
 
-.resize-box{
+.resize-box {
 	position: absolute;
-	top:0;
-	left:0;
+	top: 0;
+	left: 0;
 	width: 100%;
 	min-height: 40px;
 	height: 100% !important;
-	border:1px solid rgba(9,155,148,.5);
-	}
-.writing{
+	border: 1px solid rgba(9, 155, 148, .5);
+}
+
+.writing {
 	z-index: 990;
 }
 
+
 /*   添加btn   */
-#add{
+
+#add {
 	background: white;
 	width: 100%;
 	/*height: 100%;*/
-  text-align: center;
+	text-align: center;
 }
-#add i{
-	color:#007DDB;
+
+#add i {
+	color: #007DDB;
 	font-size: 20px;
 }
-#add>span{
-	color:#007DDB;
+
+#add>span {
+	color: #007DDB;
 	font-size: 20px;
 }
+
+
 /* 拖拉框设置最小高度 */
 
-.resize-panel{
+.resize-panel {
 	min-height: 40px !important;
 	min-width: 100px !important;
 }
 
-
-
-.layui-nav-side{
-	overflow-x:inherit;
+.layui-nav-side {
+	overflow-x: inherit;
 }
-/* 撤回按钮  */
-.undo-body{
-	min-width: 30px;
-	min-height: 100px;
-	background: rgba(0,0,0,.4);
+
+
+/* 样式框  */
+.style-open{
 	position: fixed;
-	left:0px;
-	top:20%;
-	z-index: 10;
+	right: 200px;
+	top: 0;
+	z-index: 9999;
 }
-.undo-body>li>div{
+.group{
+	width: 240px;
+	min-height: 30px;
+	position: fixed;
+	right: 200px;
+	top: 0;
+	z-index: 10000;
+	background: #e2e2e2;
+}
+.group>.layui-bg-black{
+	width: 240px;
+}
+.group>.layui-bg-black>.pull-left{
+	line-height: 20px;
+	padding: 10px;
+}
+.undo-body {
+	min-width: 200px;
+	min-height: 30px;
+}
+.undo-body>li{
+	padding: 5px 0;
+	text-align: center;
+	line-height: 20px;
+	position: relative;
+}
+.undo-body>li>#color-plate{
+	position: absolute;
+	display: none;
+	right:0px;
+}
+
+.undo-body>li>div {
 	cursor: pointer;
 	min-height: 30px;
-	padding: 5px;
-	
 }
-.undo-body>li>div>i{
+
+.undo-body>li>div>i {
 	font-size: 20px;
 }
-#pageBtn>#layui-btn,#pageBtn>.layui-this{
+
+#pageBtn>#layui-btn,
+#pageBtn>.layui-this {
 	background: #007AFF;
+}
+
+/* 特效动画css  */
+.layui-tab-item>li{
+	padding: 5px 0;
+}
+
+/* 动画时间进度条*/
+.progress{position: relative;height: auto !important;overflow: inherit !important;background: none !important;margin-bottom:0 !important;}
+.progress_bg{ border: 1px solid #ddd; border-radius: 5px; overflow: hidden;background-color:#f2f2f2;width: 200px;}
+.progress_bar{background: #5FB878; width: 21px; height: 10px; border-radius: 5px;}
+.progress_btn{width: 20px; height: 20px; border-radius: 5px; position: absolute;background:#fff; 
+left: 21px; margin-left: -10px; top:-5px; cursor: pointer;border:1px #ddd solid;box-sizing:border-box;}
+.progress_btn:hover{border-color:#F7B824;}
+/*  拾色板  */
+
+#color-plate>form{
+	width: 200px !important;
+}
+.farbtastic {
+	position: relative;
+}
+
+.farbtastic * {
+	position: absolute;
+	cursor: crosshair;
+}
+
+.farbtastic,
+.farbtastic .wheel {
+	width: 195px;
+	height: 195px;
+}
+
+.farbtastic .color,
+.farbtastic .overlay {
+	top: 47px;
+	left: 47px;
+	width: 101px;
+	height: 101px;
+}
+
+.farbtastic .wheel {
+	background: url(wheel.png) no-repeat;
+	width: 195px;
+	height: 195px;
+}
+
+.farbtastic .overlay {
+	background: url(mask.png) no-repeat;
+}
+
+.farbtastic .marker {
+	width: 17px;
+	height: 17px;
+	margin: -8px 0 0 -8px;
+	overflow: hidden;
+	background: url(marker.png) no-repeat;
 }

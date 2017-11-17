@@ -7,6 +7,8 @@
 		<link rel="stylesheet" type="text/css" href="../../main/css/main.css"/>	
 		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css"/>
 		
+		<link rel="stylesheet" type="text/css" href="../../main/css/animation.css"/>
+		 
 		<link rel="stylesheet" type="text/css" href="editor.css"/>
 		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -22,17 +24,58 @@
 		<!--<div class="icon-body" id="undo">
 			<i class="icon iconfont icon-chexiao"></i>
 		</div>-->
-<ul class="undo-body">
-	<li>
-		<div>
-			<span>删除</span>
-			<!--<i class="icon iconfont icon-guanbi-copy"></i>-->
+		<a href="javascript:;" class="layui-btn style-close style-open">
+			<i class="layui-icon">&#xe620;</i>
+		</a>
+		<div class="group layui-tab layui-tab-brief" lay-filter="editor">
+			<div class="content layui-bg-black">
+				<span class="pull-left">组件设置</span>
+				<span class="layui-btn pull-right style-close">
+					<i class="layui-icon">&#x1006;</i>
+				</span>
+			</div>
+			<ul class="undo-body layui-tab-title">	
+				<li class="layui-this">
+					<a href="javascript:;">样式</a>
+				</li>
+				<li>
+					<a href="javascript:;">动画</a>
+				</li>
+			</ul>
+			<div class="layui-tab-content">
+				<ul class="layui-tab-item layui-show">
+				    <li>
+				    	<lable>文字颜色 ：</lable>
+				    	<div id="color-plate"></div>
+				    </li>
+				</ul>
+				<ul class="layui-tab-item">
+					<li>
+						<lable>动画</lable>
+				  		<select class="form-control" id="animation-name">
+						  <option value="">请选择一个特效</option>
+						  <option value="rubberBand">抖动</option>
+						  <option value="twisterInDownRight">魔幻进入</option>
+						  <option value="lightSpeedInDown">光速进入</option>
+						</select> 
+					</li>
+					<!--<li>
+						<label>动画时间&nbsp;&nbsp;&nbsp;<span class="text">1</span>秒</label>
+						<div class="progress">
+						 <div class="progress_bg">
+						  <div class="progress_bar"></div>
+						 </div>
+						 <div class="progress_btn"></div>
+						</div>
+					</li>-->
+				</ul>
+				<div class="layui-tab-item">
+				<!---->
+				</div>
+			</div>
 		</div>
-	</li>
-	<li></li>
-	<li></li>
-	<li></li>
-</ul>	
+		
+		
 		<section>
 			<div class="layui-row layui-tab" id="t" lay-filter="editor">
 				<!-- 编辑体的展现 -->
@@ -53,11 +96,6 @@
 					  </li>
 					  <li class="layui-nav-item layui-nav-itemed">
 					    <a href="javascript:;" id="textAdd"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
-					    <!--<dl class="layui-nav-child">
-					      <dd><a href="javasciript:;" id="textAdd"><i class="layui-icon">&#xe62b;</i> <span>加粗</span></a></dd>
-					      <dd><a href="javasciript:;"><i class="layui-icon">&#xe646;</i> <span>下划线</span></a></dd>
-					      <dd><a href="javasciript:;"><i class="layui-icon">&#xe644;</i> <span>斜体</span></a></dd>
-					    </dl>-->
 					  </li>
 					  <li class="layui-nav-item">
 					  	<img id="dome" src=""/>
@@ -87,8 +125,7 @@
 		
 
 		<!-- 操作栏的展现按钮  -->
-		<a href="javascript:;" class="layui-btn back-open"><i class="layui-icon">&#xe642;</i></a>
-			 
+		<a href="javascript:;" class="layui-btn back-open"><i class="layui-icon">&#xe642;</i></a>	 
 		<!--  引用的JS -- Start -->
 		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>

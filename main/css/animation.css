@@ -1,0 +1,394 @@
+/*
+ * 抖动 rubberBand
+ * 摇摆 wobble
+ * 旋转 rotateIn
+ * 闪烁 flash
+ * 选摆 swing
+ * 淡入 fadeIn
+ * 淡出 fadeOut
+ * 从左到右移入 fadeInLeft
+ * 魔幻进入 twisterInDownRight
+ * 光速进入 lightSpeedInDown 
+ * 从上往下移出 fadeOutDown
+ * 从下往上移入 fadeInUp
+ * */
+
+/* 抖动 */
+@-webkit-keyframes rubberBand {
+	0% {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1)
+	}
+	30% {
+		-webkit-transform: scale3d(1.25, .75, 1);
+		transform: scale3d(1.25, .75, 1)
+	}
+	40% {
+		-webkit-transform: scale3d(.75, 1.25, 1);
+		transform: scale3d(.75, 1.25, 1)
+	}
+	50% {
+		-webkit-transform: scale3d(1.15, .85, 1);
+		transform: scale3d(1.15, .85, 1)
+	}
+	65% {
+		-webkit-transform: scale3d(.95, 1.05, 1);
+		transform: scale3d(.95, 1.05, 1)
+	}
+	75% {
+		-webkit-transform: scale3d(1.05, .95, 1);
+		transform: scale3d(1.05, .95, 1)
+	}
+	to {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1)
+	}
+}
+@keyframes rubberBand {
+	0% {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1)
+	}
+	30% {
+		-webkit-transform: scale3d(1.25, .75, 1);
+		transform: scale3d(1.25, .75, 1)
+	}
+	40% {
+		-webkit-transform: scale3d(.75, 1.25, 1);
+		transform: scale3d(.75, 1.25, 1)
+	}
+	50% {
+		-webkit-transform: scale3d(1.15, .85, 1);
+		transform: scale3d(1.15, .85, 1)
+	}
+	65% {
+		-webkit-transform: scale3d(.95, 1.05, 1);
+		transform: scale3d(.95, 1.05, 1)
+	}
+	75% {
+		-webkit-transform: scale3d(1.05, .95, 1);
+		transform: scale3d(1.05, .95, 1)
+	}
+	to {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1)
+	}
+}
+
+/*摇摆 */
+@keyframes wobble {
+	0% {
+		-webkit-transform: none;
+		transform: none
+	}
+	15% {
+		-webkit-transform: translate3d(-25%, 0, 0) rotate(-5deg);
+		transform: translate3d(-25%, 0, 0) rotate(-5deg)
+	}
+	30% {
+		-webkit-transform: translate3d(20%, 0, 0) rotate(3deg);
+		transform: translate3d(20%, 0, 0) rotate(3deg)
+	}
+	45% {
+		-webkit-transform: translate3d(-15%, 0, 0) rotate(-3deg);
+		transform: translate3d(-15%, 0, 0) rotate(-3deg)
+	}
+	60% {
+		-webkit-transform: translate3d(10%, 0, 0) rotate(2deg);
+		transform: translate3d(10%, 0, 0) rotate(2deg)
+	}
+	75% {
+		-webkit-transform: translate3d(-5%, 0, 0) rotate(-1deg);
+		transform: translate3d(-5%, 0, 0) rotate(-1deg)
+	}
+	to {
+		-webkit-transform: none;
+		transform: none
+	}
+}
+
+/* 旋转  */
+@-webkit-keyframes rotateIn {
+	0% {
+		-webkit-transform: rotate(0deg)
+	}
+	to {
+		-webkit-transform: rotate(1turn)
+	}
+}
+
+@keyframes rotateIn {
+	0% {
+		transform: rotate(0deg)
+	}
+	to {
+		transform: rotate(1turn)
+	}
+}
+
+/* 闪烁 */
+@-webkit-keyframes flash {
+	0%,
+	50%,
+	to {
+		opacity: 1
+	}
+	25%,
+	75% {
+		opacity: 0
+	}
+}
+
+@keyframes flash {
+	0%,
+	50%,
+	to {
+		opacity: 1
+	}
+	25%,
+	75% {
+		opacity: 0
+	}
+}
+/* 选摆 */
+@-webkit-keyframes swing {
+	20% {
+		-webkit-transform: rotate(15deg);
+		transform: rotate(15deg)
+	}
+	40% {
+		-webkit-transform: rotate(-10deg);
+		transform: rotate(-10deg)
+	}
+	60% {
+		-webkit-transform: rotate(5deg);
+		transform: rotate(5deg)
+	}
+	80% {
+		-webkit-transform: rotate(-5deg);
+		transform: rotate(-5deg)
+	}
+	to {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg)
+	}
+}
+
+@keyframes swing {
+	20% {
+		-webkit-transform: rotate(15deg);
+		transform: rotate(15deg)
+	}
+	40% {
+		-webkit-transform: rotate(-10deg);
+		transform: rotate(-10deg)
+	}
+	60% {
+		-webkit-transform: rotate(5deg);
+		transform: rotate(5deg)
+	}
+	80% {
+		-webkit-transform: rotate(-5deg);
+		transform: rotate(-5deg)
+	}
+	to {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg)
+	}
+}
+
+/* 淡入 */
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+	to {
+		opacity: 1
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+	to {
+		opacity: 1
+	}
+}
+/* 淡出 */
+
+@-webkit-keyframes fadeOut {
+	0% {
+		opacity: 1
+	}
+	to {
+		opacity: 0
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1
+	}
+	to {
+		opacity: 0
+	}
+}
+
+/* 移入 */
+@-webkit-keyframes fadeInLeft {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(-200px, 0, 0);
+		transform: translate3d(-200px, 0, 0)
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none
+	}
+}
+
+@keyframes fadeInLeft {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(-200px, 0, 0);
+		transform: translate3d(-200px, 0, 0)
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none
+	}
+}
+
+/* 魔幻进入 */
+@-webkit-keyframes twisterInDownRight {
+	0% {
+		opacity: 0;
+		-webkit-transform-origin: left top;
+		-webkit-transform: scale(1) translateX(-100%) rotate(1turn)
+	}
+	30% {
+		-webkit-transform-origin: left top;
+		-webkit-transform: scale(0) translateX(-100%) rotate(1turn)
+	}
+	to {
+		opacity: 1;
+		-webkit-transform-origin: left top;
+		-webkit-transform: scale(1) translateX(0) rotate(0deg)
+	}
+}
+
+@keyframes twisterInDownRight {
+	0% {
+		opacity: 0;
+		transform-origin: left top;
+		transform: scale(0) translateX(-100%) rotate(1turn)
+	}
+	30% {
+		transform-origin: left top;
+		transform: scale(0) translateX(-100%) rotate(1turn)
+	}
+	to {
+		opacity: 1;
+		transform-origin: left top;
+		transform: scale(1) translateX(0) rotate(0deg)
+	}
+}
+/* 光速入 */
+
+@keyframes lightSpeedInDown {
+	0% {
+		-webkit-transform: translate3d(0, -100%, 0) skewX(-30deg);
+		transform: translate3d(0, -100%, 0) skewX(-30deg);
+		opacity: 0
+	}
+	60% {
+		-webkit-transform: skewX(20deg);
+		transform: skewX(20deg);
+		opacity: 1
+	}
+	80% {
+		-webkit-transform: skewX(-5deg);
+		transform: skewX(-5deg);
+		opacity: 1
+	}
+	to {
+		-webkit-transform: none;
+		transform: none;
+		opacity: 1
+	}
+}
+
+@-webkit-keyframes lightSpeedInDown {
+	0% {
+		-webkit-transform: translate3d(0, -100%, 0) skewX(-30deg);
+		transform: translate3d(0, -100%, 0) skewX(-30deg);
+		opacity: 0
+	}
+	60% {
+		-webkit-transform: skewX(20deg);
+		transform: skewX(20deg);
+		opacity: 1
+	}
+	80% {
+		-webkit-transform: skewX(-5deg);
+		transform: skewX(-5deg);
+		opacity: 1
+	}
+	to {
+		-webkit-transform: none;
+		transform: none;
+		opacity: 1
+	}
+}
+
+/* 移出 */
+@-webkit-keyframes fadeOutDown {
+	0% {
+		opacity: 1
+	}
+	to {
+		opacity: 0;
+		-webkit-transform: translate3d(0, 100%, 0);
+		transform: translate3d(0, 100%, 0)
+	}
+}
+
+@keyframes fadeOutDown {
+	0% {
+		opacity: 1
+	}
+	to {
+		opacity: 0;
+		-webkit-transform: translate3d(0, 100%, 0);
+		transform: translate3d(0, 100%, 0)
+	}
+}
+/* 从下往上移入 */
+@-webkit-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, 200px, 0);
+		transform: translate3d(0, 200px, 0)
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none
+	}
+}
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, 200px, 0);
+		transform: translate3d(0, 200px, 0)
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none
+	}
+}

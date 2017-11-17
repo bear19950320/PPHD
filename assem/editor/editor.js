@@ -1,18 +1,66 @@
 // 全局变量
-var content=[],imgSrc="",conatent=[],log=[];
+var content=[],imgSrc="",conatent=[],log=[],flag=0;;
 
 layui.use('element', function(){
   var element = layui.element;
-  
+  /* 模板的选项卡 */
   element.on('tab(editor)', function(data){
     console.log(data);
-    $(".layui-show").attr("id","editor-ul");
-    $(".layui-show").siblings(".layui-tab-item").attr("id"," ")
+    $("#editor-body>.layui-show").attr("id","editor-ul");
+    $("#editor-body>.layui-show").siblings(".layui-tab-item").attr("id"," ")
     $(".layui-this").attr("id","layui-btn")
     $(".layui-this").siblings("li").attr("id"," ")
   });
 });
-
+$("#animation-name").change(function(){
+		$("#editor-ul").css({
+			"animation": $(this).val()+" 1.5s ease 0s 1 normal both"
+		})
+})
+/* -------------------动画时间 Start------------------- */
+var tag = false,ox = 0,left = 21,bgleft = 0;
+    $('.progress_btn').mousedown(function(e) {
+     ox = e.pageX - left;
+     tag = true;
+    });
+    $(document).mouseup(function() {
+     tag = false;
+    });
+    $('.progress').mousemove(function(e) {//鼠标移动
+     if (tag) {
+      left = e.pageX - ox;
+      if (left <= 21) {
+       left = 21;
+      }else if (left > 200) {
+       left = 200;
+      }
+      $('.progress_btn').css('left', left);
+      $('.progress_bar').width(left);
+      $('.text').html(parseInt((left/200)*10));
+      $("#editor-ul").css({
+				"animation-duration":parseInt((left/200)*10)
+			})
+     }
+    });
+    $('.progress_bg').click(function(e) {//鼠标点击
+     if (!tag) {
+      bgleft = $('.progress_bg').offset().left;
+      left = e.pageX - bgleft;
+      if (left <= 21) {
+       left = 21;
+      }else if (left > 200) {
+       left = 200;
+      }
+      $("#editor-ul").css({
+				"animation-duration":parseInt((left/200)*10)
+			})
+      $('.progress_btn').css('left', left);
+      $('.progress_bar').animate({width:left},200);
+      $('.text').html(parseInt((left/200)*10));
+     }
+    });
+   
+/* -------------------动画时间End------------------- */   
 /*------------------- 关闭编辑工具框  ----------------------*/
 $(".back-close").click(function(event){
 	event.stopPropagation();
@@ -287,7 +335,7 @@ function GetJsonData() {
  
 var pageNum=1; 
 
-/*-------------添加模板------------------------------------*/
+/*-------------添加模板Start------------------------------------*/
 $("#add").click(function(event){
 	event.stopPropagation();
 	pageNum++;
@@ -299,19 +347,49 @@ $("#add").click(function(event){
 	$("#editor-body").append('<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="'+pageNum+'"></ul>')
 })
 
+/* ------------------添加模板的End-----------------------------*/
 
+/* ------------------添加取色板的Start-----------------------------*/
+//	$("#color-btn").click(function(e){
+//		e.stopPropagation();
+//	  flag++;
+//	  if(flag%2!=0){
+//	   	$("#color-plate").show();
+//	   	$("#color-plate").css({
+//				top:$("#color-btn").height(),
+//				animation: "fadeIn 2s ease 0s 1 normal both"
+//			});
+//	  }else{
+//	   	
+//	   	$("#color-plate").css({
+//				top:$("#color-btn").height(),
+//				animation: "fadeOut 1s ease 0s 1 normal both"
+//			});		
+//	  }
+//	});
 
+$("#color-plate").load("../swatches/swatches.html",function(){	
+ 	$(document).ready(function() {
+// 		$('#picker').farbtastic('.text-color');
+    $('#picker').farbtastic('.text-color');
+  });
+})
 
-
-
-
-
-
-
-
-
-
-
+/* ------------------添加取色板的End-----------------------------*/
+	$(".style-close").click(function(){
+	 	flag++;
+		if(flag%2!=0){
+		 	$('.group').css({
+		 		animation: "fadeOut 1s ease 0s 1 normal both"
+		 	});
+		 	$(".style-open").show()
+		}else{
+			$(".style-open").hide()
+				$('.group').css({
+			 		animation: "lightSpeedInDown 1s ease 0s 1 normal both"
+			 	});
+		}
+	})
 
 
 

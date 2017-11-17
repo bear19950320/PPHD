@@ -156,6 +156,7 @@ body{
 /* ----------------------------导航条down---------------------------  */
 #down-nav{
 	height: 9%;
+	background-color: #393D49;
 }
 #down-ul{
 	height:100%;
@@ -229,4 +230,29 @@ body{
 }
 .f-anim {
 	-webkit-transition: left .2s linear;
+}
+/* 特效栏 */
+#special-body{
+	display: none;
+	list-style: none !important;
+	white-space: nowrap !important;
+	overflow-x: scroll !important;
+	vertical-align: middle !important;
+	background-color: #393D49;
+}
+#special-body>li{
+	display: inline-block;
+	min-width: 20%;
+	padding: 5px;
+	height: 100%;
+}
+#special-body>li>span{
+	font-size: 13px;
+	text-align: center;
+	width:100%;
+	height: 100%;
+	background: #FFFFFF;
+}
+#special-body>li>span>.icon{
+	font-size: 20px;
 }

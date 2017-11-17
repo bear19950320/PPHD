@@ -350,7 +350,28 @@ $("#backAdd").click(function(event){
 	$("#backInput").trigger("click");	
 })
 
+/* 特效事件  */
+$("#special").click(function(){
+	$("#down-ul").css({
+		"animation": "fadeOutDown 1.5s ease 0s 1 normal both",
+		display:"none"
+	})
+//	$("#down-ul").hide()
+	$("#special-body").show();
+	$("#special-body").css({
+		"animation": "fadeInUp 0.5s ease 0s 1 normal both"
+	});
 
+})
+/* 操作栏的返回按钮 */
+$(".nav-back").click(function(){
+	$("#down-ul").siblings("ul").hide()
+	$("#down-ul").css({
+		"animation": "fadeInUp 1.5s ease 0s 1 normal both",
+		display:"blick"
+	})
+	
+})
 
 
 
