@@ -19,7 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
 		
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
-		
+		<link rel="stylesheet" type="text/css" href="layui/css/modules/layer/default/layer.css"/>
 		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
@@ -27,7 +27,8 @@
 		<script src="main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	   
+	    <script src="main/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="main/js/MD5.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body class="layui-row">
 		<div class="layui-col-md4 layui-col-md-offset4 layui-col-sm8 layui-col-sm-offset2 login">
@@ -40,7 +41,7 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">账号名 : </label>
 				    <div class="layui-input-inline">
-				      <input type="text" id="user" name="user" required  lay-verify="required" placeholder="用户ID/手机号登陆" autocomplete="off" class="layui-input">
+				      <input type="text" id="user" name="phoneNumber" required  lay-verify="required" placeholder="用户ID/手机号登陆" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
@@ -48,7 +49,6 @@
 				    <div class="layui-input-inline">
 				      <input type="password" id="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 				    </div>
-				    <div class="layui-form-mid layui-word-aux">辅助文字</div>
 				  </div>
 				  <div class="layui-form-item">
 				    <div class="loginBtnBody">
@@ -56,31 +56,13 @@
 				    </div>
 				  </div>
 				  <div class="layui-form-item passwordAndUser">
-				  	 	<a href="javascript:;">忘记密码</a>&nbsp;<span>|</span>&nbsp;<a	href="javascript:;">注册账号</a>
+				  	 	<a href="javascript:;">忘记密码</a>&nbsp;<span>|</span>&nbsp;<a href="javascript:;">注册账号</a>
 				  </div>
 				</form>
 		    </section>
 		</div>
 		<script src="main/js/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			layui.use('form', function(){
-			  var form = layui.form;
-			  
-			  //监听提交
-			  form.on('submit(formDemo)', function(data){
-			  	if( $("#user").val() != "admin" ){
-			  		layer.msg("账号不存在");
-			  	}else if( $("#password").val() != "123"){
-			  		layer.msg("密码错误");
-			  	}else{
-			  		setTimeout(function(){ location.href="build/page/page.html" },3000)
-			  	}
-			  	
-			  //  layer.msg(JSON.stringify(data.field));
-			    return false;
-			  });
-			});
-		</script>
+	    <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

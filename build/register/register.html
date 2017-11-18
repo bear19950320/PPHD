@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+		<title>新用户注册</title>
+		<link href="../../main/img/logo.webp" rel="icon" type="image/icon">
+		<link rel="stylesheet" type="text/css" href="../../main/css/main.css"/>
+				
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="../../css/register.css"/>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/modules/layer/default/layer.css"/>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header class="row navPack">
+			<div class="col-lg-2 col-lg-offset-1">
+				<img src="../../main/img/logo1.webp" class="logoImg" alt="" />
+			</div>
+			<a href="javascript:;" class="layui-btn pull-right">
+				新用户注册
+			</a>
+		</header>
+		<section class="layui-row row">
+			<div class="layui-col-md8">
+				asdasda
+			</div>
+			<form class="layui-form layui-col-md4" action="">
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">手机号</label>
+			   <div class="layui-input-inline">
+			      <input type="number" name="phoneNumber" id="phoneNumber" required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">输入密码</label>
+			    <div class="layui-input-inline">
+			      <input type="password" name="password" id="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">重复密码</label>
+			    <div class="layui-input-inline">
+			      <input type="password" name="againPassword" id="againPassword" required lay-verify="required" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">验证码</label>
+			    <div class="layui-input-inline">
+			      <input type="number" name="code" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+			    </div>
+			    <a href="javascript:;" class="layui-btn obtainCode" id="obtainCode">获取验证码</a>
+			  </div>
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+			    </div>
+			  </div>
+			</form>
+		</section>
+		
+		<!-- 引用的JS---Start  -->
+		<script src="../../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../main/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="../../main/js/MD5.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="../../js/register.js" type="text/javascript" charset="utf-8"></script>
+	    <!-- 引用的JS---End  -->
+
+	</body>
+</html>

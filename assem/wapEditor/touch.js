@@ -238,8 +238,8 @@ var half=$(window).width()*0.5;
   	'margin-left':left+"px",
   	'margin-right':left+"px"
   })
-var pageNum=1; 
-
+var pageNum=3; 
+var Ullength=$("#editor-body>ul").length;
 /*-------------添加模板------------------------------------*/
 $("#add").click(function(event){
 	event.stopPropagation();
@@ -247,57 +247,25 @@ $("#add").click(function(event){
 	$("#editor-body").find("ul").attr("id"," ")
 	//$("#editor-body").find("ul").removeClass("swiper-slide-active").siblings(this).addClass("swiper-slide-prev")
 	//$("#pageBtn").append('<li class="layui-this">第'+ pageNum +'页</li>')
-	$("#editor-body").append('<ul id="editor-ul" class="editor-ul" num="'+pageNum+'"><span class="layui-badge">第'+pageNum+'页</span></ul>')
+	$("#editor-body").append('<div class="swiper-slide"><ul id="editor-ul" class="editor-ul" num="'+pageNum+'"><span class="layui-badge">第'+pageNum+'页</span></ul></div>')
   $(".editor-ul").css({
   	width:$(window).width()*0.8+"px",
   	'margin-top':left+"px",
   	'margin-left':left+"px",
   	'margin-right':left+"px"
   });
-  var Ullength=$("#editor-body>ul").length;
-  console.log(Ullength+"---宽"+$(window).width())
-  $("#editor-body").width($(window).width()*Ullength)
+ $("#editor-body>div").removeClass('swiper-slide-active');
+	var mySwiper = new Swiper ('.swiper-container-editor', {
+			initialSlide :$("#editor-body>div").length,
+			effect : 'coverflow',
+			observer:true,
+			onTouchEnd:function(swiper){
+				console.log($('.swiper-slide-active').find("ul").attr("num"))
+			}
+		}) 
+
 })
 
-
-$("#t").on("touchstart", function(e) {
- 
-    startX = e.originalEvent.changedTouches[0].pageX,
-    startY = e.originalEvent.changedTouches[0].pageY;
-});
-	
-	var iNow=0;
-$("#t").on("touchmove", function(e) {
-
-	  e.stopPropagation();
-    moveEndX = e.originalEvent.changedTouches[0].pageX,
-    moveEndY = e.originalEvent.changedTouches[0].pageY,
-    X = moveEndX - startX,
-    Y = moveEndY - startY;
-  var left=0;
-    if ( X > 0 ) {
-//     left+=X;
-//     $("#editor-body").animate({
-//		  	 "left":-left
-//		  })
-    }
-    else if ( X <= half ) {
-//  	iNow++;
-//  			left+=X
-//  			console.log(left)
-//  	
-//  	$("#editor-body").animate({
-//		  	 "left":left
-//		  })
-    	
-    }
-    else if ( Y > 0) {
-        alert("top 2 bottom");
-    }
-    else if ( Y < 0 ) {
-        alert("bottom 2 top");
-    }
-});
 
 function back(imgFile) {
 		zIndex++;
@@ -350,28 +318,37 @@ $("#backAdd").click(function(event){
 	$("#backInput").trigger("click");	
 })
 
-/* 特效事件  */
-$("#special").click(function(){
-	$("#down-ul").css({
-		"animation": "fadeOutDown 1.5s ease 0s 1 normal both",
-		display:"none"
+/* ---------------特效点击事件--------------- */
+$("#special-body>li").each(function(){
+	$(this).click(function(event){
+		event.stopPropagation();
+		$("#editor-ul").css({
+			"animation": $(this).attr("class")+" 1.5s ease 0s 1 normal both"
+		})
 	})
-//	$("#down-ul").hide()
+})
+
+/* 特效框显示事件  */
+$("#special").click(function(){
+	$("#down-ul").css({display:"none"})
 	$("#special-body").show();
+	
 	$("#special-body").css({
 		"animation": "fadeInUp 0.5s ease 0s 1 normal both"
 	});
-
 })
 /* 操作栏的返回按钮 */
 $(".nav-back").click(function(){
+	
 	$("#down-ul").siblings("ul").hide()
+	$("#down-ul").show()
+	
 	$("#down-ul").css({
-		"animation": "fadeInUp 1.5s ease 0s 1 normal both",
-		display:"blick"
+		"animation": "fadeInUp 1.5s ease 0s 1 normal both"
 	})
 	
 })
+
 
 
 

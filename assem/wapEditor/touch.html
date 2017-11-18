@@ -58,17 +58,33 @@
 				</li>
 			</ul>
 		</div>
+		<!--------------------- 中间的主身体Start ------------------------>
 		<section >
-			<div class="layui-row" id="t">
-				<!-- 编辑体的展现 -->
-				<div id="editor-body" class="layui-col-xs12">
-					<!-- -->
-					<ul id="editor-ul" class="editor-ul " num="1">
-						<span class="layui-badge">第1页</span>
-					</ul>
+			<!-- 最大的 身体  -->
+			<div class="layui-row swiper-container-editor" id="t">
+				<!-- 编辑体的展现身体 -->
+				<div id="editor-body" class="layui-col-xs12 swiper-wrapper">
+					<!-- 编辑的框框 -->
+					<div class="swiper-slide">
+						<ul id="editor-ul" class="editor-ul " num="1">
+							<span class="layui-badge">第1页</span>
+						</ul>
+					</div>
+					<div class="swiper-slide">
+						<ul class="editor-ul " num="2">
+							<span class="layui-badge">第2页</span>
+						</ul>
+					</div>
+					<div class="swiper-slide">
+						<ul class="editor-ul " num="3">
+							<span class="layui-badge">第3页</span>
+						</ul>
+					</div>
+
 				</div>
 			</div>
 		</section>
+		<!--------------------- 中间的主身体End ------------------------>
 		<div id="page-btn">
 			<!--<div class="swiper-pagination"></div>-->
 		</div>
@@ -114,18 +130,17 @@
 			
 		 	<ul id="special-body">
 		 		<li class="nav-back"><span><i class="icon layui-icon">&#xe603;</i><br />返回</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />无特效</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />抖动</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />淡入</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />淡出</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />移入</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />选摆</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />闪烁</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />旋转</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />摇摆</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />抖动</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />魔幻进入</span></li>
-		 		<li><span><i class="icon iconfont icon-beijing"></i><br />光速进入</span></li>
+		 		<li class="none"><span><i class="icon iconfont icon-beijing"></i><br />无特效</span></li>
+		 		<li class="rubberBand"><span><i class="icon iconfont icon-beijing"></i><br />抖动</span></li>
+		 		<li class="fadeIn"><span><i class="icon iconfont icon-beijing"></i><br />淡入</span></li>
+		 		<li class="fadeOut"><span><i class="icon iconfont icon-beijing"></i><br />淡出</span></li>
+		 		<li class="fadeInLeft"><span><i class="icon iconfont icon-beijing"></i><br />移入</span></li>
+		 		<li class="swing"><span><i class="icon iconfont icon-beijing"></i><br />选摆</span></li>
+		 		<li class="flash"><span><i class="icon iconfont icon-beijing"></i><br />闪烁</span></li>
+		 		<li class="rotateIn"><span><i class="icon iconfont icon-beijing"></i><br />旋转</span></li>
+		 		<li class="wobble"><span><i class="icon iconfont icon-beijing"></i><br />摇摆</span></li>
+		 		<li class="twisterInDownRight"><span><i class="icon iconfont icon-beijing"></i><br />魔幻进入</span></li>
+		 		<li class="lightSpeedInDown"><span><i class="icon iconfont icon-beijing"></i><br />光速进入</span></li>
 		 	</ul>
 		</nav>
   
@@ -137,6 +152,17 @@
 		<script src="touchRsize.js" type="text/javascript" charset="utf-8"></script>
         <script src="touch.js" type="text/javascript" charset="utf-8"></script>
         <!-- 引用的JS ---  END  -->
-		</body>
+		<script>        
+		  var mySwiper = new Swiper ('.swiper-container-editor', {
+		    /*  切换效果 */
+		    effect : 'coverflow',
+		    onTouchStart:function(swiper,event){
+		    	$('.swiper-slide-active').siblings('.swiper-slide').find("ul").attr("id"," ")
+				$('.swiper-slide-active').find("ul").attr("id",'editor-ul')
+			}
+		  }) 
+
+       
+		</script>
 	</body>
 </html>
