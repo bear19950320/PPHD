@@ -27,3 +27,8 @@
 .passwordAndUser>a:hover{
 	color:white;
 }
+.loginBtnBody{
+	padding-right: 10px;
+	display: flex;
+	justify-content: flex-end;
+}
