@@ -50,9 +50,9 @@ $("#obtainCode").click(function(e){
 	}
 });
 
-//ajax('getAdOrderlistadorderapi','POST','','JSON',function(data){
-//	console.log(data)
-//})
+ajax('getAdOrderlistadorderapi','POST','','JSON',function(data){
+	console.log(data)
+})
 
 layui.use('form', function(){
   var form = layui.form;

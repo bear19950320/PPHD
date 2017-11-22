@@ -9,34 +9,61 @@
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=VkRq02jHp2Tc6qdB5XHs9DDBGwi5X2km"></script>
 	<title>地图测试</title>
 	<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css"/>
+	<style type="text/css">
+		.BMap_noprint{
+			width
+		}
+		body{
+			position: relative;
+		}
+		#mapInput{
+			position: absolute;
+			left:10px;
+			top:10px;
+			z-index: 9999;
+			width: 16%;
+		}
+		#sniper{
+			position: absolute;
+			bottom: 10px;
+			left:10px;
+			z-index: 9999;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+		}
+		#sniper>img{
+			width: 100%;
+			height: 100%;
+		}
+		.anchorBL{
+			display: none;
+		}
+	</style>
 </head>
 <body>
-	<div class="layui-row">
-		<div class="layui-col-xs5 layui-col-xs-offset1" style="background: rgba(0,0,0,.5);">
-			<input type="text" name="assite" id="mapInput" placeholder="成都" autocomplete="off" class="layui-input">
-		</div>
-		<div class="layui-col-xs5 layui-col-xs-offset1" style="background: rgba(0,0,0,.5);">
-			城市名: <input id="cityName" type="text" style="width:100px; margin-right:10px;" />
-			<input type="button" value="查询" onclick="theLocation()" />
-		</div>
-	</div>
+	<input type="text" id="mapInput" placeholder="成都" class="layui-input">
+	<a href="javascript:;" id='sniper'>
+		<img src="http://www.bear1995.com/img/Sniper.png"/>
+	</a>
 	<div id="allmap"></div>
 </body>
 </html>
 <script type="text/javascript" src="../../main/js/jquery.min.js"></script>
 <script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+	var scaler=1,sizer=0.75;
 	// 百度地图API功能 (allmap  == div的一个ID)
 	var map = new BMap.Map("allmap");  // 创建Map的实例
 	
-	/* 拖动地图 */
+	/* 可以拖动地图事件 */
 	map.enableDragging();
 	
-	/* 缩放地图 */
-	map.enableScrollWheelZoom(true)
+	/* 可以缩放地图事件 */
+//	map.enableScrollWheelZoom(false)
 	
 	// 默认坐标
-	var point = new BMap.Point(104.071216,30.576279);
+	var point = new BMap.Point(104.085237,30.663835);
 	
 	// 地图在页面显示的大小 ('定位',显示大小);
 	map.centerAndZoom(point,20);
@@ -45,71 +72,135 @@
 	var geolocation = new BMap.Geolocation();
 	
 	geolocation.getCurrentPosition(function(r){
-		
 		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+		//	map.clearOverlays();
 			// 获得浏览器的定位
 			var mk = new BMap.Marker(r.point);
 
 			map.addOverlay(mk);
 			
+ 			$("#sniper").click(function(e){
+ 				e.stopPropagation();
+ 				// 设置20倍的地图缩放
+ 				map.centerAndZoom(r.point,20);
+ 				// 清除所有的标点
+ 				map.clearOverlays();
+ 				// 调用地图标点
+ 				pan(r.point);
+ 			})
 			map.panTo(r.point);
 			/*---------------- 调用设置地图方法   ------------------*/
 			pan(r.point);
+			
 		}
 		else {
 			/* 自动定位错误时的提示  */
-			alert("定位失败,请手动输入定位!");
+			layer.msg("定位失败,请手动输入定位!");
 		}        
 	
 	},{enableHighAccuracy: true})
 	
 	/* 获取地图标点列表方法   */
-	var local = new BMap.LocalSearch(map, {
-		renderOptions:{map: map}
+	var local = new BMap.LocalSearch(map);
 		
-	});
-	
-	/*
+		
+	/* 输入框val赋值到检索对象
+	 * 
 	 * 当输入地图成功后获取地图标点列表
 	 * */
 	$("#mapInput").change(function(){
+		map.clearOverlays();
+		// 搜索的赋值 <<<<
 		local.search($(this).val());
+		// 延时定时器取得定位的经纬度
+		setTimeout(function(){
+            // 当坐标数组的长度不等于0时！
+			if(local.wf.length != 0){
+				// 得到搜索定位的经纬度
+				var point=local.wf[0].point
+				// 重新赋值到map的经纬度<<<<  
+				var mk = new BMap.Marker(point);      
+		        // 添加到map<<<<                       
+		        map.addOverlay(mk);                                  
+		        // 重新订意map<<<<                      
+		        map.panTo(point); 
+		        map.centerAndZoom(point,20);
+		        pan(point);  
+			}else{
+				layer.msg("在成都市内未找到相关地点,可以先定位到地名所在城市再次定位")
+			}
+			
+		},500);
+	});
+	/* 地图缩放的监听  */
+	map.addEventListener("zoomend", function () {
 		
-		//	console.log(JSON.pase(local))
-	})
-	
+		if(map.getZoom()<16){
+			sizer=0.5;
+		}else if(map.getZoom()<11){
+			sizer=0.25;
+		}
+	});
 	/* 添加多接点的方法！ */
     function addMarker(point){
+		var myIconer =new BMap.Symbol(BMap_Symbol_SHAPE_STAR, {
+					    scale:sizer,
+					    fillColor: "red",
+					    fillOpacity: 0.8
+					  });
+	  /* 在这里创建图标更改   */
+	  var marker1 = new BMap.Marker(point,{icon:myIconer,title: "屏幕位置"});
 	  
-	  var marker = new BMap.Marker(point);
-	  
-	  map.addOverlay(marker);
+	  //marker1.disableMassClear();
+	  map.addOverlay(marker1);
 	}
-    /* 输入地名设置中心点
-     * 无法重新定位  传参
-     * 暂时不适用
-     * */
-	function theLocation(){
-		var city = document.getElementById("cityName").value;
-		if(city != " "){
-			map.centerAndZoom(city,11); // 用城市名设置地图中心点
-		}
-	} 
-	
+    function meaddMarker(point){
+		var myIconer =new BMap.Symbol(BMap_Symbol_SHAPE_STAR, {
+					    scale:sizer,
+					    fillColor: "red",
+					    fillOpacity: 0.8
+					  });
+	  /* 在这里创建图标更改   */
+	  var marker1 = new BMap.Marker(point,{icon:myIconer,title: "屏幕位置"});
+	  
+	  //marker1.disableMassClear();
+	  map.addOverlay(marker1);
+	}
+
+
 	/* 设置地图的方法  */
 	function pan(point){
+		map.enableScrollWheelZoom(true)
+		// 清除所有覆盖事件
+		map.clearOverlays();
+		
+		console.log("---"+JSON.stringify(point))
+		/*--------------------------------------圆---------------------------------------*/
 		// 添加圆圈的方法  (中心点,范围大小,{圈的边线颜色,圈的边线宽度,圈的透明度});
 		var circle = new BMap.Circle(point,500,{strokeColor:"blue", strokeWeight:0.2, strokeOpacity:0.5});
 		// 添加地图的圆圈
 		map.addOverlay(circle);
+		/*------------------------------------中心点图标-----------------------------------------*/
         // 添加 定位坐标的图标 ( 图标,图标大小 )
 		    //  创建的图标
-		var myIcon = new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/fox.gif", new BMap.Size(300,157));
+		var myIcon =new BMap.Icon(
+　　　　　　　　'http://webmap0.map.bdstatic.com/wolfman/static/common/images/us_cursor_9517a2b.png', // 百度图片
+　　　　　　　　new BMap.Size(18,22), // 视窗大小
+　　　　　　　　{
+　　　　　　　　　　imageSize: new BMap.Size(144,92), // 引用图片实际大小
+　　　　　　　　　　imageOffset:new BMap.Size(-18,-22)  // 图片相对视窗的偏移
+　　　　　　　　}
+　　　　 );
 			//  创建标注(定位,{图标})
-		var marker2 = new BMap.Marker(point,{icon:myIcon});
+		var marker2 = new BMap.Marker(point,{icon:myIcon,title: "当前位置"});//,, enableDragging: true, raiseOnDrag: true
+		
+		// 清除多点标注
+		
+		
+		//marker2.disableMassClear();
 			//  标注添加到地图上
 		map.addOverlay(marker2);
-		
+		/*-----------------------------------圈内添加多个点--------------------------------------*/
 		// 随机向地图添加25个标注
 		var bounds = map.getBounds();
 			// 获得地图的 西南
@@ -121,12 +212,14 @@
 			// 经度
 		var latSpan = Math.abs(ne.lat - sw.lat);
 		
-		// 循环几个随机坐标-->添加到光圈内
+		// 循环几个随机坐标<-->添加到光圈内
 		for (var i = 0; i < 25; i ++) {
 			
 			var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
 			
+			// 添加到地图多标注的方法
 			addMarker(point);
 		}
 	}
+
 </script>
