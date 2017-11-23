@@ -18,15 +18,16 @@
 		}
 		#mapInput{
 			position: absolute;
-			left:10px;
 			top:10px;
+			left:10px;
 			z-index: 9999;
 			width: 16%;
+			min-width: 150px;
 		}
 		#sniper{
 			position: absolute;
-			bottom: 10px;
-			left:10px;
+			right:100px;
+			bottom:160px;
 			z-index: 9999;
 			display: inline-block;
 			width: 20px;
@@ -38,6 +39,13 @@
 		}
 		.anchorBL{
 			display: none;
+		}
+		
+		.anchorTL{
+			top:auto !important;
+			left:auto !important;
+			right:-36px !important;	
+			bottom:160px !important;
 		}
 	</style>
 </head>
@@ -51,16 +59,50 @@
 </html>
 <script type="text/javascript" src="../../main/js/jquery.min.js"></script>
 <script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	var scaler=1,sizer=0.75;
+	
 	// 百度地图API功能 (allmap  == div的一个ID)
 	var map = new BMap.Map("allmap");  // 创建Map的实例
+	
+	// 右上角，添加比例尺
+	var top_right_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_RIGHT});
+	
+	// 右上角，仅包含平移和缩放按钮
+	var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL});
+	/* 创建卫星、3D、2D */
+
+	var mapType2 = new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_LEFT});
+	var overViewOpen = new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT});
 	
 	/* 可以拖动地图事件 */
 	map.enableDragging();
 	
-	/* 可以缩放地图事件 */
-//	map.enableScrollWheelZoom(false)
+	/* 鼠标右键设置中心点------->>>>>>事件Start------------------------  */
+	var menu = new BMap.ContextMenu();
+	var txtMenuItem = [{
+			text:'设为中心点',
+			callback:function(r){ 
+				var point=r
+				// 重新赋值到map的经纬度<<<<  
+				var mk = new BMap.Marker(point);      
+		        // 添加到map<<<<                       
+		        map.addOverlay(mk);                                  
+		        // 重新订意map<<<<                      
+		        map.panTo(point); 
+		        map.centerAndZoom(point,20);
+		        pan(point);  
+			}
+		}];
+	for(var i=0; i < txtMenuItem.length; i++){
+		menu.addItem(new BMap.MenuItem(txtMenuItem[i].text,txtMenuItem[i].callback,100));
+	}
+	map.addContextMenu(menu);
+	/* 鼠标右键设置中心点------->>>>>>事件End-----------------------------   */
+		
+	/*这里注释可以缩放地图事件让地图不能缩放----------故意注释 */
+	//	map.enableScrollWheelZoom()
 	
 	// 默认坐标
 	var point = new BMap.Point(104.085237,30.663835);
@@ -133,27 +175,32 @@
 		},500);
 	});
 	/* 地图缩放的监听  */
+	
 	map.addEventListener("zoomend", function () {
-		
+		$("#num").val(map.getZoom())
 		if(map.getZoom()<16){
 			sizer=0.5;
 		}else if(map.getZoom()<11){
 			sizer=0.25;
 		}
 	});
+	
+	//  到时候的单个屏幕图标添加
 	/* 添加多接点的方法！ */
-    function addMarker(point){
+    function addMarker(point,content){
 		var myIconer =new BMap.Symbol(BMap_Symbol_SHAPE_STAR, {
-					    scale:sizer,
-					    fillColor: "red",
-					    fillOpacity: 0.8
-					  });
+									    scale:sizer,
+									    fillColor: "red",
+									    fillOpacity: 0.8
+									  });
 	  /* 在这里创建图标更改   */
-	  var marker1 = new BMap.Marker(point,{icon:myIconer,title: "屏幕位置"});
-	  
+	  var marker1 = new BMap.Marker(point,{icon:myIconer,title:'屏幕位置'});
+	  marker1.customData = { myProperty: "属性值"+content };
 	  //marker1.disableMassClear();
 	  map.addOverlay(marker1);
 	}
+   
+    //  到时候的屏幕组图标添加
     function meaddMarker(point){
 		var myIconer =new BMap.Symbol(BMap_Symbol_SHAPE_STAR, {
 					    scale:sizer,
@@ -161,16 +208,31 @@
 					    fillOpacity: 0.8
 					  });
 	  /* 在这里创建图标更改   */
-	  var marker1 = new BMap.Marker(point,{icon:myIconer,title: "屏幕位置"});
+	  var marker1 = new BMap.Marker(point,{icon:myIconer,title: "屏组位置"});
 	  
 	  //marker1.disableMassClear();
 	  map.addOverlay(marker1);
 	}
-
+	
+	// 鼠标点击选择中心点经纬度
+	map.addEventListener("click",function(r){
+		console.log(r.ab.customData.myProperty);		
+	});
 
 	/* 设置地图的方法  */
 	function pan(point){
+		console.log(point.lng+"----"+point.lat)
+		ajax('queryAdScreenListByScopeadscreenapi','POST',{screenShape:"0",longitude:point.lng,latitude:point.lat,radius:500},'json',function(data){
+			console.log(data);
+		})
+		/* 添加 地图 控件  */
+		map.addControl(top_right_control);
+		map.addControl(top_right_navigation);
 		map.enableScrollWheelZoom(true)
+		/* 添加卫星、3D、2D选项控件   */
+		map.addControl(mapType2);          //左上角，默认地图控件
+		map.addControl(overViewOpen);      //右下角，打开
+		
 		// 清除所有覆盖事件
 		map.clearOverlays();
 		
@@ -190,13 +252,11 @@
 　　　　　　　　　　imageSize: new BMap.Size(144,92), // 引用图片实际大小
 　　　　　　　　　　imageOffset:new BMap.Size(-18,-22)  // 图片相对视窗的偏移
 　　　　　　　　}
-　　　　 );
+　　　	);
 			//  创建标注(定位,{图标})
 		var marker2 = new BMap.Marker(point,{icon:myIcon,title: "当前位置"});//,, enableDragging: true, raiseOnDrag: true
 		
 		// 清除多点标注
-		
-		
 		//marker2.disableMassClear();
 			//  标注添加到地图上
 		map.addOverlay(marker2);
@@ -212,13 +272,13 @@
 			// 经度
 		var latSpan = Math.abs(ne.lat - sw.lat);
 		
-		// 循环几个随机坐标<-->添加到光圈内
+		// 循环几个随机坐标<--|-->添加到光圈内
 		for (var i = 0; i < 25; i ++) {
 			
 			var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
 			
-			// 添加到地图多标注的方法
-			addMarker(point);
+			// 添加到地图多标注的方法(经纬度,到时候的后台ID)
+			addMarker(point,i);
 		}
 	}
 
