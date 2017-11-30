@@ -1,4 +1,3 @@
-
 layui.use('form', function(){
   var form = layui.form;
   //监听提交
@@ -11,14 +10,14 @@ layui.use('form', function(){
 		var hash = md5(user.password);
 		//加密后的密码重新赋值到json 
 		  user.password=hash
-	  //提交
+	  //提交AJAX;
 	  ajax('phoneNumberLoginEnter','POST',user,'json',function(data){
 			if(data.code != 10000){	
 				layer.msg(data.msg);
 			}else{
 				var data=data.data
 			}
-		})
+		});
     return false;
   });
 });

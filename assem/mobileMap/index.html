@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script src="../build/react.js"></script>
+		<script src="../build/react-dom.js"></script>
+		<script src="../build/browser.min.js"></script>
+		<script src="../build/jquery.min.js"></script>
+		<style>
+			a {
+				color: red;
+				text-decoration: none;
+			}
+			
+			a:hover {
+				color: yellow;
+			}
+			
+			a>span {
+				color: yellowgreen;
+			}
+			a>span:hover {
+				color: cyan;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="example"></div>
+		<div id='examples'></div>
+		<script type="text/babel">
+//	rendar(){
+//		let newsList=[
+//			{url:'https://www.baidu.com',title:'百度一下'},
+//			{url:'http://www.qq.com',title:'腾讯首页'},
+//			{url:'https://weibo.com',title:'新浪微博'},
+//			{url:'https://www.aliyun.com'}
+//		];
+//		let	title=["百度","腾讯","微博","阿里云"];
+//		let url=['https://www.baidu.com','http://www.qq.com','https://weibo.com','https://www.aliyun.com']	
+//		newsList.map((Item,index)=>(
+//			<li key={index}>
+//				<a href={'${Item.url}'} target="_blank">
+//					{Item.title}
+//				</a>
+//			</li>
+//		));
+//		return(
+//			<div className="top-newsList">
+//				<Card>
+//					<ul>
+//						{newsList}
+//					</ul>
+//				</Card>
+//			</div>
+//		)
+//	}
+//rendar();
+	let UserGist = React.createClass({
+		getInitialState: function() {
+			return {
+				username: '',
+				lastGistUrl: ''
+			};
+		},
+		componentDidMount: function() {
+			$.get(this.props.source, function(result) {
+				console.log(607 / 24);
+				for(var i in result.data){
+				//	console.log(result.data[i])
+					if(this.isMounted()) {
+						this.setState({
+							username: result.data[i].id,
+							lastGistUrl: result.data[i].username
+						});
+					}
+				}
+			}.bind(this));
+		},
+		render: function() {
+			console.log(this.state.username)
+			return(
+				<div>
+					{this.state.username}
+					{/*{this.state.username}'s last gist is
+					<a href={this.state.lastGistUrl}>click here <span>{this.state.lastGistUrl}</span></a > */}
+				</div>
+			);
+}
+});
+ReactDOM.render(
+	<UserGist source="../../list/json/terminal.json" />, document.getElementById('example')
+	);
+	
+	/*{url:'https://www.baidu.com',title:'百度一下'},
+			{url:'http://www.qq.com',title:'腾讯首页'},
+			{url:'https://weibo.com',title:'新浪微博'},
+			{url:'https://www.aliyun.com',title:'阿里云'}*/
+	var arr = [
+			<div>Bear</div>,
+			<div>JIm</div>
+		];
+		ReactDOM.render(
+			
+		  <div>{arr}</div>,
+		  document.getElementById('examples')
+		);
+		</script>
+	</body>
+
+</html>

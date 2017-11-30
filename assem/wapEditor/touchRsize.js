@@ -45,53 +45,21 @@
 				/** 
 				 * 创建控制点 
 				 */
-//				var n = $('<div class="n"></div>'); //北 
-//				var s = $('<div class="s"></div>'); //南 
-//				var w = $('<div class="w"></div>'); //西 
-//				var e = $('<div class="e"></div>'); //东 
 				var ne = $('<div class="ne"></div>'); //东北 
-//				var nw = $('<div class="nw"></div>'); //西北 
+				var nw = $('<div class="nw"><i class="layui-icon">&#x1006;</i></div>'); //西北 
 				var se = $('<div class="se"></div>'); //东南 
 				var sw = $('<div class="sw"></div>'); //西南 
 
 				//添加公共样式 
 				self.addHandlerCss([ne,  se, sw]);//n, s, w, e, nw,
 				//添加各自样式 
-//				n.css({
-//					'top': '-4px',
-//					'margin-left': '-4px',
-//					'left': '50%',
-//					'cursor': 'n-resize'
-//				});
-//				s.css({
-//					'bottom': '-4px',
-//					'margin-left': '-4px',
-//					'left': '50%',
-//					'cursor': 's-resize'
-//				});
-//				e.css({
-//					'top': '50%',
-//					'margin-top': '-4px',
-//					'right': '-4px',
-//					'cursor': 'e-resize'
-//				});
-//				w.css({
-//					'top': '50%',
-//					'margin-top': '-4px',
-//					'left': '-4px',
-//					'cursor': 'w-resize'
-//				});
+
 				ne.css({
 					'top': '-10px',
 					'right': '-10px',
 					'cursor': 'ne-resize',
-					"transform":"rotate(15deg)"
+					"transform":"rotate(-35deg)"
 				});
-//				nw.css({
-//					top: '-4px',
-//					'left': '-4px',
-//					'cursor': 'nw-resize'
-//				});
 				se.css({
 					'bottom': '-10px',
 					'right': '-10px',
@@ -106,7 +74,7 @@
 				});
 
 				// 添加项目 
-				self.appendHandler([ne,se, sw], resizePanel);//n, s, w, e, nw,
+				self.appendHandler([ne,se, sw,nw], resizePanel);//n, s, w, e, nw,
 
 				//绑定拖拽缩放事件 
 				self.bindResizeEvent(resizePanel, $(this));
@@ -220,17 +188,11 @@
 				otop = parseInt(org.css('top').replace('px', ''));
 			});
 
-			//西北 
-			var nwmove = false;
-			el.on('touchstart', '.nw', function(e) {
+			//西北  -----------------------------------关闭按钮
+			// var nwmove = false;
+			el.on('click', '.nw', function(e) {
 				e.stopPropagation();
-				ox = e.pageX; //原始x位置 
-				oy = e.pageY;
-				ow = el.width();
-				oh = el.height();
-				otop = parseInt(org.css('top').replace('px', ''));
-				oleft = parseInt(org.css('left').replace('px', ''));
-				nwmove = true;
+				$(this).parents("li").remove();
 			});
 
 			//东南 
@@ -318,22 +280,7 @@
 						top: otop + y,
 						width: ow + x
 					});
-				} else if(nwmove) {
-					var x = e.pageX - ox;
-					var y = e.pageY - oy;
-					el.css({
-						height: oh - y,
-						// top: otop + y, 
-						width: ow - x,
-						// left: oleft + x 
-					});
-					org.css({
-						height: oh - y,
-						top: otop + y,
-						width: ow - x,
-						left: oleft + x
-					});
-				} else if(semove) {
+				} else if(semove) {						
 					var x = e.pageX - ox;
 					var y = e.pageY - oy;
 					el.css({
@@ -371,7 +318,6 @@
 				wmove = false;
 				nmove = false;
 				nemove = false;
-				nwmove = false;
 				swmove = false;
 				semove = false;
 				drag = false;

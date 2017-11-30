@@ -37,18 +37,11 @@ body{
 }
 
 /* 所有隐藏的写在这里  */
-#imgInput,#dome,#musicInput,#domes,#backInput{
+#imgInput,#dome,#musicInput,#domes,#backInput,#videoInput{
 	display: none;
 }
 /* 导航的样式  */
-/*#page-body{
-	position: fixed;
-	top:10px;
-	left: 1px;
-	width: 40px;
-	height: 200px;
-	background: red;
-}*/
+
 #pageBtn{
 	height:auto;
 	white-space:inherit;
@@ -82,9 +75,11 @@ body{
 	height: 90%;
 	border-top:0;
 	border-bottom: 0;
-	
 	background: #D0CFD8;
 }
+/*#div{
+	height: 100%;background: red;
+}*/
 .editor-ul>span{
 	position: absolute;
 	top:-20px;
@@ -103,6 +98,19 @@ body{
 	width: 100%;
 	padding: 10px;
 }
+
+
+/* video */
+.videoUl{
+	padding: 0 !important;
+}
+
+.videoBody{
+	width: 100%;
+	padding: 0 !important;
+	height: 100%;
+}
+
 .editor-ul>li:after,#pageBtn:after{
 	display: block;
 	clear: both;
@@ -159,7 +167,7 @@ body{
 	height: 9%;
 	background-color: #393D49;
 }
-#down-ul{
+/*#down-ul{
 	height:100%;
 	width:100%;
 }
@@ -168,7 +176,7 @@ body{
 	width:20%;
 	height: 100%;
 	background: #393D49;
-}
+}*/
 .down-btn{
 	width:100%;
 	height:100%;
@@ -177,7 +185,7 @@ body{
 	display: flex;
 	justify-content: center;
 }
-.down-btn>div>.icon{
+.down-btn>div>.icon,.down-btn>div>.layui-icon{
 	font-size: 22px;
 }
 .down-btn {
@@ -187,6 +195,13 @@ body{
 #head-nav{
 	height:6%;
 	width:100%;
+	position:relative;
+}
+#prompt{
+	position: absolute;
+	right:0;top:20px;
+	color:#fff;
+	z-index: 2;
 }
 .head-ul:after{
 	display: block;
@@ -233,7 +248,7 @@ body{
 	-webkit-transition: left .2s linear;
 }
 /* 特效栏 */
-#special-body{
+#special-body,#down-ul{
 	display: none;
 	list-style: none !important;
 	white-space: nowrap !important;
@@ -241,7 +256,10 @@ body{
 	vertical-align: middle !important;
 	background-color: #393D49;
 }
-#special-body>li{
+#down-ul{
+	display: block;
+}
+#special-body>li,#down-ul>li{
 	display: inline-block;
 	min-width: 20%;
 	padding: 5px;
@@ -256,4 +274,24 @@ body{
 }
 #special-body>li>span>.icon{
 	font-size: 20px;
+}
+#editor-body .nw{
+	width: 20px;
+	height: 20px;
+	background: red;
+	position: absolute;
+	top:-10px;
+	left:-10px;
+	margin: 0;
+	text-align: center;
+	border-radius: 50%;
+	line-height: 20px;
+	background: #59c7f9;
+}
+
+#editor-body .nw>i{
+	color:white;
+}
+.swiper-slide{
+	background: #1D2D40;
 }

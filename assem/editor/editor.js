@@ -164,18 +164,18 @@ function BackImage(imgFile) {
 /* ---------------- 图片显示到div里面的方法End ---------------------  */
 
 /* -----------音乐的input change事件 ---------------- */
-function backMusic(musicfile){
-	// console.log(musicfile)
-	console.log(musicfile.value)
-	var audio = document.createElement('audio');
-audio.src =musicfile.value; //这里放音乐的地址
-audio.autoplay = 'autoplay';
-document.body.appendChild(audio);
-//var music=window.URL.createObjectURL(musicfile.files);
-//console.log(music)
-	//$("#editor-ul").append('<audio id="music-body" style="display: none;" autoplay="autoplay" src="'+musicfile.value+'" controls="nodownload" controlsList="nodownload"></audio>')
+function backMusic(){
+	 var file = document.getElementById('musicInput').files[0];  
+   var url = URL.createObjectURL(file);   
+    $("body").append('<audio src="'+url+'" autoplay="" loop="loop"></audio>')
 }
 
+/*---------------------本地视频-------------------------- */
+function onInputFileChange() {  
+   var file = document.getElementById('videoInput').files[0];  
+   var url = URL.createObjectURL(file);  
+   document.getElementById("audio_id").src = url;  
+}
 
 /* --- 图片点击让其层级变高 --- 暂未实现 --- */
 $("#editor-ul>li").on("click","img",function(event){
@@ -199,19 +199,23 @@ $("#imgAdd").click(function(event){
 /* ------------------ 点击添加图片按钮end ------------------------- */
 
 /*------------------- 点击输入框呼唤拉动Start  ----------------------*/
-$("#editor-ul>li").on("click",".click-box",function(event){
-	
-	$(this).parents("li").siblings("li").find('.resize-panel').hide();
-	event.stopPropagation();
-	if($(this).attr("touch")=="flase"){
-		$(this).attr("touch",true);
-		 new ZResize({
-		   stage: "#editor-ul", //舞台 
-		   item: $('#editor-ul>li .click-box'), //可缩放的类名 
-		 }); 					
-	}
-});
-
+//$("#editor-body").on("click",".resize-panel",function(event){
+//	alert(2)
+//	event.stopPropagation();
+//	console.log(1)
+//	console.log($(this).html())
+//	$(this).find(".content").addClass('text-color');
+//	$(this).parents("li").siblings("li").find('.content').removeClass('text-color')
+//	$(this).parents("li").siblings("li").find('.resize-panel').hide();
+//	event.stopPropagation();
+//	if($(this).attr("touch")=="flase"){
+//		$(this).attr("touch",true);
+//		 new ZResize({
+//		   stage: "#editor-ul", //舞台 
+//		   item: $('#editor-ul>li .click-box'), //可缩放的类名 
+//		 }); 					
+//	}
+//});
 /*------------------- 点击输入框呼唤拉动End  ----------------------*/
 
 
@@ -260,14 +264,15 @@ $("#editor-ul>li>.click-box").dblclick(function(){
 //		});
 /*  -------------------- 对字进行编辑 END --------------------------- */
 })
-var 	page=[],Css,content,Class,Width,Height
+
 /*---------  生成ul下面的li的json方法Start  ------------------*/ 
-var test=0
+
+var test=0,page=[],Css,content,Class,Width,Height;
 function GetJsonData() {
 	test++;
 	var t = [];
-	
 	for(var k=0;k<$("#editor-body>ul").length;k++){
+
 		var editorBody=$("#editor-body>ul").eq(k).find("li");
 		var n = "[";
 			for(i = 0; i < $("#editor-body>ul").eq(k).find("li").length; i++) {
@@ -277,105 +282,31 @@ function GetJsonData() {
 				n += "'Class':'" + editorBody.eq(i).find(".click-box").attr('name') + "',"
 				n += "'Width':'" + Number(editorBody.eq(i).width()/$('.editor-ul').width()).toFixed(2)*100+"%" + "',"
 				n += "'Height':'" +  Number(editorBody.eq(i).height()/$('.editor-ul').height()).toFixed(2)*100+"%" + "'},"
-				console.log(editorBody.eq(i).height())
 			}
 		  n = n.substr(0, n.length - 1);
 		  n +="]" 
 			n = eval('(' + n + ')');
 		t.push(n);
 	}
-	//console.log(t)
 	var json = {
 	  id:"test"+test,
 		pagaNum:$("#editor-body>ul").length,
 		content:t
 	};
-	//console.log(json)
 	return json;
 }
 
-
-
 /*---------  生成ul下面的li的json方法End  ------------------*/ 
-/* --------------------翻页选项卡事件 暂时不要 ------------------ */
-//$("#pageBtn li").mouseup(function() {
-//	if($(this).next()){
-//		 $(this).next().after($(this));
-//	}
-// 
-//}); 
  
- // oninput 事件，输入框在用户 停止输入   一秒后再执行，不重复执行，只在每次改变值之后的1秒执行一次
-// (function textCoun(textarea,num){
-//  var sendTextarea     =     document.getElementById(textarea),
-//      text            =    sendTextarea.value,
-//      counter            =    text.length,
-//      sendCount         =     document.getElementById("send-count");
-//  
-//  sendCount.innerHTML = num-counter;    //显示初始状态还属于多少字
-//  
-//  //输入以后重新计算
-//  sendTextarea.oninput = function(){
-//      text    =    sendTextarea.value,
-//      counter    =    text.length;
-//      sendCount.innerHTML = num-counter;
-//  }
-//
-//})("send-textarea",110)
- 
- 
- 
- 
-/*---------  浏览器离开事件  ------------------*/  
-//	window.onbeforeunload=function(){
-//		// 这里保存浏览器离开前的数据操作 //
-//		console.log(1-1)
-//		return "快住手！！别点下去！！";
-//	};
- 
-var pageNum=1; 
-
-/*-------------添加模板Start------------------------------------*/
-$("#add").click(function(event){
-	event.stopPropagation();
-	pageNum++;
-	$("#editor-body").find("ul").attr("id"," ")
-	$("#editor-body").find("ul").removeClass("layui-show")
-	$("#editor-body").find("ul").hide()
-	$("#pageBtn").find("li").removeClass("layui-this");
-	$("#pageBtn").append('<li class="layui-this">第'+ pageNum +'页</li>')
-	$("#editor-body").append('<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="'+pageNum+'"></ul>')
-})
-
-/* ------------------添加模板的End-----------------------------*/
-
 /* ------------------添加取色板的Start-----------------------------*/
-//	$("#color-btn").click(function(e){
-//		e.stopPropagation();
-//	  flag++;
-//	  if(flag%2!=0){
-//	   	$("#color-plate").show();
-//	   	$("#color-plate").css({
-//				top:$("#color-btn").height(),
-//				animation: "fadeIn 2s ease 0s 1 normal both"
-//			});
-//	  }else{
-//	   	
-//	   	$("#color-plate").css({
-//				top:$("#color-btn").height(),
-//				animation: "fadeOut 1s ease 0s 1 normal both"
-//			});		
-//	  }
-//	});
-
-$("#color-plate").load("../swatches/swatches.html",function(){	
+// 添加取色板的load事件
+$("#color-plate").load("../swatches/swatches.html",function(){
  	$(document).ready(function() {
 // 		$('#picker').farbtastic('.text-color');
     $('#picker').farbtastic('.text-color');
   });
-})
+});
 
-/* ------------------添加取色板的End-----------------------------*/
 	$(".style-close").click(function(){
 	 	flag++;
 		if(flag%2!=0){
@@ -390,84 +321,81 @@ $("#color-plate").load("../swatches/swatches.html",function(){
 			 	});
 		}
 	})
+/* ------------------添加取色板的End-----------------------------*/
 
 
 
+/* 整个身体点击一下保存一遍 */
+function closeOpen(){
+	
+	// 转为json
+	center=JSON.stringify(GetJsonData())
+	// 点击保存的时候的操作
+	var centern=JSON.parse(center)
+	// 储存json样式
+	localStorage.setItem("content",center)
+}
 
+var pageNum=1; 
+/* -------------------提取localStorage的值再次填充Start---------------------------- */
+$(document).ready(function(){
+	var content=localStorage.getItem("content");
+	if(content||content ==" " ){
+		var data=JSON.parse(content);
+		$("#editor-body").empty();
+		$("#pageBtn").empty();
+		pageNum=data.content.length;
+		 for(var i=0;i<data.content.length;i++){
+		 	if(data.content!="undefined"){
+		 	$("#pageBtn").append('<li id="layui-tab'+i+'">第'+(i+1)+'页</li>');
+		 	$("#layui-tab0").addClass('layui-this')
+		 		$("#editor-body").append('<ul class="editor-ul layui-tab-item ul'+i+'" num="'+i+'" class="swiper-slide"></ul>')
+		   	for(var j=0;j<data.content[i].length;j++){
+		   		$(".ul0").attr("id","editor-ul");
+		   		$(".ul0").addClass('layui-show')
+		   		if(data.content[i][j].Class=="text"){
+			 		/* 文字层级 */
+			 			$(".ul"+i).append('<li style="z-index:99;'+data.content[i][j].Css+'"><div class="click-box writing" name="text"><div class="content" contenteditable>'+data.content[i][j].content+'</div></div></li>');
+			 	
+			 		}else{
+			 		/* 图片层级 */
+			 			$(".ul"+i).append('<li style="'+data.content[i][j].Css+'"><div class="click-box" ><div class="content" style="width:'+data.content[i][j].Width+'px;height:'+data.content[i][j].Height+'px;">'+data.content[i][j].content+'</div></div></li>');		
+		   		}
+		   	}
+		 	}
+		 	//判断文字定层级
+		 }
+	}else{
+		$("#editor-body").empty();
+		$("#editor-body").append('<ul class="editor-ul layui-tab-item layui-show" num="1" id="editor-ul"></ul>')
+	}
+	new ZResize({
+		   stage: ".editor-ul", //舞台 
+		   item: $('.editor-ul>li .click-box'), //可缩放的类名 
+		 });
+		 $(".resize-panel").css({width:"100%",height:"100%"});
+})
+/* -------------------提取localStorage的值再次填充End---------------------------- */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*-------------添加模板Start------------------------------------*/
+$("#add").click(function(event){
+	event.stopPropagation();
+	pageNum++;
+	$("#editor-body").find("ul").attr("id"," ")
+	$("#editor-body").find("ul").removeClass("layui-show")
+	$("#editor-body").find("ul").hide()
+	$("#pageBtn").find("li").removeClass("layui-this");
+	$("#pageBtn").append('<li class="layui-this">第'+ pageNum +'页</li>')
+	$("#editor-body").append('<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="'+pageNum+'"></ul>')
+})
+/* ------------------添加模板的End-----------------------------*/
 
 
 var center=[]
 /*----------------点击保存的按钮时间 Start  ----------------------------------------*/
 $("#keep").click(function(event){
 	event.stopPropagation();
-//	conatent.push(conatents())	
-	conatent.push(GetJsonData())
-	// 转为json
-
- 	center=JSON.stringify(conatent)
-	// 点击保存的时候的操作
-	console.log(JSON.parse(center))
-	// 储存json样式
-	sessionStorage.setItem("content",center)
-//	
+	localStorage.setItem("content",' ')
 	location.href="../display/index.html"
 })
 /*----------------点击保存的按钮时间 END  ----------------------------------------*/

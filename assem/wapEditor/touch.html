@@ -19,14 +19,17 @@
 	    <link rel="stylesheet" type="text/css" href="../../main/swiper/swiper.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../../main/icon/iconfont.css"/>
 		<link rel="stylesheet" type="text/css" href="../../main/css/animation.css"/>
-		<style>
+		<!--<style>
 			#editor-ul{
 				padding: 10px;
 				overflow: inherit;
 			}
-		</style>
+		</style>-->
 	</head>
 	<body>
+			<!--<audio src="E:\mp3\Madden.mp3" type="audio/mp3" controls="controls">
+您的浏览器不支持（这里写提示语）
+    </audio>-->
 		<div id="head-nav">
 			<ul class="head-ul">
 				<li>
@@ -46,7 +49,7 @@
 					</div>
 				</li>
 				<li>
-					<div class="icon-body">
+					<div class="icon-body" id="helpBtn">
 						<i class="icon layui-icon">&#xe60b;</i>
 					</div>
 				</li>
@@ -57,41 +60,35 @@
 					</div>
 				</li>
 			</ul>
+			<p id="prompt">触发编辑板可编辑当前广告</p>
 		</div>
 		<!--------------------- 中间的主身体Start ------------------------>
-		<section >
+		<section>
 			<!-- 最大的 身体  -->
-			<div class="layui-row swiper-container-editor" id="t">
+			<div class="layui-row swiper-container-editor" id="t" >
 				<!-- 编辑体的展现身体 -->
-				<div id="editor-body" class="layui-col-xs12 swiper-wrapper">
+				<div id="editor-body" onkeyup="closeOpen()" onclick="closeOpen()" onselect="closeOpen()" class="layui-col-xs12 swiper-wrapper">
 					<!-- 编辑的框框 -->
 					<div class="swiper-slide">
-						<ul id="editor-ul" class="editor-ul " num="1">
+						<ul id="editor-ul" class="editor-ul" num="1">
 							<span class="layui-badge">第1页</span>
 						</ul>
 					</div>
-					<div class="swiper-slide">
-						<ul class="editor-ul " num="2">
-							<span class="layui-badge">第2页</span>
-						</ul>
-					</div>
-					<div class="swiper-slide">
-						<ul class="editor-ul " num="3">
-							<span class="layui-badge">第3页</span>
-						</ul>
-					</div>
-
 				</div>
 			</div>
 		</section>
+		<!-- 视频的事件点击与身体   -->
+		<!--<li class="videoBody">
+			<video id="audio_id" src="" autoplay="" style="width: 100%;height: 100%;object-fit:fill" controls="controls">您的浏览器不支持video标签</video>
+		</li>	-->
 		<!--------------------- 中间的主身体End ------------------------>
 		<div id="page-btn">
 			<!--<div class="swiper-pagination"></div>-->
 		</div>
 		<!-- 下面的功能按钮  -->
 		<nav id="down-nav">
-		
-				<ul id="down-ul">
+			<!-- 菜单栏  -->
+			<ul id="down-ul">
 				<li>
 					<div class="down-btn" id="add">
 				    	<div><i class="icon iconfont icon-msnui-template-file"></i></div>
@@ -126,8 +123,23 @@
 				    	<div>背景</div>
 					</div>
 				</li>
+				<li>
+					<input type="file" id="musicInput" value="" accept="audio/mpeg" onchange="backMusic(this)" />
+					<div class="down-btn" id="musicAdd">
+				    	<div><i class="layui-icon">&#xe6fc;</i></div>
+				    	<div>音乐</div>
+					</div>
+				</li>
+				<li>
+					<input type="file" name="video" id="videoInput" onchange="onInputFileChange()" value="">
+					<div class="down-btn" id="videoAdd">
+				    	<div><i class="layui-icon">&#xe6ed;</i></div>
+				    	<div>视频</div>
+					</div>
+				</li>
+				
 			</ul>
-			
+			<!--  特效的身体    -->
 		 	<ul id="special-body">
 		 		<li class="nav-back"><span><i class="icon layui-icon">&#xe603;</i><br />返回</span></li>
 		 		<li class="none"><span><i class="icon iconfont icon-beijing"></i><br />无特效</span></li>
@@ -135,7 +147,7 @@
 		 		<li class="fadeIn"><span><i class="icon iconfont icon-beijing"></i><br />淡入</span></li>
 		 		<li class="fadeOut"><span><i class="icon iconfont icon-beijing"></i><br />淡出</span></li>
 		 		<li class="fadeInLeft"><span><i class="icon iconfont icon-beijing"></i><br />移入</span></li>
-		 		<li class="swing"><span><i class="icon iconfont icon-beijing"></i><br />选摆</span></li>
+		 		<li class="swing"><span><i class="icon iconfont icon-beijing"></i><br />悬摆</span></li>
 		 		<li class="flash"><span><i class="icon iconfont icon-beijing"></i><br />闪烁</span></li>
 		 		<li class="rotateIn"><span><i class="icon iconfont icon-beijing"></i><br />旋转</span></li>
 		 		<li class="wobble"><span><i class="icon iconfont icon-beijing"></i><br />摇摆</span></li>
@@ -143,8 +155,8 @@
 		 		<li class="lightSpeedInDown"><span><i class="icon iconfont icon-beijing"></i><br />光速进入</span></li>
 		 	</ul>
 		</nav>
-  
 		<!-- 操作栏的展现按钮  -->	 
+					
 		<!--  引用的JS -- Start -->
 		<script src="../../main/js/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../layui/layui.js" type="text/javascript" charset="utf-8"></script>
@@ -153,16 +165,13 @@
         <script src="touch.js" type="text/javascript" charset="utf-8"></script>
         <!-- 引用的JS ---  END  -->
 		<script>        
-		  var mySwiper = new Swiper ('.swiper-container-editor', {
-		    /*  切换效果 */
-		    effect : 'coverflow',
-		    onTouchStart:function(swiper,event){
-		    	$('.swiper-slide-active').siblings('.swiper-slide').find("ul").attr("id"," ")
-				$('.swiper-slide-active').find("ul").attr("id",'editor-ul')
-			}
-		  }) 
-
-       
+  	      
 		</script>
 	</body>
 </html>
+<!--onTouch:function(swiper,event){
+		    	console.log($(this))
+		    	//$('.swiper-slide-active').siblings('.swiper-slide').removeClass('swiper-slide-active');
+
+
+			}-->

@@ -55,8 +55,17 @@
 				  		<select class="form-control" id="animation-name">
 						  <option value="">请选择一个特效</option>
 						  <option value="rubberBand">抖动</option>
+						  <option value="wobble">摇摆</option>
+						  <option value="rotateIn">旋转</option>
+						  <option value="flash">闪烁</option>
+						  <option value="swing">悬摆</option>
+						  <option value="fadeIn">淡入</option>
+						  <option value="fadeOut">淡出</option>
 						  <option value="twisterInDownRight">魔幻进入</option>
 						  <option value="lightSpeedInDown">光速进入</option>
+						  <option value="fadeInLeft">从左向右移入</option>
+						  <option value="fadeOutDown">从上往下移出</option>
+						  <option value="fadeOutUp">从下往上移入</option>
 						</select> 
 					</li>
 					<!--<li>
@@ -74,55 +83,54 @@
 				</div>
 			</div>
 		</div>
-		
-		
+		<!--  本地视频展示事件
+		<input type="file" name="video" id="videoInput" onchange="onInputFileChange()" value="" />
+		<video id="audio_id" src="" autoplay="" poster="" controls="controls">您的浏览器不支持video标签</video>-->
 		<section>
-			<div class="layui-row layui-tab" id="t" lay-filter="editor">
+			<div class="layui-row layui-tab" id="t" lay-filter="editor" onkeyup="closeOpen()" onclick="closeOpen()" onselect="closeOpen()">
 				<!-- 编辑体的展现 -->
 				<div id="editor-body" class="layui-col-xs12 layui-tab-content">
 					<ul id="editor-ul" class="editor-ul layui-tab-item layui-show" num="1">
-					
+						
 					</ul>
 				</div>
 				
 				<!--  action-bar 操作栏 的身体 -->
 				<ul class="layui-col-xs2 layui-nav layui-nav-tree layui-nav-side layui-anim" id="action-bar"> 
-				 	  <!-- 控制页数的选项卡 -->
-				 	    	  	
-				 	  <!-- 操作栏的隐藏按钮  -->
-					  <a href="javascript:;" class="back-close"> <i class="layui-icon">&#xe65b;</i> </a>
-					  <li class="layui-nav btn-assemble" style="min-height: 40px;">
-					  	<button class="layui-btn pull-left" id="keep" >保存</button><button class="layui-btn pull-right" id="out">退出</button>
-					  </li>
-					  <li class="layui-nav-item layui-nav-itemed">
-					    <a href="javascript:;" id="textAdd"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
-					  </li>
-					  <li class="layui-nav-item">
-					  	<img id="dome" src=""/>
-					  	<input type="file" id="imgInput" value="" accept="image/jpeg,image/jpeg,image/gif,image/png" onchange="BackImage(this)" />
-					    <a href="javascript:;" id="imgAdd"><i class="layui-icon">&#xe60d;</i>&nbsp;&nbsp;&nbsp;<span id="test1">图片</span></a>
-					  </li>
-					  <li class="layui-nav-item">
-					  	<input type="file" id="musicInput" value="" accept="audio/mpeg" onchange="backMusic(this)" />
-					  	<a href="javasciript:;" id="musicAdd"><i class="layui-icon"></i>&nbsp;&nbsp;&nbsp;<span>音乐</span> </a>
-					  </li>
-					 
-					  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i> &nbsp;&nbsp;&nbsp;<span>视频</span></a></li>
-					   <br />
-					   <!-- 翻页的身体 -->
-					  <li id="page-body">
-					  	 <!-- UL控制身体的多少 -->
-					   	 <ul id="pageBtn" class="layui-tab-title">
-					   	 	<li class="layui-this">第 1 页</li>
-					   	 </ul>
-					   </li>
-					  <li class="layui-nav-item"><a href="javasciript:;" id="add"><i class="layui-icon">&#xe654;</i><span>模板</span></a></li>
-					</ul>
+			 	  <!-- 控制页数的选项卡 -->
+			 	    	  	
+			 	  <!-- 操作栏的隐藏按钮  -->
+				  <a href="javascript:;" class="back-close"> <i class="layui-icon">&#xe65b;</i> </a>
+				  <li class="layui-nav btn-assemble" style="min-height: 40px;">
+				  	<button class="layui-btn pull-left" id="keep" >保存</button><button class="layui-btn pull-right" id="out">退出</button>
+				  </li>
+				  <li class="layui-nav-item layui-nav-itemed">
+				    <a href="javascript:;" id="textAdd"><i class="layui-icon">&#xe642;</i>&nbsp;&nbsp;&nbsp;<span>文字</span></a>
+				  </li>
+				  <li class="layui-nav-item">
+				  	<img id="dome" src=""/>
+				  	<input type="file" id="imgInput" value="" accept="image/jpeg,image/jpeg,image/gif,image/png" onchange="BackImage(this)" />
+				    <a href="javascript:;" id="imgAdd"><i class="layui-icon">&#xe60d;</i>&nbsp;&nbsp;&nbsp;<span id="test1">图片</span></a>
+				  </li>
+				  <li class="layui-nav-item">
+				  	<input type="file" id="musicInput" value="" accept="audio/mpeg" onchange="backMusic(this)" />
+				  	<a href="javasciript:;" id="musicAdd"><i class="layui-icon"></i>&nbsp;&nbsp;&nbsp;<span>音乐</span> </a>
+				  </li>
+				 
+				  <li class="layui-nav-item"><a href="javasciript:;"><i class="layui-icon"></i> &nbsp;&nbsp;&nbsp;<span>视频</span></a></li>
+				   <br />
+				   <!-- 翻页的身体 -->
+				  <li id="page-body">
+				  	 <!-- UL控制身体的多少 -->
+				   	 <ul id="pageBtn" class="layui-tab-title">
+				   	 	<li class="layui-this">第 1 页</li>
+				   	 </ul>
+				   </li>
+				  <li class="layui-nav-item"><a href="javasciript:;" id="add"><i class="layui-icon">&#xe654;</i><span>模板</span></a></li>
+				</ul>
 			</div>
 		</section>
-
-		
-		
+	
 
 		<!-- 操作栏的展现按钮  -->
 		<a href="javascript:;" class="layui-btn back-open"><i class="layui-icon">&#xe642;</i></a>	 
