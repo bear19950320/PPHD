@@ -59,17 +59,16 @@ layui.use('form', function(){
   //监听提交
   form.on('submit(formDemo)', function(data){
   	var data=JSON.stringify(data.field);
-		data=JSON.parse(data)
-	var hash = md5(data.password);
-	  	data.password=hash
+		data=JSON.parse(data);
+		console.log(data)
+//	var hash = md5(data.password);
+//	  	data.password=hash
 	   	ajax('registerEnter','POST',data,'json',function(){
-	   		
 			if(data.code == 10000){
 				layer.msg("注册成功");
 			}else{
 				layer.msg("暂时为空--"+data.msg)
 			}
-			
 	   	})
 	   
     return false;

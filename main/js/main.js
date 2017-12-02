@@ -14,7 +14,7 @@
 	document.write('<link rel="stylesheet" type="text/css" href="../../main/layer/mobile/need/layer.css" />');
 	document.write('<script src="../../main/layer/layer.js" type="text/javascript" charset="utf-8"></script>');
 	/* 公共请求地址 */
-	let link='http://192.168.7.200:8081/pphd/';
+	let link='http://192.168.7.199:8081/pphd/';
 	
 	/* --AJAX--(地址,请求类型,data传参,json的type类型,方法) */
 let ajax=function(url,type,data,json,callback){
@@ -41,8 +41,7 @@ let ajax=function(url,type,data,json,callback){
 	           layer.msg("服务器出差");
 	        }
 	    });
-	}
-
+}
 /*---------------------------页面点击相互跳转-------------------------------*/
 	/* 页面跳转点击事件 */
 	function btnClick(obj){

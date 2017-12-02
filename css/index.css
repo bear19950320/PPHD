@@ -17,7 +17,9 @@
 .layui-form-item .layui-input-inline{
 	width:240px;
 }
-
+.login>header>img{
+	width: 100%;
+}
 /* 忘记密码   用户注册 */
 .passwordAndUser>span,.passwordAndUser>a{
 	font-size: 14px;
