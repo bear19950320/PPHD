@@ -118,7 +118,7 @@
 		//	map.clearOverlays();
 			// 获得浏览器的定位
 			var mk = new BMap.Marker(r.point);
-
+			
 			map.addOverlay(mk);
 			
  			$("#sniper").click(function(e){
@@ -161,8 +161,10 @@
 	 * */
 	$("#mapInput").change(function(){
 		map.clearOverlays();
+		
 		// 搜索的赋值 <<<<
 		local.search($(this).val());
+		console.log(local)
 		// 延时定时器取得定位的经纬度
 		setTimeout(function(){
             // 当坐标数组的长度不等于0时！

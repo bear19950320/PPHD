@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Language" content="zh-CN">
+		<title>SuperSlide - 文字无缝滚动特效-左</title>
+		<script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+		<script src="jquery.SuperSlide.source.js"></script>
+	</head>
+	<body>
+	<style type="text/css">
+		/* css 重置 */
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.tempWrap {
+			width: 452px !important;
+		}
+		/* 用 !important覆盖SuperSlide自动生成的宽度，这样就可以手动控制可视宽度。 */
+		/* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
+	</style>
+	<ul id="infoList">
+		<li>asdasdsdbjjalkfjklafklasdkashdiasldaskdkasfklahoifasklnsaklhioasfklsanfoafoankflahfasklfnasohfioasnfashfioashklsahfoiasoifashfayhifoaskfahifiofklqrhioklashfashasfasflasfaflkasfasfbalsgfafblagfa</li>
+	</ul>
+
+		<script type="text/javascript">
+			jQuery("body").slide({
+				mainCell: "#infoList",
+				autoPlay: true,
+				mouseOverStop:false,
+				effect: "leftMarquee",
+				interTime: 50, 
+				trigger: "click"
+			});
+		</script>
+
+	</body>
+
+</html>

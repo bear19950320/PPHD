@@ -1,69 +1,136 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Language" content="zh-CN">
+		<title>SuperSlide - 文字无缝滚动特效-左</title>
+		<script src="../../main/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
 	<style type="text/css">
-		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		/* css 重置 */
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.tempWrap {
+			width: 452px !important;
+		}
+		/* 用 !important覆盖SuperSlide自动生成的宽度，这样就可以手动控制可视宽度。 */
+		/* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
 	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=VkRq02jHp2Tc6qdB5XHs9DDBGwi5X2km"></script>
-	<title>添加行政区划</title>
-</head>
-<body>
-	<div id="allmap"></div>
-</body>
+	<img id="dome" src="" width="200" height="200" />
+	<input type="file" name="" id="files" onchange="BackImage(this)" value="" />
+	<input type="button" id="btn" value="上传"  />
+	<script type="text/javascript">
+		var imgUrl="";
+		function readFile(obj) {
+		    var file = obj;
+		    var reader = new FileReader();
+		    reader.readAsDataURL(file);
+		    reader.onload = function(e) {
+		        imgss.push(this.result)
+		    }
+		
+		}
+		//base64
+		/* ------- 转Base64的方法Start  -------- */
+function getBase64Image(img) {  
+     var canvas = document.createElement("canvas");  
+     canvas.width = img.width;  
+     canvas.height = img.height;  
+     var ctx = canvas.getContext("2d");  
+     ctx.drawImage(img, 0, 0, img.width, img.height);  
+     var ext = img.src.substring(img.src.lastIndexOf(".")+1).toLowerCase();  
+     
+     var dataURL = canvas.toDataURL("image/"+ext);  
+     console.log(dataURL)
+     return dataURL;  
+}
+/* ------- 转Base64的方法End  -------- */
+		
+		/* ------------ 添加图片的方法！ zindex是图片的层级叠加 Stasrt ------------ */
+		var url=[];
+function BackImage(imgFile) {
+    var t_files = imgFile.files;
+    var str = '';
+    imgss = [];
+    for(var i = 0, len = t_files.length; i < len; i++) {
+        var filextension = t_files[i].name.substring(t_files[i].name.lastIndexOf("."), t_files[i].name.length);
+        filextension = filextension.toLowerCase();
+        readFile(t_files[i]);
+
+        if((filextension != '.jpg') && (filextension != '.gif') && (filextension != '.jpeg') && (filextension != '.png') && (filextension != '.bmp')) {
+            skin("对不起，系统仅支持标准格式的照片，请您调整格式后重新上传，谢谢 !");
+            imgFile.focus();
+        } else {
+            var path;
+            if(document.all) {
+            	
+                imgFile.select();
+                path = document.selection.createRange().text;
+                document.getElementById("img").innerHTML = "";
+                document.getElementById("img").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")"; //使用滤镜效果
+            } else {
+                path = window.URL.createObjectURL(imgFile.files[i]);
+                
+                var img=path;
+                var image = new Image();
+				image.src = img;
+				image.onload = function() {
+					/* -----转换为Base64 -------*/
+					var base64 = getBase64Image(image);
+					$("#dome").attr('src',base64)
+					console.log(imgUrl)
+				}
+            	
+            }
+        }
+        $("#img li").eq(0).before(str);
+    }
+}
+$("#btn").click(function(){
+	console.log(url)
+	ajax('uploadFileuploadfileapi','POST',{files:$("#dome").attr('src'),filePath:"123"},'JSON',function(data){
+		console.log(data);
+	})
+});
+
+
+
+	let link='http://192.168.7.200:8081/pphd/';
+	
+	/* --AJAX--(地址,请求类型,data传参,json的type类型,方法) */
+let ajax=function(url,type,data,json,callback){
+	    $.ajax({
+	        url : link+url,
+	        type : type,
+	        data : data,
+	        dataType : json,
+	        beforeSend : function(XMLHttpRequest) {
+	        	// 请求接口--Start--添加--loading--的动态图标 
+//				layer.load();
+			},
+	        success : function(response){
+	            /* data赋值  */
+	            credit = response
+	            // 方法的回调
+	            callback(credit);
+	        },
+	        complete : function(XMLHttpRequest,textStatus) {
+//	        	layer.closeAll('loading');
+	        },
+	        error : function(){
+	        	alert('服务器出差')
+//	           layer.msg("服务器出差");
+	        }
+	    });
+}
+
+	</script>
+
+	</body>
+
 </html>
-<script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	map.centerAndZoom(new BMap.Point(116.403765, 39.914850), 5);
-	map.enableScrollWheelZoom();
-
-	function getBoundary(){       
-		var bdary = new BMap.Boundary();
-		bdary.get("成都青羊区", function(rs){       //获取行政区域
-			map.clearOverlays();        //清除地图覆盖物       
-			var count = rs.boundaries.length; //行政区域的点有多少个
-			if (count === 0) {
-				alert('未能获取当前输入行政区域');
-				return ;
-			}
-          	var pointArray = [];
-			for (var i = 0; i < count; i++) {
-				var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000"}); //建立多边形覆盖物
-				map.addOverlay(ply);  //添加覆盖物
-				pointArray = pointArray.concat(ply.getPath());
-			}    
-			map.setViewport(pointArray);    //调整视野                
-		});   
-	}
-
-	setTimeout(function(){
-		getBoundary();
-	}, 2000);
-
-//	function addlabel() {
-//	    var pointArray = [
-//	      new BMap.Point(121.716076,23.703799),
-//	      new BMap.Point(112.121885,14.570616),
-//	      new BMap.Point(123.776573,25.695422)];
-//	    var optsArray = [{},{},{}];
-//	    var labelArray = [];
-//	    var contentArray = [
-//	      "台湾是中国的！",
-//	      "南海是中国的！",
-//	      "钓鱼岛是中国的！"];
-//	    for(var i = 0;i < pointArray.length; i++) {
-//	      optsArray[i].position = pointArray[i];
-//	      labelArray[i] = new BMap.Label(contentArray[i],optsArray[i]);
-//	      labelArray[i].setStyle({
-//			color : "red",
-//			fontSize : "12px",
-//				 height : "20px",
-//				 lineHeight : "20px",
-//				 fontFamily:"微软雅黑"
-//			 });
-//	      map.addOverlay(labelArray[i]);
-//	    }	  
-//	}
-</script>

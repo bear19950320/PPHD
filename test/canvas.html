@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>                                                         thumbnails
 <html>
 <head>
 	<title>Snap a Picture of Preview</title>
@@ -49,104 +49,114 @@
 	</div>
 
 	<div id="iframes">
-		<!-- <iframe id="preview_idx"></iframe> -->
+		 <iframe id="preview_idx"></iframe> 
 	</div>
 
 	<div id="thumbnails">
-		<!-- <div class="image-container">
-			<img src="{src}" />
-		</div> -->
+		<div class="image-container">
+			12121
+			<img src="../assem/editor/wheel.png" style="width:100%;"  class="_img"/>
+		</div> 
 	</div>
 
-	<script>
-		var idx = 0;
-		// 要截图的页面地址
-		var urlList = [
-			window.location.href
-		];
 
-		// 初始化，加载所有页面源码，注入js，渲染所有iframe，注入的js被调用，截图
-		$.each(urlList, function(idx){
-			$('#iframes').append('<iframe id="preview_' + idx + '"></iframe>');
-			$('#codes').append('<textarea id="code_' + idx + '"></textarea>');
-			(function(_idx){
-				$.ajax({
-					url: urlList[_idx],
-					success: function(data) {
-						$('#code_' + _idx).val(data);
+</body>
+</html>
+<script>
+	var idx = 0;
+	// 要截图的页面地址
+	var urlList = [
+		window.location.href
+	];
+	// 初始化，加载所有页面源码，注入js，渲染所有iframe，注入的js被调用，截图
+	$.each(urlList, function(idx){
+		$('#iframes').append('<iframe id="preview_' + idx + '"></iframe>');
+		$('#codes').append('<textarea id="code_' + idx + '"></textarea>');
+		(function(_idx){
+			$.ajax({
+				url: urlList[_idx],
+				success: function(data) {
+//					data=data.split('</html>')[0]+'</html>';
 
-						var content = 
+					data=data.split('id="thumbnails')[1].split('</body>')[0];
+				
+					data='<!DOCTYPE html><html><head></head><body><div id="thumbnails'+data+'</body></html>';
+					console.log(data)
+					$('#code_' + _idx).val(data);
+
+					var content =
 							'<script src="http://code.jquery.com/jquery-latest.min.js"><\/script>';
-						addJSToHead('code_' + _idx, content);
-						
-						var content = 
+					addJSToHead('code_' + _idx, content);
+
+					var content =
 							'<script src="canvas.js"><\/script>';
-						addJSToHead('code_' + _idx, content);
-						
-						var content = 
+					addJSToHead('code_' + _idx, content);
+					
+					var content =
 							'<script type="text/javascript">\n' +
-							'	console.log("Code is Injected.");\n' +
+//							'	console.log("Code is Injected.");\n' +
 							'	$(document).ready(function() {\n' +
 							'		setTimeout(function(){\n' +
 							'			html2canvas($("body"), {\n' +
 							'				onrendered: function(canvas) {\n' +
-							'					console.log("Html2canvas onrendered.");\n' +
+//							'					console.log("Html2canvas onrendered.");\n' +
 							'					var myImage = canvas.toDataURL("image/png");\n' +
-							'					$(parent.document).find("#thumbnails").append(\'<div class="image-container"><img src=\' + myImage + \' alt="" /></div>\');\n' +
+							'					console.log(myImage)\n'+
 							'				}\n' +
 							'			});\n' +
 							// 这里等待1秒是为了等待canvas的图表的动态效果执行完毕再截图，如果页面没有动画效果，可以设置为0
-							'		}, 1000);\n' +
+							'		},1000);\n' +
 							'	});\n' +
 							'<\/script>';
-						addJSToBody('code_' + _idx, content);
 
-						setTimeout(function(){
-							var previewFrame = $('#preview_' + _idx)[0];
-							var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+					addJSToBody('code_' + _idx, content);
+					setTimeout(function(){
+						var previewFrame = $('#preview_' + _idx)[0];
+						var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
 
-							preview.open();
-							preview.write($('#code_' + _idx).val());
-							preview.close();
-						}, 0);
-					}
-				});
-			})(idx);
-		});
+						preview.open();
+						console.log(preview)
+						preview.write($('#code_' + _idx).val());
+						preview.close();
+			
+					},1000);
+					
+				}
+			});
+		})(idx);
+	});
 
-		// 注入js到head的方法
-		function addJSToHead(id, content) {
-			var pageContent = $('#' + id).val();
+	// 注入js到head的方法
+	function addJSToHead(id, content) {
+		var pageContent = $('#' + id).val();
 
-			var searchText = pageContent.search('<head>');
-			if(searchText > 0) {
-				content = '<head>' + '\n' + content;
-				var updatedPageContent = pageContent.replace('<head>', content);
-				$('#' + id).val(updatedPageContent);
-			}
-			else {
-				alert('WARNING! The &lt;head&gt tag seems to be missing in your HTML. Although your code may still work, we highly recommened that you have a valid HTML syntax. Please refer to the new document of correct formatted');
-				content = content + pageContent;
-				return false;
-			}
+		var searchText = pageContent.search('<head>');
+		if(searchText > 0) {
+			content = '<head>' + '\n' + content;
+			var updatedPageContent = pageContent.replace('<head>', content);
+			$('#' + id).val(updatedPageContent);
 		}
-
-		// 注入js到body的方法
-		function addJSToBody(id, content) {
-			var pageContent = $('#' + id).val();
-
-			var searchText = pageContent.search('<body>');
-			if(searchText > 0) {
-				content = '<body>' + '\n' + content;
-				var updatedPageContent = pageContent.replace('<body>', content);
-				$('#' + id).val(updatedPageContent);
-			}
-			else {
-				alert('WARNING! The <body> tag seems to be missing in your HTML. Although your code may still work, we highly recommened that you have a valid HTML syntax. Please refer to the new document of correct formatted');
-				content = content + pageContent;
-				return false;
-			}
+		else {
+			alert('WARNING! The &lt;head&gt tag seems to be missing in your HTML. Although your code may still work, we highly recommened that you have a valid HTML syntax. Please refer to the new document of correct formatted');
+			content = content + pageContent;
+			return false;
 		}
-	</script>
-</body>
-</html>
+	}
+
+	// 注入js到body的方法
+	function addJSToBody(id, content) {
+		var pageContent = $('#' + id).val();
+
+		var searchText = pageContent.search('<body>');
+		if(searchText > 0) {
+			content = '<body>' + '\n' + content;
+			var updatedPageContent = pageContent.replace('<body>', content);
+			$('#' + id).val(updatedPageContent);
+		}
+		else {
+			alert('WARNING! The <body> tag seems to be missing in your HTML. Although your code may still work, we highly recommened that you have a valid HTML syntax. Please refer to the new document of correct formatted');
+			content = content + pageContent;
+			return false;
+		}
+	}
+</script>
